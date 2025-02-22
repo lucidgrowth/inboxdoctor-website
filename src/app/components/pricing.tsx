@@ -5,6 +5,7 @@ import { motion } from "motion/react";
 import { Check } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
+import { Spotlight } from "./spotlight";
 
 export default function PricingSection() {
   const [isAnnual, setIsAnnual] = useState(false);
@@ -63,6 +64,10 @@ export default function PricingSection() {
 
   return (
     <div className="relative py-20 overflow-hidden bg-background">
+      <Spotlight
+        className="-top-40 left-0 md:left-60 md:-top-20"
+        fill="white"
+      />
       {/* Background with purple gradient */}
       <div
         className="absolute inset-0 opacity-5"
@@ -75,23 +80,35 @@ export default function PricingSection() {
 
       <div className="relative container mx-auto px-6">
         <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-5"
+          >
+            <span className="text-sm text-primary">Pricing</span>
+          </motion.div>
+
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold text-white mb-4"
+            className="text-3xl md:text-6xl font-semibold font-aspekta text-white mb-4"
           >
             Flexible Pricing Plans
-            <br />
-            <span className="text-blue-400">for Every Need</span>
+            <span className="">
+              {" "}
+              <br />
+              for Every Need
+            </span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-gray-400 max-w-2xl mx-auto mb-8"
+            className="text-gray-400 max-w-2xl mx-auto mb-8 text-lg lg:text-xl"
           >
             Choose the plan that best fits your requirements and start
             optimizing your email deliverability today!
@@ -102,22 +119,26 @@ export default function PricingSection() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
             viewport={{ once: true }}
-            className="flex items-center justify-center gap-4 mb-12"
+            className="flex items-center justify-center gap-7 mb-12"
           >
             <span
-              className={`text-sm ${isAnnual ? "text-gray-400" : "text-white"}`}
+              className={`text-base ${
+                isAnnual ? "text-gray-400" : "text-white"
+              }`}
             >
               Monthly
             </span>
             <Switch
               checked={isAnnual}
               onCheckedChange={setIsAnnual}
-              className="data-[state=checked]:bg-blue-600"
+              className="data-[state=checked]:bg-primary scale-150"
             />
             <span
-              className={`text-sm ${isAnnual ? "text-white" : "text-gray-400"}`}
+              className={`text-base  ${
+                isAnnual ? "text-white" : "text-gray-400"
+              }`}
             >
-              Annually <span className="text-blue-400">(20% off)</span>
+              Annually <span className="text-primary ">(20% off)</span>
             </span>
           </motion.div>
         </div>
@@ -138,13 +159,13 @@ export default function PricingSection() {
               viewport={{ once: true }}
               className={`relative rounded-2xl border ${
                 plan.popular
-                  ? "border-blue-500/50 bg-blue-500/[0.08]"
+                  ? "border-primary/50 bg-primary/[0.08]"
                   : "border-white/10 bg-white/[0.02]"
               } backdrop-blur-sm p-8`}
             >
               {plan.popular && (
                 <div className="absolute -top-3 left-0 right-0 flex justify-center">
-                  <span className="bg-blue-500 text-white text-sm px-3 py-1 rounded-full">
+                  <span className="bg-primary text-white text-sm px-3 py-1 rounded-full">
                     Popular
                   </span>
                 </div>
@@ -171,17 +192,17 @@ export default function PricingSection() {
               <ul className="mb-8 space-y-4">
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-blue-500" />
+                    <Check className="w-5 h-5 text-primary" />
                     <span className="text-gray-300">{feature}</span>
                   </li>
                 ))}
               </ul>
               <Button
                 variant={plan.ctaVariant}
-                className={`w-full ${
+                className={`w-full rounded-full h-14 text-base text-white ${
                   plan.ctaVariant === "default"
-                    ? "bg-blue-600 hover:bg-blue-700"
-                    : "border-blue-500/50 hover:bg-blue-500/10"
+                    ? "bg-primary hover:bg-primary/90"
+                    : "border-primary/50 hover:bg-primary/10"
                 }`}
               >
                 {plan.cta}
