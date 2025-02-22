@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { BarChart, Bell, Shield, Zap } from "lucide-react";
+import { BarChart, Bell, FileText, HeartPulse, Inbox, Plug, Shield, ShieldCheck, Tag, TestTube, Zap } from "lucide-react";
 import { motion, useInView } from "motion/react";
 import Image from "next/image";
 import { useRef } from "react";
@@ -9,65 +9,58 @@ import { useRef } from "react";
 export default function FeaturesSection() {
   const features = [
     {
-      name: "Smart Notifications",
-      badge: "Badge",
-      description:
-        "Get intelligent alerts about your email performance and potential delivery issues before they affect your campaigns.",
-      icon: Bell,
+      badge: "Mailboxes",
+      name: "Unified Email Management",
+      description: "Connect, monitor, and switch between multiple email accounts seamlessly. Our unified dashboard provides centralized control, real-time synchronization, and easy account switching capabilities.",
+      icon: Inbox,
       image: "/mailbox-image.png",
     },
     {
-      name: "Real-Time Monitoring",
-      badge: "Badge",
-      description:
-        "Monitor your email deliverability metrics in real-time with our advanced analytics dashboard.",
-      icon: BarChart,
+      badge: "Postmaster",
+      name: "Email Reputation Insights",
+      description: "Monitor bounce rates, spam complaints, and deliverability trends in detail. Get comprehensive analytics on sender reputation, engagement metrics, and actionable recommendations for improvement.",
+      icon: ShieldCheck,
       image: "/mailbox-image.png",
     },
     {
-      name: "AI-Powered Protection",
-      badge: "Badge",
-      description:
-        "Our AI algorithms continuously protect your domain reputation and optimize delivery rates.",
-      icon: Shield,
+      badge: "Email Health",
+      name: "Health Monitoring",
+      description: "Stay ahead with automated alerts and optimization suggestions. Receive real-time notifications about potential deliverability issues, blacklist monitoring, and proactive recommendations to maintain optimal email performance.",
+      icon: HeartPulse,
       image: "/mailbox-image.png",
     },
     {
-      name: "Advanced Analytics",
-      badge: "Badge",
-      description:
-        "Get deep insights into your email performance with detailed analytics and actionable recommendations.",
-      icon: Zap,
+      badge: "Seed List",
+      name: "Inbox Placement Testing",
+      description: "Analyze which folders (Inbox, Spam, Promotions) your emails land in across multiple email providers. Test deliverability with real-world seed addresses and get detailed placement reports before sending campaigns.",
+      icon: TestTube,
       image: "/mailbox-image.png",
     },
     {
-      name: "Real-Time Monitoring",
-      badge: "Badge",
-      description:
-        "Monitor your email deliverability metrics in real-time with our advanced analytics dashboard.",
-      icon: BarChart,
+      badge: "Templates",
+      name: "Smart Email Templates",
+      description: "Save time with customizable email templates enhanced by AI-powered suggestions. Get intelligent recommendations for subject lines, content optimization, and timing to maximize engagement and response rates.",
+      icon: FileText,
       image: "/mailbox-image.png",
     },
     {
-      name: "AI-Powered Protection",
-      badge: "Badge",
-      description:
-        "Our AI algorithms continuously protect your domain reputation and optimize delivery rates.",
-      icon: Shield,
+      badge: "Labels",
+      name: "Intelligent Organization",
+      description: "Auto-categorization helps prioritize important conversations with smart labels and filters. Implement custom rules, automated tagging, and priority inbox features to maintain an organized email workflow.",
+      icon: Tag,
       image: "/mailbox-image.png",
     },
     {
-      name: "Advanced Analytics",
-      badge: "Badge",
-      description:
-        "Get deep insights into your email performance with detailed analytics and actionable recommendations.",
-      icon: Zap,
+      badge: "Integrations",
+      name: "Google Postmaster Tools",
+      description: "Seamlessly connect with Google Postmaster Tools to access detailed sending reputation data, authentication status, and domain-level feedback for improved deliverability insights.",
+      icon: Plug,
       image: "/mailbox-image.png",
     },
   ];
 
   return (
-    <div className="relative py-20 overflow-hidden bg-background">
+    <div id="features" className="relative py-20 overflow-hidden bg-background">
       {/* Ambient background glow */}
       {/* <div className="absolute inset-0 bg-gradient-to-b from-blue-500/5 via-transparent to-transparent" /> */}
 
@@ -92,14 +85,14 @@ export default function FeaturesSection() {
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 backdrop-blur-sm mb-8">
             <span className="text-sm text-primary">Powerful Features</span>
           </div>
-          <h2 className="text-4xl md:text-5xl/[70px] font-bold text-white mb-6">
+          <h2 className="text-3xl md:text-6xl font-semibold text-white mb-6">
             Designed for
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-500">
               Email Deliverability and Warm-up
             </span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-400 text-lg lg:text-xl max-w-2xl mx-auto">
             It helps users improve inbox placement, reduce spam folder rates,
             and improve email sending reputation.
           </p>
@@ -209,7 +202,7 @@ function FeatureItem2({ feature, index }: { feature: any; index: number }) {
       ref={ref}
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-      transition={{ duration: 0.8, delay: index * 0.2 }}
+      transition={{ duration: 0.8 }}
       className={cn(
         "gap-8 justify-between items-center pt-12 pb-12 flex",
         index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"

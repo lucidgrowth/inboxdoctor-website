@@ -81,7 +81,7 @@ export default function ComparisonSection() {
   ];
 
   return (
-    <div className="relative py-20 overflow-hidden bg-background">
+    <div id="comparison" className="relative py-20 overflow-hidden bg-background">
       {/* Subtle grid overlay */}
       {/* <div
         className="absolute inset-0 opacity-5"

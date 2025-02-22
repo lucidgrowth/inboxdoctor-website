@@ -157,12 +157,14 @@ export default function HeroSection() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="text-4xl md:text-6xl font-bold font-aspekta tracking-tight"
           >
-            <span className="text-white">Take Control of Your </span>
-            <span className="bg-gradient-to-r from-primary-light to-primary bg-clip-text text-transparent">
-              Inbox
+            <span className="text-white">
+              Boost Your Email Deliverability <br /> And Stay{" "}
             </span>
-            <br />
-            <span className="text-white">with AI-Powered Intelligence</span>
+            <span className="bg-primary bg-clip-text text-transparent">
+              Out of Spam
+            </span>
+
+            {/* <span className="text-white">with AI-Powered Intelligence</span> */}
           </motion.h1>
 
           {/* Subheading */}
@@ -172,8 +174,8 @@ export default function HeroSection() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto"
           >
-            AI-powered email optimization that helps sales teams boost response
-            rates and close more deals in record time..
+            Land in inboxes, not spam folders. Boost open rates and sender
+            reputation with ease.
           </motion.p>
 
           {/* Social Proof */}
@@ -319,7 +321,7 @@ export default function HeroSection() {
                   height={600}
                   className="w-full h-full object-contain"
                 />
-            </div>
+              </div>
               <div className="relative rounded-[50%] blur-[150px] bg-primary aspect-[1194/378] z-0"></div>
             </div>
             <div className="relative z-10">
