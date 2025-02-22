@@ -31,7 +31,7 @@ export default function FeaturesSection() {
       description:
         "Connect, monitor, and switch between multiple email accounts seamlessly. Our unified dashboard provides centralized control, real-time synchronization, and easy account switching capabilities.",
       icon: Inbox,
-      image: "/mailbox-image.png",
+      image: "/mailbox-image-full.png",
     },
     {
       badge: "Postmaster",
@@ -39,7 +39,7 @@ export default function FeaturesSection() {
       description:
         "Monitor bounce rates, spam complaints, and deliverability trends in detail. Get comprehensive analytics on sender reputation, engagement metrics, and actionable recommendations for improvement.",
       icon: ShieldCheck,
-      image: "/mailbox-image.png",
+      image: "/mailbox-image-full.png",
     },
     {
       badge: "Email Health",
@@ -47,7 +47,7 @@ export default function FeaturesSection() {
       description:
         "Stay ahead with automated alerts and optimization suggestions. Receive real-time notifications about potential deliverability issues, blacklist monitoring, and proactive recommendations to maintain optimal email performance.",
       icon: HeartPulse,
-      image: "/mailbox-image.png",
+      image: "/mailbox-image-full.png",
     },
     {
       badge: "Seed List",
@@ -55,7 +55,7 @@ export default function FeaturesSection() {
       description:
         "Analyze which folders (Inbox, Spam, Promotions) your emails land in across multiple email providers. Test deliverability with real-world seed addresses and get detailed placement reports before sending campaigns.",
       icon: TestTube,
-      image: "/mailbox-image.png",
+      image: "/mailbox-image-full.png",
     },
     {
       badge: "Templates",
@@ -63,23 +63,7 @@ export default function FeaturesSection() {
       description:
         "Save time with customizable email templates enhanced by AI-powered suggestions. Get intelligent recommendations for subject lines, content optimization, and timing to maximize engagement and response rates.",
       icon: FileText,
-      image: "/mailbox-image.png",
-    },
-    {
-      badge: "Labels",
-      name: "Intelligent Organization",
-      description:
-        "Auto-categorization helps prioritize important conversations with smart labels and filters. Implement custom rules, automated tagging, and priority inbox features to maintain an organized email workflow.",
-      icon: Tag,
-      image: "/mailbox-image.png",
-    },
-    {
-      badge: "Integrations",
-      name: "Google Postmaster Tools",
-      description:
-        "Seamlessly connect with Google Postmaster Tools to access detailed sending reputation data, authentication status, and domain-level feedback for improved deliverability insights.",
-      icon: Plug,
-      image: "/mailbox-image.png",
+      image: "/mailbox-image-full.png",
     },
   ];
 
@@ -259,12 +243,14 @@ function FeatureItem2({ feature, index }: { feature: Feature; index: number }) {
 
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-[15]" />
 
-        <div className="z-10 relative w-full overflow-hidden aspect-[574/449] rounded-2xl border border-primary">
+        {/* aspect-[574/449] */}
+
+        <div className="z-10 relative w-full overflow-hidden aspect-video rounded-2xl border border-primary">
           <Image
             src={feature.image || "/placeholder.svg"}
             alt={feature.name}
             fill
-            className="object-contain w-full h-full"
+            className="object-contain w-full h-full object-top"
           />
         </div>
         {/* glow */}
@@ -280,7 +266,7 @@ function FeatureItem2({ feature, index }: { feature: Feature; index: number }) {
         <div
           className="z-0 pointer-events-none w-[150%] absolute inset-0"
           style={{
-            top: "-651px",
+            top: "-525px",
             left: "-142px",
           }}
         >
