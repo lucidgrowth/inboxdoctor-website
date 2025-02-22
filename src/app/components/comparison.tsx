@@ -2,6 +2,7 @@
 
 import { Check, X } from "lucide-react";
 import { motion } from "motion/react";
+import React from "react";
 
 export default function ComparisonSection() {
   const features = [
@@ -158,17 +159,11 @@ export default function ComparisonSection() {
 
               {/* Features */}
               {features.map((feature, index) => (
-                <>
-                  <div
-                    key={`name-${feature.id}`}
-                    className="bg-background p-6 border-t border-white/10"
-                  >
+                <React.Fragment key={feature.id}>
+                  <div className="bg-background p-6 border-t border-white/10">
                     <p className="text-white">{feature.name}</p>
                   </div>
-                  <div
-                    key={`inboxdoctor-${feature.id}`}
-                    className="bg-background p-6 border-t border-white/10"
-                  >
+                  <div className="bg-background p-6 border-t border-white/10">
                     <div className="flex justify-center">
                       {feature.inboxDoctor ? (
                         <Check className="w-6 h-6 text-primary" />
@@ -177,10 +172,7 @@ export default function ComparisonSection() {
                       )}
                     </div>
                   </div>
-                  <div
-                    key={`warmy-${feature.id}`}
-                    className="bg-background p-6 border-t border-white/10"
-                  >
+                  <div className="bg-background p-6 border-t border-white/10">
                     <div className="flex justify-center">
                       {feature.warmy ? (
                         <Check className="w-6 h-6 text-gray-400" />
@@ -189,10 +181,7 @@ export default function ComparisonSection() {
                       )}
                     </div>
                   </div>
-                  <div
-                    key={`inboxally-${feature.id}`}
-                    className="bg-background p-6 border-t border-white/10"
-                  >
+                  <div className="bg-background p-6 border-t border-white/10">
                     <div className="flex justify-center">
                       {feature.inboxAlly ? (
                         <Check className="w-6 h-6 text-gray-400" />
@@ -201,10 +190,7 @@ export default function ComparisonSection() {
                       )}
                     </div>
                   </div>
-                  <div
-                    key={`folderly-${feature.id}`}
-                    className="bg-background p-6 border-t border-white/10"
-                  >
+                  <div className="bg-background p-6 border-t border-white/10">
                     <div className="flex justify-center">
                       {feature.folderly ? (
                         <Check className="w-6 h-6 text-gray-400" />
@@ -213,7 +199,7 @@ export default function ComparisonSection() {
                       )}
                     </div>
                   </div>
-                </>
+                </React.Fragment>
               ))}
             </div>
           </div>
