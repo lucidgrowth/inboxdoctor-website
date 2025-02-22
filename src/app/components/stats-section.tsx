@@ -1,5 +1,6 @@
 "use client";
 
+import Container from "@/components/container";
 import {
   BarElement,
   CategoryScale,
@@ -101,8 +102,8 @@ export default function StatsSection() {
   };
 
   return (
-    <div id="benefits" className="relative py-20 overflow-hidden bg-background">
-      <div className="relative container mx-auto px-6">
+    <Container id="benefits">
+      <div className="relative">
         <div className="text-center mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -161,6 +162,6 @@ export default function StatsSection() {
           </div>
         </motion.div>
       </div>
-    </div>
+    </Container>
   );
 }

@@ -12,13 +12,14 @@ import {
 } from "lucide-react";
 
 import Image from "next/image";
+import Container from "@/components/container";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="bg-background border-t border-white/10">
-      <div className="container mx-auto px-6 py-12">
+      <Container type="div" className="px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo and Description */}
           <motion.div
@@ -193,7 +194,7 @@ export default function Footer() {
             © {currentYear} InboxDoctor. All rights reserved.
           </p>
         </motion.div>
-      </div>
+      </Container>
     </footer>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import Button from "@/components/button";
+import Container from "@/components/container";
 import { Check, Mail, Star } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
@@ -71,7 +72,7 @@ export default function HeroSection() {
   const [selectedReview, setSelectedReview] = useState<string | null>(null);
 
   return (
-    <div className="relative min-h-screen bg-background overflow-hidden">
+    <Container className="overflow-visible">
       {/* Sparkles Effect */}
       {/* <div className="absolute inset-0 h-[400px] w-full">
         <SparklesCore
@@ -335,6 +336,6 @@ export default function HeroSection() {
           </motion.div>
         </motion.div>
       </div>
-    </div>
+    </Container>
   );
 }

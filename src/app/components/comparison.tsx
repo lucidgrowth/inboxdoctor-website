@@ -1,5 +1,6 @@
 "use client";
 
+import Container from "@/components/container";
 import { Check, X } from "lucide-react";
 import { motion } from "motion/react";
 import React from "react";
@@ -81,7 +82,7 @@ export default function ComparisonSection() {
   ];
 
   return (
-    <div id="comparison" className="relative py-20 overflow-hidden bg-background">
+    <Container id="comparison">
       {/* Subtle grid overlay */}
       {/* <div
         className="absolute inset-0 opacity-5"
@@ -92,7 +93,7 @@ export default function ComparisonSection() {
         }}
       /> */}
 
-      <div className="relative max-w-[1200px] mx-auto px-6">
+      <div className="relative px-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -205,6 +206,6 @@ export default function ComparisonSection() {
           </div>
         </motion.div>
       </div>
-    </div>
+    </Container>
   );
 }

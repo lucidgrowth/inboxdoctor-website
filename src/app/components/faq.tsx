@@ -9,6 +9,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import Container from "@/components/container";
 
 const faqs = [
   {
@@ -66,7 +67,7 @@ const faqs = [
 
 export default function FaqSection() {
   return (
-    <div id="faq" className="relative py-20 overflow-hidden bg-background">
+    <Container id="faq">
       <div className="relative container mx-auto px-6">
         <div className="text-center mb-16">
           <motion.div
@@ -109,6 +110,6 @@ export default function FaqSection() {
           </Accordion>
         </div>
       </div>
-    </div>
+    </Container>
   );
 }

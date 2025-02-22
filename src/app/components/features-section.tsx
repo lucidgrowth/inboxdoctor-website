@@ -1,5 +1,6 @@
 "use client";
 
+import Container from "@/components/container";
 import { cn } from "@/lib/utils";
 import {
   FileText,
@@ -83,7 +84,7 @@ export default function FeaturesSection() {
   ];
 
   return (
-    <div id="features" className="relative py-20 overflow-hidden bg-background">
+    <Container id="features">
       {/* Ambient background glow */}
       {/* <div className="absolute inset-0 bg-gradient-to-b from-blue-500/5 via-transparent to-transparent" /> */}
 
@@ -97,7 +98,7 @@ export default function FeaturesSection() {
         }}
       /> */}
 
-      <div className="relative container mx-auto px-6">
+      <div className="relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -127,7 +128,7 @@ export default function FeaturesSection() {
           ))}
         </div>
       </div>
-    </div>
+    </Container>
   );
 }
 

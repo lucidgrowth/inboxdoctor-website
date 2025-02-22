@@ -6,6 +6,7 @@ import { Check } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { Spotlight } from "./spotlight";
+import Container from "@/components/container";
 
 export default function PricingSection() {
   const [isAnnual, setIsAnnual] = useState(false);
@@ -63,7 +64,7 @@ export default function PricingSection() {
   ];
 
   return (
-    <div id="pricing" className="relative py-20 overflow-hidden bg-background">
+    <Container id="pricing">
       {/* <div className="z-2 pointer-events-none [background-origin:border-box] w-[924px] absolute -inset-[190px] inset-y-auto inset-x-auto left-1/2 -translate-x-[135px] -translate-y-[290px] hidden lg:block">
         <img
           src="/pricing-rays.png"
@@ -90,7 +91,7 @@ export default function PricingSection() {
         }}
       /> */}
 
-      <div className="relative container mx-auto px-6">
+      <div className="relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -226,6 +227,6 @@ export default function PricingSection() {
           ))}
         </motion.div>
       </div>
-    </div>
+    </Container>
   );
 }
