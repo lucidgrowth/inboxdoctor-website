@@ -5,54 +5,102 @@ import { motion, useAnimationFrame, useMotionValue } from "motion/react";
 import Image from "next/image";
 import { InfiniteMovingCards } from "@/components/infinity-moving-cards";
 
-const testimonials = [
+const testimonialsPart1 = [
   {
     name: "Michael Smith",
-    role: "Sales Executive at Global Enterprises",
+    role: "Newsletter Creator",
     image: "/avatars/avatar_male_01.webp",
     quote:
-      "I love how InboxDoctor integrates with my workflow. It saves me so much time and prevents delivery issues completely.",
+      "The spam score analysis caught issues I never knew existed. My emails now consistently reach the primary inbox instead of promotions.",
   },
   {
     name: "Sarah Johnson",
-    role: "Marketing Director at Tech Innovators",
-    image: "/avatars/avatar_female_01.webp",
+    role: "Content Marketing Lead",
+    image: "/avatars/avatar_female_05.png",
     quote:
-      "InboxDoctor has revolutionized our email campaigns. Our delivery rates have improved significantly with minimal effort.",
+      "As someone who sends weekly newsletters, the spam trigger detection has been invaluable. Haven't hit the spam folder since using it.",
   },
   {
     name: "David Miller",
-    role: "Operations Manager at Efficiency Experts",
+    role: "Email Marketing Specialist",
     image: "/avatars/avatar_male_02.webp",
     quote:
-      "The email optimization features are highly reliable and efficient. It has streamlined our process and reduced bounce rates dramatically.",
+      "The deliverability insights are incredible. I can now troubleshoot issues before they affect our campaigns. Setup took some time though.",
   },
   {
+    name: "Michael Smith",
+    role: "Newsletter Creator",
+    image: "/avatars/avatar_male_01.webp",
+    quote:
+      "The spam score analysis caught issues I never knew existed. My emails now consistently reach the primary inbox instead of promotions.",
+  },
+  {
+    name: "Sarah Johnson",
+    role: "Content Marketing Lead",
+    image: "/avatars/avatar_female_05.png",
+    quote:
+      "As someone who sends weekly newsletters, the spam trigger detection has been invaluable. Haven't hit the spam folder since using it.",
+  },
+  {
+    name: "David Miller",
+    role: "Email Marketing Specialist",
+    image: "/avatars/avatar_male_02.webp",
+    quote:
+      "The deliverability insights are incredible. I can now troubleshoot issues before they affect our campaigns. Setup took some time though.",
+  },
+];
+
+const testimonialsPart2 = [
+  {
     name: "Emily Chen",
-    role: "CEO at Digital Solutions",
+    role: "Content Strategy Director",
     image: "/avatars/avatar_female_02.webp",
     quote:
-      "As a CEO, email deliverability is crucial. InboxDoctor helps me ensure our messages reach their intended recipients every time.",
+      "Managing multiple newsletter campaigns was a nightmare before InboxDoctor. Now I can ensure every email lands in the primary inbox.",
   },
   {
     name: "William Taylor",
-    role: "Head of Sales at Growth Corp",
+    role: "Digital Content Producer",
     image: "/avatars/avatar_male_03.webp",
     quote:
-      "The AI-powered features have transformed our email strategy. It's like having a dedicated email expert on the team.",
+      "The content optimization suggestions are brilliant. It helps me write engaging newsletters that actually reach subscribers.",
   },
   {
     name: "Jane Wilson",
-    role: "Marketing Lead at Creative Solutions",
+    role: "Substack Writer",
     image: "/avatars/avatar_female_03.webp",
     quote:
-      "InboxDoctor revolutionized our email workflows. It's like having a personal deliverability consultant working around the clock!",
+      "Perfect for independent writers like me. Went from 62% to 98% inbox placement rate. The authentication setup guide was super helpful.",
+  },
+  {
+    name: "Emily Chen",
+    role: "Content Strategy Director",
+    image: "/avatars/avatar_female_02.webp",
+    quote:
+      "Managing multiple newsletter campaigns was a nightmare before InboxDoctor. Now I can ensure every email lands in the primary inbox.",
+  },
+  {
+    name: "William Taylor",
+    role: "Digital Content Producer",
+    image: "/avatars/avatar_male_03.webp",
+    quote:
+      "The content optimization suggestions are brilliant. It helps me write engaging newsletters that actually reach subscribers.",
+  },
+  {
+    name: "Jane Wilson",
+    role: "Substack Writer",
+    image: "/avatars/avatar_female_03.webp",
+    quote:
+      "Perfect for independent writers like me. Went from 62% to 98% inbox placement rate. The authentication setup guide was super helpful.",
   },
 ];
 
 export default function TestimonialsSection() {
   return (
-    <div id="testimonials" className="relative py-20 overflow-hidden bg-background">
+    <div
+      id="testimonials"
+      className="relative py-20 overflow-hidden bg-background"
+    >
       <div className="relative container mx-auto px-6">
         <div className="text-center mb-16">
           <motion.div
@@ -80,13 +128,13 @@ export default function TestimonialsSection() {
 
         <div className="space-y-2">
           <InfiniteMovingCards
-            items={testimonials}
+            items={testimonialsPart1}
             direction="right"
             speed="slow"
             pauseOnHover={false}
           />
           <InfiniteMovingCards
-            items={testimonials}
+            items={testimonialsPart2}
             direction="left"
             speed="slow"
             pauseOnHover={false}

@@ -1,11 +1,10 @@
 "use client";
 
-import { motion } from "motion/react";
-import Link from "next/link";
-import { ArrowRight, Inbox } from "lucide-react";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import Container from "@/components/container";
+import { Button } from "@/components/ui/button";
+import { motion } from "motion/react";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function NavBar() {
   return (
@@ -15,13 +14,13 @@ export default function NavBar() {
       transition={{ duration: 0.5 }}
       className="fixed top-0 left-0 right-0 z-50  bg-background/10 backdrop-blur-md"
     >
-      <Container className="flex items-center justify-between px-6 py-4">
+      <Container className="flex items-center justify-between lg:px-20 py-4 bg-transparent">
         <Link
           href="/"
-          className="flex items-center space-x-2 relative h-[45px] w-[200px]"
+          className="flex items-center space-x-2 relative h-[50px] w-[200px]"
         >
           <Image
-            src="/id-logo-full-blue.png"
+            src="/id-logo.png"
             alt="InboxDoctor Logo"
             fill
             className="w-full h-full object-contain"
@@ -63,13 +62,10 @@ export default function NavBar() {
 
         <Link href="/get-started">
           <Button
-            size="lg"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-6 text-lg rounded-full group relative"
+            // size=""
+            className="bg-blue-600 hover:bg-blue-700 text-white px-5 rounded-full group relative"
           >
             Book a Call
-            <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-            {/* Button Glow Effect */}
-            <div className="absolute inset-0 -z-10 bg-blue-600/20 blur-lg rounded-full" />
           </Button>
         </Link>
       </Container>

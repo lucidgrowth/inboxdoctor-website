@@ -1,18 +1,11 @@
 "use client";
 
+import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
-import {
-  Facebook,
-  Inbox,
-  Instagram,
-  Linkedin,
-  Twitter,
-  Youtube,
-} from "lucide-react";
 
-import Image from "next/image";
 import Container from "@/components/container";
+import Image from "next/image";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -42,10 +35,10 @@ export default function Footer() {
                 />
               </Link>
               <p className="text-gray-400 mb-6">
-                Revolutionizing email deliverability with AI-powered solutions.
-                Ensure your messages reach the right inboxes, every time.
+                Land in inboxes, not spam folders. Boost open rates and sender
+                reputation with ease.
               </p>
-              <div className="flex space-x-4">
+              {/* <div className="flex space-x-4">
                 <Link
                   href="#"
                   className="text-gray-400 hover:text-blue-500 transition-colors"
@@ -81,7 +74,7 @@ export default function Footer() {
                   <Youtube className="w-6 h-6" />
                   <span className="sr-only">Youtube</span>
                 </Link>
-              </div>
+              </div> */}
             </div>
           </motion.div>
 
@@ -144,6 +137,68 @@ export default function Footer() {
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
           >
+            <h3 className="text-white font-semibold mb-4">Socials</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link
+                  href="https://www.facebook.com/share/1B3tM8eryg/?mibextid=wwXIfr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-blue-500 transition-colors"
+                >
+                  Facebook
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="https://www.instagram.com/inbox_doctor?igsh=cnlxYWk2b2ZvdDFk"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-blue-500 transition-colors"
+                >
+                  Instagram
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="https://www.linkedin.com/company/inboxdoctor/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-blue-500 transition-colors"
+                >
+                  LinkedIn
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="https://www.youtube.com/channel/UCZFJb3dWSr-MSjdLJXHkjcQ"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-blue-500 transition-colors"
+                >
+                  Youtube
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="https://x.com/Inbox_Doctor"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-blue-500 transition-colors"
+                >
+                  X
+                </Link>
+              </li>
+            </ul>
+          </motion.div>
+
+          {/* Legal Pages */}
+          {/* <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
             <h3 className="text-white font-semibold mb-4">Legal</h3>
             <ul className="space-y-2">
               <li>
@@ -179,7 +234,7 @@ export default function Footer() {
                 </Link>
               </li>
             </ul>
-          </motion.div>
+          </motion.div> */}
         </div>
 
         {/* Copyright */}

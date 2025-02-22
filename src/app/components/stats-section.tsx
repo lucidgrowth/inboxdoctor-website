@@ -134,9 +134,9 @@ export default function StatsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
-          className="grid grid-cols-1 lg:grid-cols-6 gap-6"
+          className="flex flex-col-reverse lg:flex-row gap-6"
         >
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:flex-basis-[33.33%] w-full lg:w-[33.33%] space-y-6">
             {stats.map((stat, index) => (
               <motion.div
                 key={index}
@@ -154,7 +154,7 @@ export default function StatsSection() {
             ))}
           </div>
 
-          <div className="lg:col-span-4 bg-white/[0.03] backdrop-blur-sm rounded-2xl border border-white/10 p-6">
+          <div className="lg:flex-basis-[66.67%] w-full lg:w-[66.67%] bg-white/[0.03] backdrop-blur-sm rounded-2xl border border-white/10 p-6">
             <div className="h-[400px]">
               {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
               <Line options={chartOptions} data={chartData as any} />

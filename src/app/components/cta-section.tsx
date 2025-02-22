@@ -4,16 +4,17 @@ import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Container from "@/components/container";
 
 export default function CTASection() {
   return (
-    <div className="relative py-32 pb-10 overflow-hidden bg-background">
+    <Container className="py-32 pb-10">
       <motion.div
         initial={{ opacity: 0, scale: 0.98 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1 }}
         viewport={{ once: true }}
-        className="relative container mx-auto px-[64px]"
+        className="relative"
       >
         {/* Card Container */}
         <div className="relative rounded-3xl bg-background overflow-hidden">
@@ -85,6 +86,6 @@ export default function CTASection() {
           </div>
         </div>
       </motion.div>
-    </div>
+    </Container>
   );
 }
