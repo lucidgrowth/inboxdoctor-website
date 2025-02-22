@@ -89,7 +89,7 @@ export default function FaqSection() {
             Frequently Asked Questions
           </motion.h2>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg lg:text-xl">
-            Find answers to common questions about InboxDoctor
+            Find answers to common questions about InboxDoctor.
           </p>
         </div>
 

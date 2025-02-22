@@ -125,7 +125,7 @@ export default function StatsSection() {
           </motion.h2>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg lg:text-xl">
             Track your email performance and deliverability with our advanced
-            analytics
+            analytics.
           </p>
         </div>
 
@@ -155,7 +155,7 @@ export default function StatsSection() {
           </div>
 
           <div className="lg:flex-basis-[66.67%] w-full lg:w-[66.67%] bg-white/[0.03] backdrop-blur-sm rounded-2xl border border-white/10 p-6">
-            <div className="h-[400px]">
+            <div className="h-[240px] lg:h-[400px]">
               {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
               <Line options={chartOptions} data={chartData as any} />
             </div>

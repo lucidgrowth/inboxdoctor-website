@@ -122,7 +122,7 @@ export default function TestimonialsSection() {
             What Our Users are Saying
           </motion.h2>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg lg:text-xl">
-            Hear from satisfied users about their experience with InboxDoctor
+            Hear from satisfied users about their experience with InboxDoctor.
           </p>
         </div>
 

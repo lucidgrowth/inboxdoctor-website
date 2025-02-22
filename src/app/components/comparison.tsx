@@ -93,14 +93,14 @@ export default function ComparisonSection() {
         }}
       /> */}
 
-      <div className="relative px-6">
+      <div className="relative">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16 w-[763px] mx-auto"
+          className="text-center mb-16 max-w-[763px] w-full mx-auto"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -131,40 +131,42 @@ export default function ComparisonSection() {
           viewport={{ once: true }}
           className="relative overflow-x-auto"
         >
-          <div className="">
-            <div className="grid grid-cols-5 gap-px bg-white/10">
+          <div className="min-w-[500px]">
+            <div className="flex flex-col gap-px bg-white/10">
               {/* Header */}
-              <div className="bg-background p-6">
-                <span className="sr-only">Feature</span>
-              </div>
-              <div className="bg-background p-6">
-                <h3 className="text-lg font-semibold text-primary text-center">
-                  InboxDoctor
-                </h3>
-              </div>
-              <div className="bg-background p-6">
-                <h3 className="text-lg font-semibold text-gray-400 text-center">
-                  Warmy.io
-                </h3>
-              </div>
-              <div className="bg-background p-6">
-                <h3 className="text-lg font-semibold text-gray-400 text-center">
-                  InboxAlly
-                </h3>
-              </div>
-              <div className="bg-background p-6">
-                <h3 className="text-lg font-semibold text-gray-400 text-center">
-                  Folderly
-                </h3>
+              <div className="flex">
+                <div className="bg-background p-6 w-[150px] shrink-0">
+                  <span className="sr-only">Feature</span>
+                </div>
+                <div className="bg-background p-6 min-w-[150px] flex-1">
+                  <h3 className="text-lg font-semibold text-primary text-center whitespace-nowrap">
+                    InboxDoctor
+                  </h3>
+                </div>
+                <div className="bg-background p-6 min-w-[150px] flex-1">
+                  <h3 className="text-lg font-semibold text-gray-400 text-center whitespace-nowrap">
+                    Warmy.io
+                  </h3>
+                </div>
+                <div className="bg-background p-6 min-w-[150px] flex-1">
+                  <h3 className="text-lg font-semibold text-gray-400 text-center whitespace-nowrap">
+                    InboxAlly
+                  </h3>
+                </div>
+                <div className="bg-background p-6 min-w-[150px] flex-1">
+                  <h3 className="text-lg font-semibold text-gray-400 text-center whitespace-nowrap">
+                    Folderly
+                  </h3>
+                </div>
               </div>
 
               {/* Features */}
               {features.map((feature, index) => (
-                <React.Fragment key={feature.id}>
-                  <div className="bg-background p-6 border-t border-white/10">
+                <div key={feature.id} className="flex w-full">
+                  <div className="bg-background p-6 w-[150px] border-t border-white/10 shrink-0">
                     <p className="text-white">{feature.name}</p>
                   </div>
-                  <div className="bg-background p-6 border-t border-white/10">
+                  <div className="bg-background p-6 border-t min-w-[150px] border-white/10 flex-1">
                     <div className="flex justify-center">
                       {feature.inboxDoctor ? (
                         <Check className="w-6 h-6 text-primary" />
@@ -173,7 +175,7 @@ export default function ComparisonSection() {
                       )}
                     </div>
                   </div>
-                  <div className="bg-background p-6 border-t border-white/10">
+                  <div className="bg-background p-6 border-t min-w-[150px] border-white/10 flex-1">
                     <div className="flex justify-center">
                       {feature.warmy ? (
                         <Check className="w-6 h-6 text-gray-400" />
@@ -182,7 +184,7 @@ export default function ComparisonSection() {
                       )}
                     </div>
                   </div>
-                  <div className="bg-background p-6 border-t border-white/10">
+                  <div className="bg-background p-6 border-t min-w-[150px] border-white/10 flex-1">
                     <div className="flex justify-center">
                       {feature.inboxAlly ? (
                         <Check className="w-6 h-6 text-gray-400" />
@@ -191,7 +193,7 @@ export default function ComparisonSection() {
                       )}
                     </div>
                   </div>
-                  <div className="bg-background p-6 border-t border-white/10">
+                  <div className="bg-background p-6 border-t min-w-[150px] border-white/10 flex-1">
                     <div className="flex justify-center">
                       {feature.folderly ? (
                         <Check className="w-6 h-6 text-gray-400" />
@@ -200,7 +202,7 @@ export default function ComparisonSection() {
                       )}
                     </div>
                   </div>
-                </React.Fragment>
+                </div>
               ))}
             </div>
           </div>

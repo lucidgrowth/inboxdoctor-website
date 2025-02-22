@@ -8,7 +8,7 @@ import Container from "@/components/container";
 
 export default function CTASection() {
   return (
-    <Container className="py-32 pb-10">
+    <Container className="py-32 pb-10 px-0">
       <motion.div
         initial={{ opacity: 0, scale: 0.98 }}
         whileInView={{ opacity: 1, scale: 1 }}
@@ -19,7 +19,7 @@ export default function CTASection() {
         {/* Card Container */}
         <div className="relative rounded-3xl bg-background overflow-hidden">
           <div className="absolute inset-0">
-            <Image src="/cta-section-grid.png" alt="" fill />
+            <Image src="/cta-section-grid.png" alt="" fill className="object-cover" />
           </div>
 
           {/* <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-[15]" /> */}
