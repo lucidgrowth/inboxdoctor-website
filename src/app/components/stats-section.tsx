@@ -1,19 +1,19 @@
 "use client";
 
-import { motion } from "motion/react";
-import { Line } from "react-chartjs-2";
 import {
-  Chart as ChartJS,
+  BarElement,
   CategoryScale,
+  Chart as ChartJS,
+  Filler,
+  Legend,
   LinearScale,
-  PointElement,
   LineElement,
+  PointElement,
   Title,
   Tooltip,
-  Legend,
-  Filler,
-  BarElement,
 } from "chart.js";
+import { motion } from "motion/react";
+import { Line } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
@@ -66,18 +66,6 @@ export default function StatsSection() {
         ],
         backgroundColor: "rgba(59, 130, 246, 0.2)",
         tension: 0.4,
-      },
-      {
-        type: "bar" as const,
-        label: "Daily Volume",
-        data: [
-          180, 280, 300, 280, 300, 280, 300, 250, 300, 400, 500, 450, 600, 800,
-          1000,
-        ],
-        backgroundColor: "rgba(59, 130, 246, 0.2)",
-        borderColor: "rgba(59, 130, 246, 0.4)",
-        borderWidth: 1,
-        borderRadius: 4,
       },
     ],
   };
@@ -167,6 +155,7 @@ export default function StatsSection() {
 
           <div className="lg:col-span-4 bg-white/[0.03] backdrop-blur-sm rounded-2xl border border-white/10 p-6">
             <div className="h-[400px]">
+              {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
               <Line options={chartOptions} data={chartData as any} />
             </div>
           </div>

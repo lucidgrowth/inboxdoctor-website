@@ -1,10 +1,9 @@
 "use client";
 
+import Button from "@/components/button";
+import { Check, Mail, Star } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
-import { SparklesCore } from "./sparkle-core";
-import Button from "@/components/button";
-import { Check, Star, Mail } from "lucide-react";
 import { useState } from "react";
 
 export default function HeroSection() {
@@ -74,7 +73,7 @@ export default function HeroSection() {
   return (
     <div className="relative min-h-screen bg-background overflow-hidden">
       {/* Sparkles Effect */}
-      <div className="absolute inset-0 h-[400px] w-full">
+      {/* <div className="absolute inset-0 h-[400px] w-full">
         <SparklesCore
           background="transparent"
           minSize={1}
@@ -84,7 +83,7 @@ export default function HeroSection() {
           speed={0.8}
           className="h-full w-full"
         />
-      </div>
+      </div> */}
 
       {/* Grid Background */}
       {/* <div

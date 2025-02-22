@@ -101,7 +101,7 @@ export default {
   },
   plugins: [require("tailwindcss-animate"), addVariablesForColors],
 } satisfies Config;
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function addVariablesForColors({ addBase, theme }: any) {
   let allColors = flattenColorPalette(theme("colors"));
   let newVars = Object.fromEntries(

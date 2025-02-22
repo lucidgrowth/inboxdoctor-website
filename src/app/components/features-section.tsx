@@ -1,59 +1,82 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { BarChart, Bell, FileText, HeartPulse, Inbox, Plug, Shield, ShieldCheck, Tag, TestTube, Zap } from "lucide-react";
+import {
+  FileText,
+  HeartPulse,
+  Inbox,
+  Plug,
+  ShieldCheck,
+  Tag,
+  TestTube,
+} from "lucide-react";
 import { motion, useInView } from "motion/react";
 import Image from "next/image";
 import { useRef } from "react";
 
+type Feature = {
+  badge: string;
+  name: string;
+  description: string;
+  icon: React.ElementType;
+  image: string;
+};
+
 export default function FeaturesSection() {
-  const features = [
+  const features: Feature[] = [
     {
       badge: "Mailboxes",
       name: "Unified Email Management",
-      description: "Connect, monitor, and switch between multiple email accounts seamlessly. Our unified dashboard provides centralized control, real-time synchronization, and easy account switching capabilities.",
+      description:
+        "Connect, monitor, and switch between multiple email accounts seamlessly. Our unified dashboard provides centralized control, real-time synchronization, and easy account switching capabilities.",
       icon: Inbox,
       image: "/mailbox-image.png",
     },
     {
       badge: "Postmaster",
       name: "Email Reputation Insights",
-      description: "Monitor bounce rates, spam complaints, and deliverability trends in detail. Get comprehensive analytics on sender reputation, engagement metrics, and actionable recommendations for improvement.",
+      description:
+        "Monitor bounce rates, spam complaints, and deliverability trends in detail. Get comprehensive analytics on sender reputation, engagement metrics, and actionable recommendations for improvement.",
       icon: ShieldCheck,
       image: "/mailbox-image.png",
     },
     {
       badge: "Email Health",
       name: "Health Monitoring",
-      description: "Stay ahead with automated alerts and optimization suggestions. Receive real-time notifications about potential deliverability issues, blacklist monitoring, and proactive recommendations to maintain optimal email performance.",
+      description:
+        "Stay ahead with automated alerts and optimization suggestions. Receive real-time notifications about potential deliverability issues, blacklist monitoring, and proactive recommendations to maintain optimal email performance.",
       icon: HeartPulse,
       image: "/mailbox-image.png",
     },
     {
       badge: "Seed List",
       name: "Inbox Placement Testing",
-      description: "Analyze which folders (Inbox, Spam, Promotions) your emails land in across multiple email providers. Test deliverability with real-world seed addresses and get detailed placement reports before sending campaigns.",
+      description:
+        "Analyze which folders (Inbox, Spam, Promotions) your emails land in across multiple email providers. Test deliverability with real-world seed addresses and get detailed placement reports before sending campaigns.",
       icon: TestTube,
       image: "/mailbox-image.png",
     },
     {
       badge: "Templates",
       name: "Smart Email Templates",
-      description: "Save time with customizable email templates enhanced by AI-powered suggestions. Get intelligent recommendations for subject lines, content optimization, and timing to maximize engagement and response rates.",
+      description:
+        "Save time with customizable email templates enhanced by AI-powered suggestions. Get intelligent recommendations for subject lines, content optimization, and timing to maximize engagement and response rates.",
       icon: FileText,
       image: "/mailbox-image.png",
     },
     {
       badge: "Labels",
       name: "Intelligent Organization",
-      description: "Auto-categorization helps prioritize important conversations with smart labels and filters. Implement custom rules, automated tagging, and priority inbox features to maintain an organized email workflow.",
+      description:
+        "Auto-categorization helps prioritize important conversations with smart labels and filters. Implement custom rules, automated tagging, and priority inbox features to maintain an organized email workflow.",
       icon: Tag,
       image: "/mailbox-image.png",
     },
     {
       badge: "Integrations",
       name: "Google Postmaster Tools",
-      description: "Seamlessly connect with Google Postmaster Tools to access detailed sending reputation data, authentication status, and domain-level feedback for improved deliverability insights.",
+      description:
+        "Seamlessly connect with Google Postmaster Tools to access detailed sending reputation data, authentication status, and domain-level feedback for improved deliverability insights.",
       icon: Plug,
       image: "/mailbox-image.png",
     },
@@ -108,7 +131,7 @@ export default function FeaturesSection() {
   );
 }
 
-function FeatureItem({ feature, index }: { feature: any; index: number }) {
+function FeatureItem({ feature, index }: { feature: Feature; index: number }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -194,7 +217,7 @@ function FeatureItem({ feature, index }: { feature: any; index: number }) {
   );
 }
 
-function FeatureItem2({ feature, index }: { feature: any; index: number }) {
+function FeatureItem2({ feature, index }: { feature: Feature; index: number }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   return (
