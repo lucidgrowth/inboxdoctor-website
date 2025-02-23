@@ -11,64 +11,66 @@ import CTAForm from "./cta-form";
 export default function HeroSection() {
   const reviews = [
     {
-      name: "Alex Thompson",
-      role: "Content Marketing Manager",
-      review: "Helped us increase inbox placement by 35%. Worth every penny.",
-      avatar: "/avatars/avatar_male_01.webp",
+      name: "Amit Desai",
+      quote:
+        "Our emails kept hitting spam until I found InboxDoctor. As a CRM Manager, its warmup saved our campaign—it’s now a smooth ride!",
+      role: "CRM Manager",
+      image: "/avatars/avatar_male_08.png",
       stars: 5,
     },
     // {
     //   name: "Maria Garcia",
     //   role: "Content Creator",
-    //   review: "Finally, a tool that actually prevents spam folder issues.",
-    //   avatar: "/avatars/avatar_female_01.webp",
+    //   quote: "Finally, a tool that actually prevents spam folder issues.",
+    //   image: "/avatars/avatar_female_01.webp",
     //   stars: 4,
     // },
     {
       name: "Chris Bennett",
       role: "Newsletter Editor",
-      review: "Great for monitoring domain reputation, but UI needs work.",
-      avatar: "/avatars/avatar_male_02.webp",
+      quote: "Great for monitoring domain reputation, but UI needs work.",
+      image: "/avatars/avatar_male_02.webp",
       stars: 4,
     },
     {
-      name: "Linda Chen",
-      role: "Content Strategy Lead",
-      review: "Spam score analysis saved us from major deliverability issues.",
-      avatar: "/avatars/avatar_female_02.webp",
+      name: "Suresh Nair",
+      image: "/avatars/avatar_male_06.png",
+      quote:
+        "InboxDoctor warmed up our mailboxes, boosting engagement. Promotional emails now reach customers easily—great for e-commerce!",
+      role: "E-commerce Operations Manager",
       stars: 5,
     },
     {
       name: "Mark Sullivan",
       role: "Content Marketing Specialist",
-      review: "Good tool, but could use more template customization options.",
-      avatar: "/avatars/avatar_male_03.webp",
+      quote: "Good tool, but could use more template customization options.",
+      image: "/avatars/avatar_male_03.webp",
       stars: 4,
     },
     {
       name: "Sarah Williams",
       role: "Digital Content Producer",
-      review: "The authentication checks are invaluable for our business.",
-      avatar: "/avatars/avatar_female_03.webp",
+      quote: "The authentication checks are invaluable for our business.",
+      image: "/avatars/avatar_female_03.webp",
       stars: 5,
     },
     {
-      name: "Robert Kim",
-      role: "Content Operations Manager",
-      review: "Solid deliverability insights, though setup takes time.",
-      avatar: "/avatars/avatar_male_04.webp",
+      name: "Manish Thakur",
+      quote:
+        "At our startup, emails vanished into spam during a big pitch. InboxDoctor warmed them up—now, as Growth Lead, we land in inboxes perfectly!",
+      role: "Growth Lead",
+      image: "/avatars/avatar_male_09.png",
       stars: 4,
     },
     {
-      name: "Jessica Patel",
-      role: "Content & Email Strategist",
-      review: "Cut our bounce rates in half within a month.",
-      avatar: "/avatars/avatar_female_04.webp",
+      name: "Tenzing Lepcha",
+      quote:
+        "New domain, no delivery—weeks of chaos. InboxDoctor sorted it out. I handle Email Ops; it’s smooth sailing from here!",
+      role: "Email Operations Specialist",
+      image: "/avatars/avatar_male_07.png",
       stars: 5,
     },
   ];
-
-  const avatars = reviews.map((review) => review.avatar);
 
   const [selectedReview, setSelectedReview] = useState<string | null>(null);
 
@@ -194,7 +196,7 @@ export default function HeroSection() {
                     <div key={index} className="relative group">
                       <div className="relative w-10 h-10 rounded-full border-2 border-background overflow-hidden transition-transform hover:scale-110 hover:z-10">
                         <Image
-                          src={review.avatar || "/avatar_male_01.webp"}
+                          src={review.image || "/avatar_male_01.webp"}
                           alt={review.name}
                           fill
                           className="object-cover"
@@ -207,7 +209,7 @@ export default function HeroSection() {
                           <div className="flex items-center gap-3 mb-2">
                             <div className="w-10 h-10 rounded-full overflow-hidden shrink-0">
                               <Image
-                                src={review.avatar || "/placeholder.svg"}
+                                src={review.image || "/placeholder.svg"}
                                 alt={review.name}
                                 width={40}
                                 height={40}
@@ -231,7 +233,7 @@ export default function HeroSection() {
                               />
                             ))}
                           </div>
-                          <p className="text-white text-sm">{review.review}</p>
+                          <p className="text-white text-left text-sm">{review.quote}</p>
                         </div>
                       </div>
                     </div>

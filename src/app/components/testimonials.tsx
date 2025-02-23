@@ -7,11 +7,11 @@ import { InfiniteMovingCards } from "@/components/infinity-moving-cards";
 
 const testimonialsPart1 = [
   {
-    name: "Michael Smith",
-    role: "Newsletter Creator",
-    image: "/avatars/avatar_male_01.webp",
+    name: "Amit Desai",
     quote:
-      "The spam score analysis caught issues I never knew existed. My emails now consistently reach the primary inbox instead of promotions.",
+      "Our emails kept hitting spam until I found InboxDoctor. As a CRM Manager, its warmup saved our campaign—it’s now a smooth ride!",
+    role: "CRM Manager",
+    image: "/avatars/avatar_male_08.png",
   },
   {
     name: "Sarah Johnson",
@@ -28,49 +28,36 @@ const testimonialsPart1 = [
       "The deliverability insights are incredible. I can now troubleshoot issues before they affect our campaigns. Setup took some time though.",
   },
   {
-    name: "Michael Smith",
-    role: "Newsletter Creator",
-    image: "/avatars/avatar_male_01.webp",
+    name: "Amit Desai",
     quote:
-      "The spam score analysis caught issues I never knew existed. My emails now consistently reach the primary inbox instead of promotions.",
+      "Our emails kept hitting spam until I found InboxDoctor. As a CRM Manager, its warmup saved our campaign—it’s now a smooth ride!",
+    role: "CRM Manager",
+    image: "/avatars/avatar_male_08.png",
+  },
+
+  {
+    name: "Karan Malhotra",
+    role: "Digital Campaign Specialist",
+    image: "/avatars/avatar_male_05.png",
+    quote:
+      "InboxDoctor’s warmup built mailbox credibility fast. Now our newsletters hit inboxes—perfect for a Digital Campaign Specialist!",
   },
   {
-    name: "Sarah Johnson",
-    role: "Content Marketing Lead",
-    image: "/avatars/avatar_female_05.png",
+    name: "Suresh Nair",
+    image: "/avatars/avatar_male_06.png",
     quote:
-      "As someone who sends weekly newsletters, the spam trigger detection has been invaluable. Haven't hit the spam folder since using it.",
-  },
-  {
-    name: "David Miller",
-    role: "Email Marketing Specialist",
-    image: "/avatars/avatar_male_02.webp",
-    quote:
-      "The deliverability insights are incredible. I can now troubleshoot issues before they affect our campaigns. Setup took some time though.",
+      "InboxDoctor warmed up our mailboxes, boosting engagement. Promotional emails now reach customers easily—great for e-commerce!",
+    role: "E-commerce Operations Manager",
   },
 ];
 
 const testimonialsPart2 = [
   {
-    name: "Emily Chen",
-    role: "Content Strategy Director",
-    image: "/avatars/avatar_female_02.webp",
+    name: "Tenzing Lepcha",
     quote:
-      "Managing multiple newsletter campaigns was a nightmare before InboxDoctor. Now I can ensure every email lands in the primary inbox.",
-  },
-  {
-    name: "William Taylor",
-    role: "Digital Content Producer",
-    image: "/avatars/avatar_male_03.webp",
-    quote:
-      "The content optimization suggestions are brilliant. It helps me write engaging newsletters that actually reach subscribers.",
-  },
-  {
-    name: "Jane Wilson",
-    role: "Substack Writer",
-    image: "/avatars/avatar_female_03.webp",
-    quote:
-      "Perfect for independent writers like me. Went from 62% to 98% inbox placement rate. The authentication setup guide was super helpful.",
+      "New domain, no delivery—weeks of chaos. InboxDoctor sorted it out. I handle Email Ops; it’s smooth sailing from here!",
+    role: "Email Operations Specialist",
+    image: "/avatars/avatar_male_07.png",
   },
   {
     name: "Emily Chen",
@@ -80,11 +67,32 @@ const testimonialsPart2 = [
       "Managing multiple newsletter campaigns was a nightmare before InboxDoctor. Now I can ensure every email lands in the primary inbox.",
   },
   {
-    name: "William Taylor",
-    role: "Digital Content Producer",
-    image: "/avatars/avatar_male_03.webp",
+    name: "Manish Thakur",
     quote:
-      "The content optimization suggestions are brilliant. It helps me write engaging newsletters that actually reach subscribers.",
+      "At our startup, emails vanished into spam during a big pitch. InboxDoctor warmed them up—now, as Growth Lead, we land in inboxes perfectly!",
+    role: "Growth Lead",
+    image: "/avatars/avatar_male_09.png",
+  },
+  {
+    name: "Tenzing Lepcha",
+    quote:
+      "New domain, no delivery—weeks of chaos. InboxDoctor sorted it out. I handle Email Ops; it’s smooth sailing from here!",
+    role: "Email Operations Specialist",
+    image: "/avatars/avatar_male_07.png",
+  },
+  {
+    name: "Emily Chen",
+    role: "Content Strategy Director",
+    image: "/avatars/avatar_female_02.webp",
+    quote:
+      "Managing multiple newsletter campaigns was a nightmare before InboxDoctor. Now I can ensure every email lands in the primary inbox.",
+  },
+  {
+    name: "Manish Thakur",
+    quote:
+      "At our startup, emails vanished into spam during a big pitch. InboxDoctor warmed them up—now, as Growth Lead, we land in inboxes perfectly!",
+    role: "Growth Lead",
+    image: "/avatars/avatar_male_09.png",
   },
   {
     name: "Jane Wilson",
