@@ -11,59 +11,96 @@ import {
   Tag,
   TestTube,
 } from "lucide-react";
-import { motion, useInView } from "motion/react";
+import { AnimatePresence, motion, useInView } from "motion/react";
 import Image from "next/image";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Feature = {
+  id: number;
   badge: string;
   name: string;
   description: string;
   icon: React.ElementType;
   image: string;
+  images: string[];
 };
 
 export default function FeaturesSection() {
   const features: Feature[] = [
     {
+      id: 1,
       badge: "Mailboxes",
       name: "Effortless Email Account Management",
       description:
         "Easily connect, manage, and monitor multiple mailboxes in one centralized dashboard. Track connection status, SMTP settings, and warm-up activity in real time for improved email deliverability.",
       icon: Inbox,
-      image: "/mailbox-image-full.png",
+      image: "/features/mailboxes/mailbox-main.png",
+      images: [
+        "/features/mailboxes/mailbox-main.png",
+        "/features/mailboxes/mailbox-details.png",
+        "/features/mailboxes/mailbox-sender-profile.png",
+      ],
     },
     {
+      id: 2,
       badge: "Postmaster",
       name: "Email Reputation Insights",
       description:
         "Monitor domain reputation, spam rates, and IP health in one place. Stay ahead of deliverability issues with real-time analytics and actionable recommendations to maintain a high sender reputation.",
       icon: ShieldCheck,
-      image: "/mailbox-image-full.png",
+      image: "/features/postmaster/postmaster-main.png",
+      images: [
+        "/features/postmaster/postmaster-main.png",
+        "/features/postmaster/spam-rate.png",
+        "/features/postmaster/ip-reputation.png",
+        "/features/postmaster/domain-reputation.png",
+        "/features/postmaster/authentication.png",
+        "/features/postmaster/encryption.png",
+        "/features/postmaster/delivery-error.png",
+        "/features/postmaster/feedback-loop.png",
+      ],
     },
     {
+      id: 3,
       badge: "Email Health",
       name: "Ensure Maximum Deliverability",
       description:
         "Get a complete assessment of your email infrastructure with real-time diagnostics to prevent spam issues and deliverability failures.",
       icon: HeartPulse,
       image: "/mailbox-image-full.png",
+      images: [
+        "/mailbox-image-full.png",
+        "/mailbox-image-full.png",
+        "/mailbox-image-full.png",
+        "/mailbox-image-full.png",
+      ],
     },
     {
+      id: 4,
       badge: "Seed List",
       name: "Improve Your Email Deliverability",
       description:
         "Ensure your emails reach the right inboxes by testing deliverability across a network of trusted seed mailboxes.",
       icon: TestTube,
-      image: "/mailbox-image-full.png",
+      image: "/features/seed-list/seed-list-main.png",
+      images: [
+        "/features/seed-list/seed-list-main.png",
+        "/features/seed-list/seed-list-details.png",
+      ],
     },
     {
+      id: 5,
       badge: "Templates",
       name: "Optimize Your Email Content",
       description:
         "Craft high-performing email templates with personalization, structure analysis, and spam detection to improve inbox placement.",
       icon: FileText,
-      image: "/mailbox-image-full.png",
+      image: "/features/templates/template-main.png",
+      images: [
+        "/features/templates/template-main.png",
+        "/features/templates/template-text.png",
+        "/features/templates/template-html.png",
+      ],
     },
   ];
 
@@ -94,8 +131,7 @@ export default function FeaturesSection() {
             <span className="text-sm text-primary">Powerful Features</span>
           </div>
           <h2 className="text-4xl md:text-6xl font-semibold text-white mb-6">
-            Designed for{" "}
-            <br className="hidden lg:block" />
+            Designed for <br className="hidden lg:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-500">
               Email Deliverability and Warm-up
             </span>
@@ -205,6 +241,22 @@ function FeatureItem({ feature, index }: { feature: Feature; index: number }) {
 function FeatureItem2({ feature, index }: { feature: Feature; index: number }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isHovering, setIsHovering] = useState(false);
+
+  useEffect(() => {
+    if (isHovering) return; // Don't set interval if hovering
+
+    const timer = setInterval(() => {
+      setCurrentImageIndex(
+        (prevIndex) => (prevIndex + 1) % feature.images.length
+      );
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, [feature.images.length, isHovering]);
+
   return (
     <motion.div
       ref={ref}
@@ -226,7 +278,9 @@ function FeatureItem2({ feature, index }: { feature: Feature; index: number }) {
         <div className="gap-4 flex flex-col justify-center lg:justify-start items-center lg:items-start">
           <div className="gap-2 bg-primary/20 rounded-[100px] flex-none justify-center items-center p-2 px-4 flex">
             <feature.icon className="w-4 h-4 text-white" />
-            <span className="text-sm text-white uppercase">{feature.badge}</span>
+            <span className="text-sm text-white uppercase">
+              {feature.badge}
+            </span>
           </div>
           <h3 className="text-center lg:text-left text-3xl md:text-5xl font-semibold text-white bg-clip-text text-transparent pb-3">
             {feature.name}
@@ -238,20 +292,41 @@ function FeatureItem2({ feature, index }: { feature: Feature; index: number }) {
       </div>
 
       {/* image wrapper */}
-      <div className="lg:w-1/2 w-full max-w-[576px] relative z-0">
+      <div
+        className="lg:w-1/2 w-full max-w-[576px] relative z-0"
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
+      >
         {/* image  */}
 
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-[15]" />
 
         {/* aspect-[574/449] */}
 
-        <div className="z-10 relative w-full overflow-hidden aspect-video rounded-2xl border border-primary">
-          <Image
+        <div className="z-10 relative w-full overflow-hidden aspect-video rounded-2xl border border-primary bg-background">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentImageIndex}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="absolute inset-0"
+            >
+              <Image
+                src={feature.images[currentImageIndex] || "/placeholder.svg"}
+                alt={`${feature.name} ${currentImageIndex + 1}`}
+                fill
+                className="object-contain"
+              />
+            </motion.div>
+          </AnimatePresence>
+          {/* <Image
             src={feature.image || "/placeholder.svg"}
             alt={feature.name}
             fill
             className="object-contain w-full h-full object-top"
-          />
+          /> */}
         </div>
         {/* glow */}
         {/* <div className="z-[20] pointer-events-none absolute -inset-[8%] inset-x-[7%] inset-y-auto">
@@ -262,6 +337,24 @@ function FeatureItem2({ feature, index }: { feature: Feature; index: number }) {
             className="object-contain w-full h-full"
           />
         </div> */}
+        {/* Image indicator dots */}
+        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+          {feature.images.map((dotIndex, index) => (
+            <motion.div
+              key={index}
+              className={cn(
+                "w-2 h-2 rounded-full cursor-pointer",
+                currentImageIndex === index ? "bg-primary" : "bg-white/50"
+              )}
+              initial={false}
+              animate={{
+                scale: currentImageIndex === index ? 1.2 : 1,
+              }}
+              transition={{ duration: 0.3 }}
+              onClick={() => setCurrentImageIndex(index)}
+            />
+          ))}
+        </div>
 
         <div className="z-0 pointer-events-none w-[150%] absolute inset-0 lg:top-[-525px] top-[-285px] left-[-90px] lg:left-[-142px]">
           <img

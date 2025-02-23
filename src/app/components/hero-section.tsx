@@ -6,6 +6,7 @@ import { Check, Mail, Star } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
 import { useState } from "react";
+import CTAForm from "./cta-form";
 
 export default function HeroSection() {
   const reviews = [
@@ -131,7 +132,7 @@ export default function HeroSection() {
       /> */}
 
         {/* Content */}
-        <div className="relative mx-auto px-6 pt-32 pb-20">
+        <div className="relative mx-auto pt-32">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -147,7 +148,7 @@ export default function HeroSection() {
             >
               <Mail className="w-4 h-4 text-primary mr-2" />
               <span className="text-sm text-primary">
-                Your AI Email Assistant
+                Inbox Placement Optimizer
               </span>
             </motion.div>
 
@@ -303,6 +304,8 @@ export default function HeroSection() {
             </div>
           </motion.div> */}
 
+            <CTAForm />
+
             {/* App Screenshot */}
             <motion.div
               initial={{ opacity: 0, y: 40 }}
@@ -313,7 +316,7 @@ export default function HeroSection() {
               {/* Background */}
               <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-[15]" />
-                <div className="z-0 w-[62%] absolute -top-[23.5%] bottom-auto left-1/2 -translate-x-1/2">
+                <div className="z-0 w-[62%] absolute -top-[12.5%] lg:-top-[23.5%] bottom-auto left-1/2 -translate-x-1/2">
                   <Image
                     src="/glow-image.png"
                     alt="InboxDoctor Interface"
@@ -322,15 +325,22 @@ export default function HeroSection() {
                     className="w-full h-full object-contain"
                   />
                 </div>
-                <div className="relative rounded-[50%] blur-[150px] bg-primary aspect-[1194/378] z-0"></div>
+                <div className="relative rounded-[50%] blur-[150px] bg-primary aspect-square lg:aspect-[1194/378] z-0"></div>
               </div>
               <div className="relative z-10">
                 <Image
-                  src="/hero-image.jpg"
+                  src="/hero-image-mobile.png"
+                  alt="InboxDoctor Interface"
+                  width={767}
+                  height={767}
+                  className="rounded-xl lg:rounded-2xl shadow-2xl border border-primary/30 w-full z-10 lg:hidden"
+                />
+                <Image
+                  src="/hero-image.png"
                   alt="InboxDoctor Interface"
                   width={1400}
                   height={600}
-                  className="rounded-2xl shadow-2xl border border-primary/30 w-full z-10"
+                  className="rounded-xl lg:rounded-2xl shadow-2xl border border-primary/30 w-full z-10 hidden lg:block"
                 />
               </div>
             </motion.div>

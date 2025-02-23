@@ -13,50 +13,64 @@ export default function PricingSection() {
 
   const plans = [
     {
-      name: "Basic",
+      name: "Starter",
       description:
-        "Perfect for individuals starting their email journey with essential features.",
-      price: "Free",
+        "Kickstart your email warmup journey with essential tools and support for budding senders.",
+      price: isAnnual ? "387.6" : "497",
       features: [
-        "1 Domain Setup",
-        "Basic Email Warmup",
-        "Standard Analytics",
-        "Email Health Monitoring",
-        "Basic Templates",
-        "Community Support",
+        "500 Warmup Emails Send Per Day",
+        "15,000 Warmup Emails Send Per Month",
+        "5 Sender Profiles",
+        "100 Email Health Test Per Month",
+        "Add your Own Email Template",
+        "Choose Your Warm Up Language",
+        "Unlimited Google Postmaster Integration",
+        "Unlimited Email Template Coach",
+        "Email Support",
       ],
-      cta: "Get Started",
+      cta: "Contact Sales",
       ctaVariant: "outline" as const,
     },
     {
-      name: "Pro",
+      name: "Growth",
       description:
-        "Ideal for businesses needing advanced features and priority support.",
-      price: isAnnual ? "89.99" : "99.99",
+        "Accelerate your email performance with enhanced capabilities, tools, and expanded support.",
+      price: isAnnual ? "877.6" : "1097",
       features: [
-        "All Basic Features",
-        "Unlimited Domains",
-        "Advanced Analytics",
-        "Priority Support",
-        "Custom Templates",
-        "API Access",
+        "1000 Warmup Emails Send Per Day",
+        "30,000 Warmup Emails Send Per Month",
+        "10 Sender Profiles",
+        "250 Email Health Test Per Month",
+        "Add your Own Email Template",
+        "Choose Your Warm Up Language",
+        "Unlimited Google Postmaster Integration",
+        "Unlimited Email Template Coach",
+        "Email & Live Chat Support",
       ],
-      cta: "Get Started",
+      cta: "Contact Sales",
       ctaVariant: "default" as const,
       popular: true,
     },
     {
       name: "Enterprise",
       description:
-        "Tailored solutions for large organizations requiring custom features.",
+        "Unlock premium warmup email solutions with tailor-made services for large-scale operations.",
       price: "Custom",
       features: [
-        "All Pro Features",
-        "Custom Integration",
-        "Dedicated Support",
-        "SLA Guarantee",
-        "Custom Development",
-        "Advanced Security",
+        "Access to Largest and Widest Warmup Seed Pool Network",
+        "10,000+ Warmup Emails Send Per Day",
+        "300,000+ Warmup Emails Send Per Month",
+        "500+ Sender Profiles",
+        "5000+ Email Health Test Per Month",
+        "API Access",
+        "Add your Own Email Template",
+        "Choose Your Warm Up Language",
+        "Unlimited Google Postmaster Integration",
+        "Unlimited Email Template Coach",
+        "Weekly Deliverability Consultation by the Hour",
+        "Dedicated Account Manager",
+        "Dedicated Slack Channel Support",
+        "Email & Live Chat Support",
       ],
       cta: "Contact Sales",
       ctaVariant: "outline" as const,
@@ -167,13 +181,13 @@ export default function PricingSection() {
                 plan.popular
                   ? "border-primary/50 bg-primary/[0.08]"
                   : "border-white/10 bg-white/[0.02]"
-              } backdrop-blur-sm p-8`}
+              } backdrop-blur-sm p-8 h-fit`}
             >
-              {plan.name === "Pro" && (
+              {plan.name === "Growth" && (
                 <div className="z-0 pointer-events-none w-[70%] absolute right-0 top-0">
                   <img
                     src="/pricing-card-image.png"
-                    alt="Pro Badge"
+                    alt="Growth Badge"
                     className="w-full h-full object-contain"
                   />
                 </div>
@@ -207,8 +221,8 @@ export default function PricingSection() {
               </div>
               <ul className="mb-8 space-y-4">
                 {plan.features.map((feature) => (
-                  <li key={feature} className="flex items-center gap-3">
-                    <Check className="w-5 h-5 text-primary" />
+                  <li key={feature} className="flex items-start gap-3">
+                    <Check className="w-5 h-5 mt-1 text-primary" />
                     <span className="text-gray-300">{feature}</span>
                   </li>
                 ))}

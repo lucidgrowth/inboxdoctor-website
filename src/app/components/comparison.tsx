@@ -8,76 +8,94 @@ import React from "react";
 export default function ComparisonSection() {
   const features = [
     {
-      id: 1,
-      name: "Higher Email Send Rates",
+      id: 9,
+      name: "Gated & Vetted Warmup Pool Access",
       inboxDoctor: true,
-      warmy: false,
-      inboxAlly: false,
-      folderly: false,
-      warmupIp: false,
+      others: false,
     },
     {
-      id: 2,
-      name: "AI-Powered Warmup",
+      id: 10,
+      name: "Dedicated Warmup Seed Pool for Enterprise",
       inboxDoctor: true,
-      warmy: true,
-      inboxAlly: false,
-      folderly: true,
-      warmupIp: false,
+      others: false,
     },
     {
-      id: 3,
-      name: "Real-Time Analytics",
+      id: 11,
+      name: "Near Real-Time Warmup Analytics",
       inboxDoctor: true,
-      warmy: true,
-      inboxAlly: true,
-      folderly: true,
-      warmupIp: true,
+      others: false,
     },
     {
-      id: 4,
-      name: "Dedicated Support",
+      id: 12,
+      name: "Largest & Widest Seed Email Warmup Pool",
       inboxDoctor: true,
-      warmy: false,
-      inboxAlly: false,
-      folderly: false,
-      warmupIp: false,
+      others: false,
     },
     {
-      id: 5,
-      name: "Custom Warmup Rules",
+      id: 13,
+      name: "Premium Seed Accounts Across USA",
       inboxDoctor: true,
-      warmy: false,
-      inboxAlly: false,
-      folderly: true,
-      warmupIp: false,
+      others: false,
     },
     {
-      id: 6,
-      name: "Spam Testing",
+      id: 14,
+      name: "Set Your Warmup Email Open Rates, Time Window & Speed",
       inboxDoctor: true,
-      warmy: true,
-      inboxAlly: true,
-      folderly: true,
-      warmupIp: false,
+      others: false,
     },
     {
-      id: 7,
-      name: "Domain Health Monitoring",
+      id: 15,
+      name: "Higher Warmup Email Send Rates",
       inboxDoctor: true,
-      warmy: true,
-      inboxAlly: true,
-      folderly: true,
-      warmupIp: true,
+      others: false,
     },
     {
-      id: 8,
-      name: "Free Domain Replacement",
+      id: 16,
+      name: "No IMAP-Based Warmup Engagement",
       inboxDoctor: true,
-      warmy: false,
-      inboxAlly: false,
-      folderly: false,
-      warmupIp: false,
+      others: false,
+    },
+    {
+      id: 17,
+      name: "GUI-Based Warmup Engagement on Mobile & Laptop",
+      inboxDoctor: true,
+      others: false,
+    },
+    {
+      id: 18,
+      name: "Seed Accounts Connected on Mobile & Laptop",
+      inboxDoctor: true,
+      others: false,
+    },
+    {
+      id: 19,
+      name: "Send Emails on Your Schedule & Timezone",
+      inboxDoctor: true,
+      others: false,
+    },
+    {
+      id: 20,
+      name: "Send Warmup Emails with Your Own Template",
+      inboxDoctor: true,
+      others: false,
+    },
+    {
+      id: 21,
+      name: "Do Warmup in Your Own Languages",
+      inboxDoctor: true,
+      others: false,
+    },
+    {
+      id: 22,
+      name: "Unlimited Google Postmaster Integration",
+      inboxDoctor: true,
+      others: false,
+    },
+    {
+      id: 23,
+      name: "Email Coach - Score & Optimize Your Email Templates",
+      inboxDoctor: true,
+      others: false,
     },
   ];
 
@@ -131,31 +149,21 @@ export default function ComparisonSection() {
           viewport={{ once: true }}
           className="relative overflow-x-auto"
         >
-          <div className="min-w-[500px]">
+          <div className="min-w-[500px] max-w-[800px] mx-auto">
             <div className="flex flex-col gap-px bg-white/10">
               {/* Header */}
               <div className="flex">
-                <div className="bg-background p-6 w-[150px] shrink-0">
+                <div className="bg-background p-6 w-[150px] lg:w-[250px] shrink-0">
                   <span className="sr-only">Feature</span>
                 </div>
-                <div className="bg-background p-6 min-w-[150px] flex-1">
-                  <h3 className="text-lg font-semibold text-primary text-center whitespace-nowrap">
+                <div className="bg-background p-4 lg:p-6 min-w-[100px] lg:min-w-[150px] flex-1">
+                  <h3 className="text-sm lg:text-lg font-semibold text-primary text-center whitespace-nowrap">
                     InboxDoctor
                   </h3>
                 </div>
-                <div className="bg-background p-6 min-w-[150px] flex-1">
-                  <h3 className="text-lg font-semibold text-gray-400 text-center whitespace-nowrap">
-                    Warmy.io
-                  </h3>
-                </div>
-                <div className="bg-background p-6 min-w-[150px] flex-1">
-                  <h3 className="text-lg font-semibold text-gray-400 text-center whitespace-nowrap">
-                    InboxAlly
-                  </h3>
-                </div>
-                <div className="bg-background p-6 min-w-[150px] flex-1">
-                  <h3 className="text-lg font-semibold text-gray-400 text-center whitespace-nowrap">
-                    Folderly
+                <div className="bg-background p-4 lg:p-6 min-w-[100px] lg:min-w-[150px] flex-1">
+                  <h3 className="text-sm lg:text-lg font-semibold text-gray-400 text-center whitespace-nowrap">
+                    Others
                   </h3>
                 </div>
               </div>
@@ -163,10 +171,12 @@ export default function ComparisonSection() {
               {/* Features */}
               {features.map((feature, index) => (
                 <div key={feature.id} className="flex w-full">
-                  <div className="bg-background p-6 w-[150px] border-t border-white/10 shrink-0">
-                    <p className="text-white">{feature.name}</p>
+                  <div className="bg-background p-6 w-[150px] lg:w-[250px] border-t border-white/10 shrink-0">
+                    <p className="text-white text-sm lg:text-lg">
+                      {feature.name}
+                    </p>
                   </div>
-                  <div className="bg-background p-6 border-t min-w-[150px] border-white/10 flex-1">
+                  <div className="bg-background p-4 lg:p-6 border-t min-w-[100px] flex items-center justify-center border-white/10 flex-1">
                     <div className="flex justify-center">
                       {feature.inboxDoctor ? (
                         <Check className="w-6 h-6 text-primary" />
@@ -175,27 +185,9 @@ export default function ComparisonSection() {
                       )}
                     </div>
                   </div>
-                  <div className="bg-background p-6 border-t min-w-[150px] border-white/10 flex-1">
+                  <div className="bg-background p-4 lg:p-6 border-t flex items-center justify-center min-w-[100px] border-white/10 flex-1">
                     <div className="flex justify-center">
-                      {feature.warmy ? (
-                        <Check className="w-6 h-6 text-gray-400" />
-                      ) : (
-                        <X className="w-6 h-6 text-gray-500" />
-                      )}
-                    </div>
-                  </div>
-                  <div className="bg-background p-6 border-t min-w-[150px] border-white/10 flex-1">
-                    <div className="flex justify-center">
-                      {feature.inboxAlly ? (
-                        <Check className="w-6 h-6 text-gray-400" />
-                      ) : (
-                        <X className="w-6 h-6 text-gray-500" />
-                      )}
-                    </div>
-                  </div>
-                  <div className="bg-background p-6 border-t min-w-[150px] border-white/10 flex-1">
-                    <div className="flex justify-center">
-                      {feature.folderly ? (
+                      {feature.others ? (
                         <Check className="w-6 h-6 text-gray-400" />
                       ) : (
                         <X className="w-6 h-6 text-gray-500" />
