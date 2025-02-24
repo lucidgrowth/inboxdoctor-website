@@ -1,25 +1,31 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { bookingLink } from "@/lib/constants";
 import { motion } from "motion/react";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const CTAForm = () => {
+  const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
 
     try {
-      setIsSubmitting(true);
-      // Add your form submission logic here
-      console.log("Form submitted:", email);
-      // Reset form after successful submission
-      setEmail("");
-
-      // Send email to InboxDoctor
+      //TODO: Hit API to save email
+      
       // fake delay
       await new Promise((resolve) => setTimeout(resolve, 2000));
+
+      setEmail("");
+      window.location.href = bookingLink;
+      // Send email to InboxDoctor
     } catch (error) {
       console.error("Error submitting form:", error);
     } finally {

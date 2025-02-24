@@ -2,6 +2,7 @@
 
 import Container from "@/components/container";
 import { Button } from "@/components/ui/button";
+import { bookingLink } from "@/lib/constants";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
@@ -120,7 +121,11 @@ export default function NavBar() {
                 FAQ
               </Link>
               <div className="px-4 py-4">
-                <Link href="/get-started">
+                <Link
+                  href={bookingLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Button
                     // size=""
                     className="bg-blue-600 hover:bg-blue-700 text-white px-5 rounded-full group relative"
@@ -133,7 +138,12 @@ export default function NavBar() {
           )}
         </AnimatePresence>
 
-        <Link href="/get-started" className="hidden md:block">
+        <Link
+          href={bookingLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hidden md:block"
+        >
           <Button
             // size=""
             className="bg-blue-600 hover:bg-blue-700 text-white px-5 rounded-full group relative"

@@ -5,6 +5,8 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Container from "@/components/container";
+import { bookingLink } from "@/lib/constants";
+import Link from "next/link";
 
 export default function CTASection() {
   return (
@@ -19,7 +21,12 @@ export default function CTASection() {
         {/* Card Container */}
         <div className="relative rounded-3xl bg-background overflow-hidden">
           <div className="absolute inset-0">
-            <Image src="/cta-section-grid.png" alt="" fill className="object-cover" />
+            <Image
+              src="/cta-section-grid.png"
+              alt=""
+              fill
+              className="object-cover"
+            />
           </div>
 
           {/* <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-[15]" /> */}
@@ -74,15 +81,17 @@ export default function CTASection() {
             </p>
 
             {/* CTA Button */}
-            <Button
-              size="lg"
-              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 text-lg rounded-full group relative"
-            >
-              Book a Call
-              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-              {/* Button Glow Effect */}
-              <div className="absolute inset-0 -z-10 bg-blue-600/20 blur-lg rounded-full" />
-            </Button>
+            <Link href={bookingLink} target="_blank" rel="noopener noreferrer">
+              <Button
+                size="lg"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 text-lg rounded-full group relative"
+              >
+                Book a Call
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                {/* Button Glow Effect */}
+                <div className="absolute inset-0 -z-10 bg-blue-600/20 blur-lg rounded-full" />
+              </Button>
+            </Link>
           </div>
         </div>
       </motion.div>

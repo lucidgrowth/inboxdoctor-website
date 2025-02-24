@@ -7,6 +7,8 @@ import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { Spotlight } from "./spotlight";
 import Container from "@/components/container";
+import Link from "next/link";
+import { bookingLink } from "@/lib/constants";
 
 export default function PricingSection() {
   const [isAnnual, setIsAnnual] = useState(false);
@@ -227,16 +229,23 @@ export default function PricingSection() {
                   </li>
                 ))}
               </ul>
-              <Button
-                variant={plan.ctaVariant}
-                className={`w-full rounded-full h-14 text-base text-white ${
-                  plan.ctaVariant === "default"
-                    ? "bg-primary hover:bg-primary/90"
-                    : "border-primary/50 hover:bg-primary/10"
-                }`}
+
+              <Link
+                href={bookingLink}
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                {plan.cta}
-              </Button>
+                <Button
+                  variant={plan.ctaVariant}
+                  className={`w-full rounded-full h-14 text-base text-white ${
+                    plan.ctaVariant === "default"
+                      ? "bg-primary hover:bg-primary/90"
+                      : "border-primary/50 hover:bg-primary/10"
+                  }`}
+                >
+                  {plan.cta}
+                </Button>
+              </Link>
             </motion.div>
           ))}
         </motion.div>
