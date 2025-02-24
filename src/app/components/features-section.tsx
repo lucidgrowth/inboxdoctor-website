@@ -70,6 +70,7 @@ export default function FeaturesSection() {
       image: "/features/email-health/email-health-main.png",
       images: [
         "/features/email-health/email-health-main.png",
+        "/features/email-health/details.png",
         "/features/email-health/test-email.png",
       ],
     },
