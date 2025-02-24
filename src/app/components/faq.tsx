@@ -15,19 +15,19 @@ const faqs = [
   {
     question: "What is InboxDoctor and how does it work?",
     answer:
-      "InboxDoctor is an AI-powered email deliverability platform that analyzes and optimizes your emails to ensure they reach the inbox. It uses advanced algorithms to check content, authentication, and sender reputation.",
+      "InboxDoctor is an email deliverability platform that analyzes and optimizes your emails to ensure they reach the inbox. It uses advanced algorithms to check content, authentication, and sender reputation.",
   },
   {
     question: "How can InboxDoctor improve my email deliverability?",
     answer:
       "InboxDoctor improves deliverability by analyzing SPF, DKIM, and DMARC records, checking content against spam triggers, monitoring sender reputation, and providing real-time optimization suggestions.",
   },
-  {
-    question:
-      "Is InboxDoctor compatible with my existing email service provider?",
-    answer:
-      "Yes, InboxDoctor integrates seamlessly with major email service providers including Gmail, Outlook, SendGrid, Mailchimp, and many others through our API or direct integration.",
-  },
+  // {
+  //   question:
+  //     "Is InboxDoctor compatible with my existing email service provider?",
+  //   answer:
+  //     "Yes, InboxDoctor integrates seamlessly with major email service providers including Gmail, Outlook, SendGrid, Mailchimp, and many others through our API or direct integration.",
+  // },
   {
     question: "What kind of reporting and analytics does InboxDoctor provide?",
     answer:
@@ -43,16 +43,16 @@ const faqs = [
     answer:
       "We implement enterprise-grade security including SOC 2 compliance, end-to-end encryption, two-factor authentication, and regular security audits to protect your data.",
   },
-  // {
-  //   question: "Can I use InboxDoctor for multiple domains?",
-  //   answer:
-  //     "Yes, our platform supports multiple domains and subdomains. You can manage all your email sending domains from a single dashboard with domain-specific analytics.",
-  // },
-  // {
-  //   question: "Do you offer customer support?",
-  //   answer:
-  //     "We provide 24/7 customer support through chat, email, and phone. Our team of email deliverability experts is always ready to help you optimize your email performance.",
-  // },
+  {
+    question: "Can I use InboxDoctor for multiple domains?",
+    answer:
+      "Yes, our platform supports multiple domains and subdomains. You can manage all your email sending domains from a single dashboard with domain-specific analytics.",
+  },
+  {
+    question: "Do you offer customer support?",
+    answer:
+      "We provide customer support based on your plan. Our team of email deliverability experts is available through chat, email, and phone to help you optimize your email performance.",
+  },
   // {
   //   question: "What pricing plans are available?",
   //   answer:
@@ -101,7 +101,7 @@ export default function FaqSection() {
                 value={`item-${index}`}
                 className="border border-white/10 bg-white/[0.02] rounded-2xl px-4"
               >
-                <AccordionTrigger className="py-6 hover:no-underline text-lg [&>svg]:size-6">
+                <AccordionTrigger className="py-6 hover:no-underline text-lg [&>svg]:size-6 text-white">
                   {faq.question}
                 </AccordionTrigger>
                 <AccordionContent className="">{faq.answer}</AccordionContent>

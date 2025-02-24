@@ -67,12 +67,10 @@ export default function FeaturesSection() {
       description:
         "Get a complete assessment of your email infrastructure with real-time diagnostics to prevent spam issues and deliverability failures.",
       icon: HeartPulse,
-      image: "/mailbox-image-full.png",
+      image: "/features/email-health/email-health-main.png",
       images: [
-        "/mailbox-image-full.png",
-        "/mailbox-image-full.png",
-        "/mailbox-image-full.png",
-        "/mailbox-image-full.png",
+        "/features/email-health/email-health-main.png",
+        "/features/email-health/test-email.png",
       ],
     },
     {
@@ -222,13 +220,13 @@ function FeatureItem({ feature, index }: { feature: Feature; index: number }) {
           className="relative aspect-video w-full perspective-1000"
         >
           <div className="relative rounded-2xl overflow-hidden border border-blue-500/20 aspect-video group">
-            <div className="z-2 bg-gradient-to-b from-[var(--color-primary--background)] to-[var(--color-primary--background)] [background-origin:border-box] [background-clip:padding-box,border-box] border border-transparent rounded-[20px] relative overflow-hidden">
+            <div className="z-2 bg-gradient-to-b from-[var(--primary)] to-[var(--primary)] [background-origin:border-box] [background-clip:padding-box,border-box] border border-transparent rounded-[20px] relative overflow-hidden">
               <Image
                 src={feature.image || "/placeholder.svg"}
                 alt={feature.name}
                 height={767}
                 width={479}
-                className="object-contain w-full h-full"
+                className="object-contain object-top w-full h-full"
               />
             </div>
           </div>
