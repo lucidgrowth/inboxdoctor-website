@@ -11,64 +11,68 @@ import CTAForm from "./cta-form";
 export default function HeroSection() {
   const reviews = [
     {
+      stars: 5,
+      name: "Priya Sharma",
+      role: "Content Marketing Lead",
+      image: "/avatars/avatar_female_07.png",
+      quote:
+        "As someone who sends weekly newsletters, the spam trigger detection has been invaluable. Haven't hit the spam folder since using it.",
+    },
+    {
+      stars: 4,
+      name: "Rajesh Kumar",
+      role: "Email Marketing Specialist",
+      image: "/avatars/avatar_male_11.png",
+      quote:
+        "The deliverability insights are incredible. I can now troubleshoot issues before they affect our campaigns. Setup took some time though.",
+    },
+    {
+      stars: 5,
       name: "Amit Desai",
       quote:
-        "Our emails kept hitting spam until I found InboxDoctor. As a CRM Manager, its warmup saved our campaign—it’s now a smooth ride!",
-      role: "CRM Manager",
-      image: "/avatars/avatar_male_08.png",
-      stars: 5,
+        "InboxDoctor transformed our email deliverability! Our open rates skyrocketed after using their warmup tool, making our campaigns more effective than ever.",
+      role: "Email Marketing Specialist",
+      image: "/avatars/avatar_male_12.png",
     },
-    // {
-    //   name: "Maria Garcia",
-    //   role: "Content Creator",
-    //   quote: "Finally, a tool that actually prevents spam folder issues.",
-    //   image: "/avatars/avatar_female_01.webp",
-    //   stars: 4,
-    // },
     {
-      name: "Chris Bennett",
-      role: "Newsletter Editor",
-      quote: "Great for monitoring domain reputation, but UI needs work.",
-      image: "/avatars/avatar_male_02.webp",
       stars: 4,
+      name: "Karan Malhotra",
+      role: "Digital Campaign Specialist",
+      image: "/avatars/avatar_male_05.png",
+      quote:
+        "InboxDoctor's warmup built mailbox credibility fast. Now our newsletters hit inboxes—perfect for a Digital Campaign Specialist!",
     },
     {
+      stars: 4,
       name: "Suresh Nair",
       image: "/avatars/avatar_male_06.png",
       quote:
         "InboxDoctor warmed up our mailboxes, boosting engagement. Promotional emails now reach customers easily—great for e-commerce!",
       role: "E-commerce Operations Manager",
-      stars: 5,
     },
     {
-      name: "Mark Sullivan",
-      role: "Content Marketing Specialist",
-      quote: "Good tool, but could use more template customization options.",
-      image: "/avatars/avatar_male_03.webp",
+      stars: 5,
+      name: "Tenzing Lepcha",
+      quote:
+        "New domain, no delivery—weeks of chaos. InboxDoctor sorted it out. I handle Email Ops; it's smooth sailing from here!",
+      role: "Email Operations Specialist",
+      image: "/avatars/avatar_male_07.png",
+    },
+    {
+      stars: 5,
+      name: "Anjali Mehta",
+      role: "Content Strategy Director",
+      image: "/avatars/avatar_female_08.png",
+      quote:
+        "Managing multiple newsletter campaigns was a nightmare before InboxDoctor. Now I can ensure every email lands in the primary inbox.",
+    },
+    {
       stars: 4,
-    },
-    {
-      name: "Sarah Williams",
-      role: "Digital Content Producer",
-      quote: "The authentication checks are invaluable for our business.",
-      image: "/avatars/avatar_female_03.webp",
-      stars: 5,
-    },
-    {
       name: "Manish Thakur",
       quote:
         "At our startup, emails vanished into spam during a big pitch. InboxDoctor warmed them up—now, as Growth Lead, we land in inboxes perfectly!",
       role: "Growth Lead",
       image: "/avatars/avatar_male_09.png",
-      stars: 4,
-    },
-    {
-      name: "Tenzing Lepcha",
-      quote:
-        "New domain, no delivery—weeks of chaos. InboxDoctor sorted it out. I handle Email Ops; it’s smooth sailing from here!",
-      role: "Email Operations Specialist",
-      image: "/avatars/avatar_male_07.png",
-      stars: 5,
     },
   ];
 
@@ -233,7 +237,9 @@ export default function HeroSection() {
                               />
                             ))}
                           </div>
-                          <p className="text-white text-left text-sm">{review.quote}</p>
+                          <p className="text-white text-left text-sm">
+                            {review.quote}
+                          </p>
                         </div>
                       </div>
                     </div>
