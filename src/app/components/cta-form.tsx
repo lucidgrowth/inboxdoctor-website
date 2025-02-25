@@ -19,12 +19,16 @@ const CTAForm = () => {
 
     try {
       //TODO: Hit API to save email
-      
+
       // fake delay
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      // await new Promise((resolve) => setTimeout(resolve, 2000));
+
+      // add email to calendy URL
+      const newURL = new URL(bookingLink);
+      newURL.searchParams.set("email", email);
 
       setEmail("");
-      window.location.href = bookingLink;
+      window.location.href = newURL.toString();
       // Send email to InboxDoctor
     } catch (error) {
       console.error("Error submitting form:", error);
