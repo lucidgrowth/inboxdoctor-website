@@ -23,7 +23,7 @@ export default function CTASection() {
           <div className="absolute inset-0">
             <Image
               src="/cta-section-grid.png"
-              alt=""
+              alt="grid background"
               fill
               className="object-cover"
             />

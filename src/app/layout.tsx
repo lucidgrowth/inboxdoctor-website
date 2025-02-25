@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
-  title: "InboxDoctor",
+  title: "InboxDoctor – Best Email Warm-Up & Deliverability Tool",
   description:
     "Land in inboxes, not spam folders. Boost open rates and sender reputation with ease.",
   authors: {
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     follow: true,
   },
   openGraph: {
-    title: "InboxDoctor",
+    title: "InboxDoctor – Best Email Warm-Up & Deliverability Tool",
     description:
       "Land in inboxes, not spam folders. Boost open rates and sender reputation with ease.",
     siteName: "InboxDoctor",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "InboxDoctor",
+    title: "InboxDoctor – Best Email Warm-Up & Deliverability Tool",
     description:
       "Land in inboxes, not spam folders. Boost open rates and sender reputation with ease.",
     images: ["https://inboxdoctor.ai/opengraph-image.png"],
