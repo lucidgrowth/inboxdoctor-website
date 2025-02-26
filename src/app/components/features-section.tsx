@@ -328,14 +328,15 @@ function FeatureItem2({ feature, index }: { feature: Feature; index: number }) {
           /> */}
         </div>
         {/* glow */}
-        {/* <div className="z-[20] pointer-events-none absolute -inset-[8%] inset-x-[7%] inset-y-auto">
+        <div className="z-[9] pointer-events-none absolute inset-[-11%_7%_auto]">
           <Image
             src="/glow-image-sm.png"
             alt="InboxDoctor Interface"
-            fill
+            height={72}
+            width={495}
             className="object-contain w-full h-full"
           />
-        </div> */}
+        </div>
         {/* Image indicator dots */}
         <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
           {feature.images.map((dotIndex, index) => (
