@@ -30,6 +30,13 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  icons: {
+    icon: {
+      sizes: "48x48",
+      url: "/favicon.ico",
+      type: "image/x-icon",
+    },
+  },
   openGraph: {
     title: "InboxDoctor – Best Email Warm-Up & Deliverability Tool",
     description:
