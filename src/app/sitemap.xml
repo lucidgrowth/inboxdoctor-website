@@ -4,4 +4,44 @@
     <lastmod>2025-02-22T15:02:24.021Z</lastmod>
     <priority>1</priority>
   </url>
+ <url>
+    <loc>https://inboxdoctor.ai/legal/terms-and-conditions</loc>
+    <lastmod>2025-02-28T15:02:24.021Z</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://inboxdoctor.ai/legal/privacy-policy</loc>
+    <lastmod>2025-02-28T15:02:24.021Z</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://inboxdoctor.ai/legal/anti-spam-policy</loc>
+    <lastmod>2025-02-28T15:02:24.021Z</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://inboxdoctor.ai/legal/cookie-policy</loc>
+    <lastmod>2025-02-28T15:02:24.021Z</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://inboxdoctor.ai/legal/google-api-discloser</loc>
+    <lastmod>2025-02-28T15:02:24.021Z</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://inboxdoctor.ai/legal/subprocessors</loc>
+    <lastmod>2025-02-28T15:02:24.021Z</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://inboxdoctor.ai/legal/accessibility-statement</loc>
+    <lastmod>2025-02-28T15:02:24.021Z</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://inboxdoctor.ai/legal/eula</loc>
+    <lastmod>2025-02-28T15:02:24.021Z</lastmod>
+    <priority>0.7</priority>
+  </url>
 </urlset>
