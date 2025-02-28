@@ -7,13 +7,48 @@ import Link from "next/link";
 import Container from "@/components/container";
 import Image from "next/image";
 
+const legalPages = [
+  {
+    title: "Terms and Conditions",
+    href: "/legal/terms-and-conditions",
+  },
+  {
+    title: "Privacy Policy",
+    href: "/legal/privacy-policy",
+  },
+  {
+    title: "Anti-Spam Policy",
+    href: "/legal/anti-spam-policy",
+  },
+  {
+    title: "Cookie Policy",
+    href: "/legal/cookie-policy",
+  },
+  {
+    title: "Google API Discloser",
+    href: "/legal/google-api-discloser",
+  },
+  {
+    title: "Subprocessors",
+    href: "/legal/subprocessors",
+  },
+  {
+    title: "Accessibility Statement",
+    href: "/legal/accessibility-statement",
+  },
+  {
+    title: "EULA",
+    href: "/legal/eula",
+  },
+];
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="bg-background border-t border-white/10">
       <Container type="div" className="px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           {/* Logo and Description */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -193,7 +228,7 @@ export default function Footer() {
           </motion.div>
 
           {/* Legal Pages */}
-          {/* <motion.div
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -201,40 +236,18 @@ export default function Footer() {
           >
             <h3 className="text-white font-semibold mb-4">Legal</h3>
             <ul className="space-y-2">
-              <li>
-                <Link
-                  href="/privacy-policy"
-                  className="text-gray-400 hover:text-blue-500 transition-colors"
-                >
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/terms-of-service"
-                  className="text-gray-400 hover:text-blue-500 transition-colors"
-                >
-                  Terms of Service
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/cookie-policy"
-                  className="text-gray-400 hover:text-blue-500 transition-colors"
-                >
-                  Cookie Policy
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/gdpr"
-                  className="text-gray-400 hover:text-blue-500 transition-colors"
-                >
-                  GDPR Compliance
-                </Link>
-              </li>
+              {legalPages.map((page) => (
+                <li key={page.href}>
+                  <Link
+                    href={page.href}
+                    className="text-gray-400 hover:text-blue-500 transition-colors"
+                  >
+                    {page.title}
+                  </Link>
+                </li>
+              ))}
             </ul>
-          </motion.div> */}
+          </motion.div>
         </div>
 
         {/* Copyright */}

@@ -1,17 +1,14 @@
 import ComparisonSection from "./components/comparison";
+import CTASection from "./components/cta-section";
 import FaqSection from "./components/faq";
 import FeaturesSection from "./components/features-section";
 import HeroSection from "./components/hero-section";
-import NavBar from "./components/nav-bar";
 import PricingSection from "./components/pricing";
-import TestimonialsSection from "./components/testimonials";
-import Footer from "./components/footer";
-import CTASection from "./components/cta-section";
 import StatsSection from "./components/stats-section";
+import TestimonialsSection from "./components/testimonials";
 export default function Home() {
   return (
     <main>
-      <NavBar />
       <HeroSection />
       <StatsSection />
       <FeaturesSection />
@@ -20,7 +17,6 @@ export default function Home() {
       <TestimonialsSection />
       <FaqSection />
       <CTASection />
-      <Footer />
       {/* <InfiniteMovingCardsDemo /> */}
     </main>
   );

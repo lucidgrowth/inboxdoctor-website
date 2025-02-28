@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+import NavBar from "./components/nav-bar";
+import Footer from "./components/footer";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -96,7 +98,9 @@ export default function RootLayout({
         <meta name="msvalidate.01" content="9993CBC4BC27866C85C4AB5FD1326CA3" />
       </head>
       <body className={`${inter.variable} ${aspekta.variable} antialiased`}>
+        <NavBar />
         {children}
+        <Footer />
       </body>
     </html>
   );
