@@ -33,7 +33,11 @@ export default async function LegalLayout({
           {frontmatter.lastUpdatedAt && (
             <p className="text-muted-foreground">
               Last updated:{" "}
-              {new Date(frontmatter.lastUpdatedAt).toLocaleDateString()}
+              {new Date(frontmatter.lastUpdatedAt).toLocaleString("en-GB", {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+              })}
             </p>
           )}
         </div>
