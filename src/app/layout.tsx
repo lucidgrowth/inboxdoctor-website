@@ -21,9 +21,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
-  title: "InboxDoctor – Best Email Warm-Up & Deliverability Tool",
+  title: "InboxDoctor | Email Warm-Up & Deliverability Tool",
   description:
-    "Land in inboxes, not spam folders. Boost open rates and sender reputation with ease.",
+    "Boost email deliverability with InboxDoctor. Land in inboxes, not spam, and improve open rates and sender reputation effortlessly.",
   authors: {
     name: "InboxDoctor",
     url: "https://inboxdoctor.ai",
@@ -40,9 +40,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "InboxDoctor – Best Email Warm-Up & Deliverability Tool",
+    title: "InboxDoctor | Email Warm-Up & Deliverability Tool",
     description:
-      "Land in inboxes, not spam folders. Boost open rates and sender reputation with ease.",
+      "Boost email deliverability with InboxDoctor. Land in inboxes, not spam, and improve open rates and sender reputation effortlessly.",
     siteName: "InboxDoctor",
     url: "https://inboxdoctor.ai",
     type: "website",
@@ -58,9 +58,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "InboxDoctor – Best Email Warm-Up & Deliverability Tool",
+    title: "InboxDoctor | Email Warm-Up & Deliverability Tool",
     description:
-      "Land in inboxes, not spam folders. Boost open rates and sender reputation with ease.",
+      "Boost email deliverability with InboxDoctor. Land in inboxes, not spam, and improve open rates and sender reputation effortlessly.",
     images: ["https://inboxdoctor.ai/opengraph-image.png"],
   },
   keywords: [
@@ -95,6 +95,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Bing Webmaster Tools */}
         <meta name="msvalidate.01" content="9993CBC4BC27866C85C4AB5FD1326CA3" />
       </head>
       <body className={`${inter.variable} ${aspekta.variable} antialiased`}>

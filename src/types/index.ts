@@ -7,4 +7,6 @@ export interface TocItem {
 export interface Frontmatter {
   title: string;
   lastUpdatedAt: string;
+  metaTitle: string;
+  metaDescription: string;
 }
