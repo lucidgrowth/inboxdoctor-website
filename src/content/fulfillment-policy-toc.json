@@ -1,0 +1,84 @@
+[
+  {
+    "title": "Introduction",
+    "id": "1-introduction"
+  },
+  {
+    "title": "Fulfillment of Services",
+    "id": "2-fulfillment-of-services",
+    "subsections": [
+      {
+        "title": "Digital Delivery",
+        "id": "digital-delivery"
+      },
+      {
+        "title": "Account Activation",
+        "id": "account-activation"
+      },
+      {
+        "title": "Service Features & Access",
+        "id": "service-features-access"
+      }
+    ]
+  },
+  {
+    "title": "No Refund Policy",
+    "id": "3-no-refund-policy",
+    "subsections": [
+      {
+        "title": "All Sales Are Final",
+        "id": "all-sales-are-final"
+      },
+      {
+        "title": "Exceptions",
+        "id": "exceptions"
+      },
+      {
+        "title": "Service Features & Access",
+        "id": "service-features-access"
+      }
+    ]
+  },
+  {
+    "title": "Customer Responsibilities",
+    "id": "4-customer-responsibilities",
+    "subsections": [
+      {
+        "title": "Accurate Information",
+        "id": "accurate-information"
+      },
+      {
+        "title": "Compliance with Laws",
+        "id": "compliance-with-laws"
+      }
+    ]
+  },
+  {
+    "title": "Service Reliability & Support",
+    "id": "5-service-reliability-support",
+    "subsections": [
+      {
+        "title": "Uptime Commitment",
+        "id": "uptime-commitment"
+      },
+      {
+        "title": "Technical Support",
+        "id": "technical-support"
+      }
+    ]
+  },
+  {
+    "title": "Modifications to the Fulfillment Policy",
+    "id": "6-modifications-to-the-fulfillment-policy",
+    "subsections": [
+      {
+        "title": "Policy Updates",
+        "id": "policy-updates"
+      },
+      {
+        "title": "Company Information",
+        "id": "company-information"
+      }
+    ]
+  }
+]

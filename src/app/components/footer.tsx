@@ -37,6 +37,10 @@ const legalPages = [
     href: "/legal/accessibility-statement",
   },
   {
+    title: "Fulfillment Policy",
+    href: "/legal/fulfillment-policy",
+  },
+  {
     title: "EULA",
     href: "/legal/eula",
   },
