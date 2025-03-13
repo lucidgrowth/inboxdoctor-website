@@ -1,0 +1,52 @@
+import React from "react";
+import PublicNavbar from "./components/report-header";
+import QueryProviderWrapper from "@/providers/query-provider";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "InboxDoctor | Email Domain Report",
+  description:
+    "Get a comprehensive domain health analysis with InboxDoctor's free report. Check email deliverability, SPF, DKIM, DMARC setup, and identify issues affecting inbox placement.",
+  openGraph: {
+    title: "InboxDoctor | Email Domain Report",
+    description:
+      "Get a comprehensive domain health analysis with InboxDoctor's free report. Check email deliverability, SPF, DKIM, DMARC setup, and identify issues affecting inbox placement.",
+    siteName: "InboxDoctor",
+    url: "https://inboxdoctor.ai",
+    type: "website",
+    locale: "en_US",
+    images: [
+      {
+        url: "https://inboxdoctor.ai/report-image.png",
+        width: 1200,
+        height: 630,
+        alt: "InboxDoctor",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "InboxDoctor | Email Domain Report",
+    description:
+      "Get a comprehensive domain health analysis with InboxDoctor's free report. Check email deliverability, SPF, DKIM, DMARC setup, and identify issues affecting inbox placement.",
+    images: ["https://inboxdoctor.ai/report-image.png"],
+  },
+};
+
+export default function MainLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <div>
+      <TooltipProvider>
+        <QueryProviderWrapper>
+          <PublicNavbar />
+          {children}
+        </QueryProviderWrapper>
+      </TooltipProvider>
+    </div>
+  );
+}

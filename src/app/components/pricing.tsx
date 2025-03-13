@@ -9,6 +9,7 @@ import { Spotlight } from "./spotlight";
 import Container from "@/components/container";
 import Link from "next/link";
 import { bookingLink } from "@/lib/constants";
+import Image from "next/image";
 
 export default function PricingSection() {
   const [isAnnual, setIsAnnual] = useState(false);
@@ -187,10 +188,12 @@ export default function PricingSection() {
             >
               {plan.name === "Growth" && (
                 <div className="z-0 pointer-events-none w-[70%] absolute right-0 top-0">
-                  <img
+                  <Image
                     src="/pricing-card-image.png"
                     alt="Growth Badge"
-                    className="w-full h-full object-contain"
+                    width={500}
+                    height={300}
+                    className="w-full h-full object-contain rounded-lg"
                   />
                 </div>
               )}
