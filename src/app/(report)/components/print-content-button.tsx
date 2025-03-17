@@ -1,6 +1,5 @@
-import { Download } from "lucide-react";
-import { Button } from "./ui/button";
-
+import { Printer } from "lucide-react";
+ import { Button } from "@/components/ui/button";
 const wrapInBranding = (htmlContent: string, allStyles: string) => `
   <html>
     <head>
