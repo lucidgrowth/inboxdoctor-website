@@ -1,14 +1,38 @@
-"use client";
+import { Download } from "lucide-react";
+import { Button } from "./ui/button";
 
-import { Printer } from "lucide-react";
-import { Button } from "@/components/ui/button";
-
-const wrapInBranding = (htmlContent: string) => `
+const wrapInBranding = (htmlContent: string, allStyles: string) => `
   <html>
     <head>
+      <style>
+        ${allStyles}
+        /* Add print-specific styles */
+        @media print {
+          body {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+            color-adjust: exact !important;
+          }
+          /* Force page size to A4 */
+          @page {
+            size: A4;
+            margin: 1cm;
+          }
+        }
+      </style>
+      <script>
+        // Auto-close script
+        window.onload = function() {
+          // Set up afterprint event to close window
+          window.addEventListener('afterprint', function() {
+            // Signal to parent window that printing is done
+            window.parent.postMessage('print-completed', '*');
+          });
+        }
+      </script>
     </head>
     <body>
-       <header class="flex h-16 max-w-[1600px] w-full mx-auto shrink-0 items-center justify-between gap-2 border-b px-4">
+    <header class="flex h-16 max-w-[1600px] w-full mx-auto shrink-0 items-center justify-between gap-2 border-b px-4">
           <a
             href="https://inboxdoctor.ai"
             target="_blank"
@@ -73,80 +97,287 @@ const PrintContentButton = ({
   postRunCallback: () => void;
   beforePrintCallback?: (newTab: Window) => void;
 }) => {
-  const handlePrint = () => {
-    // const width = 800;
-    // const height = 600;
-    // // const left = (window.screen.width - width) / 2;
-    // // const top = (window.screen.height - height) / 2;
-
+  const handleDownload = () => {
     preRunCallback?.();
 
-    setTimeout(() => {
-      // Get the element to print
-      const elementToPrint = document.getElementById(id);
-      if (!elementToPrint) {
+    // Get the element to export
+    const elementToExport = document.getElementById(id);
+    if (!elementToExport) {
         console.error(`Element with ID "${id}" not found.`);
         return;
       }
 
-      // Create a blob with the HTML content
-      const htmlContent = wrapInBranding(elementToPrint.innerHTML);
-      const blob = new Blob([htmlContent], { type: "text/html" });
-      const blobUrl = URL.createObjectURL(blob);
-
-      // Open in a new tab
-      const newTab = window.open(blobUrl, "_blank");
-
-      if (newTab) {
-        // Wait for the page to load before adding styles
-        newTab.addEventListener("load", () => {
-          const styles = document.getElementsByTagName("style");
-          const links = document.getElementsByTagName("link");
-
-          // Copy all <style> elements
-          Array.from(styles).forEach((style) => {
-            const newStyle = document.createElement("style");
-            newStyle.textContent = style.textContent;
-            // Copy any attributes from the original style tag
-            Array.from(style.attributes).forEach((attr) => {
-              newStyle.setAttribute(attr.name, attr.value);
-            });
-            newTab.document.head?.appendChild(newStyle);
-          });
-
-          // Copy all <link> elements (external stylesheets)
-          Array.from(links).forEach((link) => {
-            if (link.rel === "stylesheet" && link.href) {
-              const newLink = document.createElement("link");
-              newLink.rel = "stylesheet";
-              newLink.href = link.href;
-              newTab.document.head?.appendChild(newLink);
-            }
-          });
-
-          // Remove the print button from the new tab
-          const printContentButton = newTab.document.getElementById(
-            "print-content-button"
-          );
-          if (printContentButton) {
-            printContentButton.remove();
-          }
-
-          // Trigger print after everything is loaded
-          setTimeout(() => {
-            newTab.print();
-            postRunCallback?.();
-          }, 1000);
-        });
+    // Try to extract domain name from the content
+    let domainName = "domain";
+    try {
+      // Look for domain name in the content - check for specific elements or text patterns
+      const domainElement = elementToExport.querySelector('[data-domain-name]');
+      if (domainElement) {
+        domainName = domainElement.textContent || "domain";
+      } else {
+        // Fallback: try to find domain in content
+        const contentText = elementToExport.textContent || "";
+        const domainMatch = contentText.match(/Domain Name[:\s]+([a-zA-Z0-9.-]+)/i);
+        if (domainMatch && domainMatch[1]) {
+          domainName = domainMatch[1];
+        }
       }
-    }, 0);
+    } catch (error) {
+      console.error("Error extracting domain name:", error);
+    }
+
+    // Generate date string for filename (YYYY-MM-DD format)
+    const now = new Date();
+    const dateStr = now.toISOString().split('T')[0];
+    
+    // Create unique filename: email-domain-health-report-{domain}-{date}.pdf
+    // Replace invalid filename characters
+    const sanitizedDomain = domainName.replace(/[^a-zA-Z0-9.-]/g, "-");
+    const uniqueFilename = `email-domain-health-report-${sanitizedDomain}-${dateStr}`;
+
+    // Collect all styles from the current page
+    let allStyles = '';
+    
+    // Extract styles from <style> tags
+    const styleElements = document.getElementsByTagName('style');
+    for (let i = 0; i < styleElements.length; i++) {
+      allStyles += styleElements[i].textContent + '\n';
+    }
+    
+    // Extract styles from <link> stylesheets
+    const processStylesheets = async () => {
+      const linkElements = document.getElementsByTagName('link');
+      const stylesheetPromises = [];
+      
+      for (let i = 0; i < linkElements.length; i++) {
+        const link = linkElements[i];
+        if (link.rel === 'stylesheet' && link.href) {
+          const promise = fetch(link.href)
+            .then(response => response.text())
+            .then(cssText => {
+              allStyles += cssText + '\n';
+            })
+            .catch(error => {
+              console.error(`Error loading stylesheet: ${link.href}`, error);
+            });
+          
+          stylesheetPromises.push(promise);
+        }
+      }
+      
+      // Wait for all stylesheets to load
+      await Promise.all(stylesheetPromises);
+      
+      // Add additional styles
+      allStyles += `
+        /* Basic utility classes for common Tailwind patterns */
+        .flex { display: flex; }
+        .flex-col { flex-direction: column; }
+        .items-center { align-items: center; }
+        .justify-between { justify-content: space-between; }
+        .gap-2 { gap: 0.5rem; }
+        .gap-3 { gap: 0.75rem; }
+        .w-full { width: 100%; }
+        .max-w-[1600px] { max-width: 1600px; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .px-4 { padding-left: 1rem; padding-right: 1rem; }
+        .py-10 { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+        .size-8 { width: 2rem; height: 2rem; }
+        .size-10 { width: 2.5rem; height: 2.5rem; }
+        .border-b { border-bottom-width: 1px; }
+        .border-t { border-top-width: 1px; }
+        .rounded-md { border-radius: 0.375rem; }
+        .shrink-0 { flex-shrink: 0; }
+        .font-semibold { font-weight: 600; }
+        .text-center { text-align: center; }
+        .whitespace-nowrap { white-space: nowrap; }
+        
+        /* Additional styles for PDF output */
+        body {
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+          color: #333;
+          line-height: 1.5;
+        }
+        
+        a {
+          color: #0066cc;
+          text-decoration: none;
+        }
+        
+        img {
+          max-width: 100%;
+          height: auto;
+        }
+        
+        /* Force color printing */
+        * {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+      `;
+      
+      // Create HTML content with proper styling
+      const htmlContent = wrapInBranding(elementToExport.innerHTML, allStyles);
+      
+      // Create a modal dialog with instructions
+      const modalOverlay = document.createElement('div');
+      modalOverlay.id = 'print-modal-overlay';
+      modalOverlay.style.position = 'fixed';
+      modalOverlay.style.top = '0';
+      modalOverlay.style.left = '0';
+      modalOverlay.style.width = '100%';
+      modalOverlay.style.height = '100%';
+      modalOverlay.style.backgroundColor = 'rgba(0,0,0,0.5)';
+      modalOverlay.style.display = 'flex';
+      modalOverlay.style.alignItems = 'center';
+      modalOverlay.style.justifyContent = 'center';
+      modalOverlay.style.zIndex = '9999';
+      
+      const modalContent = document.createElement('div');
+      modalContent.style.backgroundColor = 'white';
+      modalContent.style.padding = '20px';
+      modalContent.style.borderRadius = '8px';
+      modalContent.style.maxWidth = '500px';
+      modalContent.style.width = '90%';
+      modalContent.style.textAlign = 'center';
+      modalContent.innerHTML = `
+        <h3 style="margin-top: 0; font-size: 18px; font-weight: bold;">Downloading Email Domain Health Report</h3>
+        <p>Your report for <strong>${domainName}</strong> will begin downloading.</p>
+        <p>When the print dialog appears, select <strong>"Save as PDF"</strong> and click <strong>"Save"</strong>.</p>
+        <p>Recommended filename: <strong>${uniqueFilename}</strong></p>
+        <p id="modal-status">Preparing document...</p>
+        <button id="modal-close-btn" style="background-color: #4F46E5; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-top: 15px;">Close</button>
+      `;
+      
+      modalOverlay.appendChild(modalContent);
+      document.body.appendChild(modalOverlay);
+      
+      // Close modal on button click
+      document.getElementById('modal-close-btn')?.addEventListener('click', () => {
+        closeModal();
+      });
+      
+      // Function to close modal and clean up
+      const closeModal = () => {
+        const overlay = document.getElementById('print-modal-overlay');
+        if (overlay && overlay.parentNode) {
+          overlay.parentNode.removeChild(overlay);
+        }
+      };
+      
+      // Create an invisible iframe
+      const printFrame = document.createElement('iframe');
+      printFrame.id = 'print-pdf-frame';
+      printFrame.style.position = 'fixed';
+      printFrame.style.right = '-9999px';
+      printFrame.style.bottom = '-9999px';
+      printFrame.style.width = '0';
+      printFrame.style.height = '0';
+      printFrame.style.opacity = '0';
+      document.body.appendChild(printFrame);
+      
+      // Set up message listener for iframe communication
+      const messageListener = (event: MessageEvent) => {
+        if (event.data === 'print-completed') {
+          // Update status
+          const statusElement = document.getElementById('modal-status');
+          if (statusElement) {
+            statusElement.textContent = 'PDF saved successfully!';
+            statusElement.style.color = 'green';
+          }
+          
+          // Clean up after printing
+          setTimeout(() => {
+            // Remove the message listener
+            window.removeEventListener('message', messageListener);
+            
+            // Remove the iframe
+            const frame = document.getElementById('print-pdf-frame');
+            if (frame && frame.parentNode) {
+              frame.parentNode.removeChild(frame);
+            }
+            
+            // Close the modal after a brief success message
+            setTimeout(() => {
+              closeModal();
+              postRunCallback?.();
+            }, 1500);
+          }, 500);
+        }
+      };
+      
+      window.addEventListener('message', messageListener);
+      
+      // Get the iframe document and write content to it
+      const frameDoc = printFrame.contentDocument || printFrame.contentWindow?.document;
+      if (frameDoc) {
+        frameDoc.open();
+        frameDoc.write(htmlContent);
+        frameDoc.close();
+        
+        // Update status
+        const statusElement = document.getElementById('modal-status');
+        if (statusElement) {
+          statusElement.textContent = 'Print dialog opening...';
+        }
+        
+        // Trigger print after a short delay
+        setTimeout(() => {
+          try {
+            printFrame.contentWindow?.print();
+            
+            // Set a fallback cleanup in case afterprint doesn't trigger
+            setTimeout(() => {
+              // Check if the iframe is still in the document
+              const frame = document.getElementById('print-pdf-frame');
+              if (frame && frame.parentNode) {
+                window.removeEventListener('message', messageListener);
+                frame.parentNode.removeChild(frame);
+                
+                // Update status or close modal
+                const statusElement = document.getElementById('modal-status');
+                if (statusElement) {
+                  statusElement.textContent = 'Process completed';
+                }
+                
+          setTimeout(() => {
+                  closeModal();
+                  postRunCallback?.();
+                }, 1500);
+              }
+            }, 7000);
+          } catch (error) {
+            console.error("Error printing:", error);
+            
+            // Handle error in UI
+            const statusElement = document.getElementById('modal-status');
+            if (statusElement) {
+              statusElement.textContent = 'Error generating PDF. Please try again.';
+              statusElement.style.color = 'red';
+            }
+            
+            // Clean up on error
+            const frame = document.getElementById('print-pdf-frame');
+            if (frame && frame.parentNode) {
+              window.removeEventListener('message', messageListener);
+              frame.parentNode.removeChild(frame);
+            }
+            
+            postRunCallback?.();
+          }
+          }, 1000);
+      }
+    };
+    
+    // Start processing stylesheets
+    processStylesheets();
   };
 
   return (
     <div id="print-content-button">
-      <Button onClick={handlePrint} variant="outline">
-        <Printer className="w-4 h-4" />
-        Print
+      <Button onClick={handleDownload} variant="outline">
+        <Download className="w-4 h-4 mr-2" />
+        Download Report
       </Button>
     </div>
   );
