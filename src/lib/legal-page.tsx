@@ -50,7 +50,7 @@ const components = {
   ),
 };
 
-const readFileSafe = async (filePath: string): Promise<string | null> => {
+export const readFileSafe = async (filePath: string): Promise<string | null> => {
   try {
     return await fs.readFile(filePath, "utf-8");
   } catch (error) {
@@ -59,12 +59,12 @@ const readFileSafe = async (filePath: string): Promise<string | null> => {
   }
 };
 
-const parseToc = async (tocPath: string): Promise<TocItem[] | undefined> => {
+export const parseToc = async (tocPath: string): Promise<TocItem[] | undefined> => {
   const tocJSON = await readFileSafe(tocPath);
   return tocJSON ? JSON.parse(tocJSON) : undefined;
 };
 
-const compileMdxContent = async (
+export const compileMdxContent = async (
   source: string
 ): Promise<{
   frontmatter: Frontmatter;

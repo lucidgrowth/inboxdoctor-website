@@ -1,0 +1,38 @@
+[
+  {
+    "title": "SPF: Your Email’s Trust Anchor",
+    "id": "spf-your-email-s-trust-anchor"
+  },
+  {
+    "title": "SPF 101: The Basics of Email Security",
+    "id": "spf-101-the-basics-of-email-security"
+  },
+  {
+    "title": "Benefits of SPF for Email Deliverability",
+    "id": "benefits-of-spf-for-email-deliverability"
+  },
+  {
+    "title": "Breaking Down SPF’s Key Components",
+    "id": "breaking-down-spf-s-key-components"
+  },
+  {
+    "title": "SPF Record Details",
+    "id": "spf-record-details"
+  },
+  {
+    "title": "SPF Record Anatomy",
+    "id": "spf-record-anatomy"
+  },
+  {
+    "title": "SPF Query Results",
+    "id": "spf-query-results"
+  },
+  {
+    "title": "SPF Record Syntax",
+    "id": "spf-record-syntax"
+  },
+  {
+    "title": "How to Configure SPF for Email Deliverability",
+    "id": "how-to-configure-spf-for-email-deliverability"
+  }
+]

@@ -1,0 +1,34 @@
+[
+  {
+    "title": "PTR: The Return Address for Your Email’s Identity",
+    "id": "ptr-the-return-address-for-your-email-s-identity"
+  },
+  {
+    "title": "PTR 101: The Basics of Proving Who You Are",
+    "id": "ptr-101-the-basics-of-proving-who-you-are"
+  },
+  {
+    "title": "Benefits of PTR for Email Deliverability",
+    "id": "benefits-of-ptr-for-email-deliverability"
+  },
+  {
+    "title": "Breaking Down PTR’s Key Components",
+    "id": "breaking-down-ptr-s-key-components"
+  },
+  {
+    "title": "PTR Record Details",
+    "id": "ptr-record-details"
+  },
+  {
+    "title": "PTR Record Anatomy",
+    "id": "ptr-record-anatomy"
+  },
+  {
+    "title": "PTR Record Syntax",
+    "id": "ptr-record-syntax"
+  },
+  {
+    "title": "How to Configure PTR for Email Deliverability",
+    "id": "how-to-configure-ptr-for-email-deliverability"
+  }
+]

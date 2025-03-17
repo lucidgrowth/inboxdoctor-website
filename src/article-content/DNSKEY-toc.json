@@ -1,0 +1,30 @@
+[
+    {
+      "title": "DNSKEY 101: The Basics of Unlocking Trust",
+      "id": "dnskey-101-the-basics-of-unlocking-trust"
+    },
+    {
+      "title": "Benefits of DNSKEY for Email Deliverability",
+      "id": "benefits-of-dnskey-for-email-deliverability"
+    },
+    {
+      "title": "Breaking Down DNSKEY’s Key Components",
+      "id": "breaking-down-dnskey-s-key-components"
+    },
+    {
+      "title": "DNSKEY Record Details",
+      "id": "dnskey-record-details"
+    },
+    {
+      "title": "DNSKEY Record Anatomy",
+      "id": "dnskey-record-anatomy"
+    },
+    {
+      "title": "DNSKEY Record Syntax",
+      "id": "dnskey-record-syntax"
+    },
+    {
+      "title": "How to Configure DNSKEY for Email Deliverability",
+      "id": "how-to-configure-dnskey-for-email-deliverability"
+    }
+  ]

@@ -1,0 +1,30 @@
+[
+  {
+    "title": "SSL 101: The Basics of Keeping Your Email Safe",
+    "id": "ssl-101-the-basics-of-keeping-your-email-safe"
+  },
+  {
+    "title": "Benefits of SSL for Email Deliverability",
+    "id": "benefits-of-ssl-for-email-deliverability"
+  },
+  {
+    "title": "Breaking Down SSL’s Key Components",
+    "id": "breaking-down-ssl-s-key-components"
+  },
+  {
+    "title": "SSL Record Details",
+    "id": "ssl-record-details"
+  },
+  {
+    "title": "SSL Certificate Anatomy",
+    "id": "ssl-certificate-anatomy"
+  },
+  {
+    "title": "SSL Handshake Example",
+    "id": "ssl-handshake-example"
+  },
+  {
+    "title": "How to Configure SSL for Email Deliverability",
+    "id": "how-to-configure-ssl-for-email-deliverability"
+  }
+]

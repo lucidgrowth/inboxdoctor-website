@@ -1,0 +1,30 @@
+[
+  {
+    "title": "TLS 101: The Basics of Total Security",
+    "id": "tls-101-the-basics-of-total-security"
+  },
+  {
+    "title": "Benefits of TLS for Email Deliverability",
+    "id": "benefits-of-tls-for-email-deliverability"
+  },
+  {
+    "title": "Breaking Down TLS’s Key Components",
+    "id": "breaking-down-tls-s-key-components"
+  },
+  {
+    "title": "TLS Record Details",
+    "id": "tls-record-details"
+  },
+  {
+    "title": "TLS Process Anatomy",
+    "id": "tls-process-anatomy"
+  },
+  {
+    "title": "TLS Example in SMTP",
+    "id": "tls-example-in-smtp"
+  },
+  {
+    "title": "How to Configure TLS for Email Deliverability",
+    "id": "how-to-configure-tls-for-email-deliverability"
+  }
+]

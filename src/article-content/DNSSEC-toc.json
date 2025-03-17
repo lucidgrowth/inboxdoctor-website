@@ -1,0 +1,30 @@
+[
+  {
+    "title": "DNSSEC 101: The Basics of a Protected Email Path",
+    "id": "dnssec-101-the-basics-of-a-protected-email-path"
+  },
+  {
+    "title": "Benefits of DNSSEC for Email Deliverability",
+    "id": "benefits-of-dnssec-for-email-deliverability"
+  },
+  {
+    "title": "Breaking Down DNSSEC’s Key Components",
+    "id": "breaking-down-dnssec-s-key-components"
+  },
+  {
+    "title": "DNSSEC Record Details",
+    "id": "dnssec-record-details"
+  },
+  {
+    "title": "DNSSEC Record Anatomy",
+    "id": "dnssec-record-anatomy"
+  },
+  {
+    "title": "DNSSEC Record Syntax Examples",
+    "id": "dnssec-record-syntax-examples"
+  },
+  {
+    "title": "How to Configure DNSSEC for Email Deliverability",
+    "id": "how-to-configure-dnssec-for-email-deliverability"
+  }
+]

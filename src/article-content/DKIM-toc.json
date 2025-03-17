@@ -1,0 +1,30 @@
+[
+  {
+    "title": "DKIM: Your Email’s Digital Handshake",
+    "id": "dkim-your-email-s-digital-handshake"
+  },
+  {
+    "title": "DKIM 101: The Freshman Take on Email Security",
+    "id": "dkim-101-the-freshman-take-on-email-security"
+  },
+  {
+    "title": "Benefits of DKIM for Email Deliverability",
+    "id": "benefits-of-dkim-for-email-deliverability"
+  },
+  {
+    "title": "Breaking Down DKIM’s Key Components",
+    "id": "breaking-down-dkim-s-key-components"
+  },
+  {
+    "title": "DKIM Signature Details",
+    "id": "dkim-signature-details"
+  },
+  {
+    "title": "DKIM Record Anatomy",
+    "id": "dkim-record-anatomy"
+  },
+  {
+    "title": "How to Configure DKIM for Email Deliverability",
+    "id": "how-to-configure-dkim-for-email-deliverability"
+  }
+]

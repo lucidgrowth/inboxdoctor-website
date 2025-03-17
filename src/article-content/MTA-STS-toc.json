@@ -1,0 +1,34 @@
+[
+  {
+    "title": "MTA-STS 101: The Basics of a Secure Email Handover",
+    "id": "mta-sts-101-the-basics-of-a-secure-email-handover"
+  },
+  {
+    "title": "Benefits of MTA-STS for Email Deliverability",
+    "id": "benefits-of-mta-sts-for-email-deliverability"
+  },
+  {
+    "title": "Breaking Down MTA-STS’s Key Components",
+    "id": "breaking-down-mta-sts-s-key-components"
+  },
+  {
+    "title": "MTA-STS Record Details",
+    "id": "mta-sts-record-details"
+  },
+  {
+    "title": "MTA-STS Record Anatomy",
+    "id": "mta-sts-record-anatomy"
+  },
+  {
+    "title": "MTA-STS Record Syntax",
+    "id": "mta-sts-record-syntax"
+  },
+  {
+    "title": "MTA-STS Policy File Syntax",
+    "id": "mta-sts-policy-file-syntax"
+  },
+  {
+    "title": "How to Configure MTA-STS for Email Deliverability",
+    "id": "how-to-configure-mta-sts-for-email-deliverability"
+  }
+]

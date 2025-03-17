@@ -1,0 +1,38 @@
+[
+  {
+    "title": "DMARC: Your Email’s Security Shield",
+    "id": "dmarc-your-email-s-security-shield"
+  },
+  {
+    "title": "DMARC 101: The Freshman Take on Email Magic",
+    "id": "dmarc-101-the-freshman-take-on-email-magic"
+  },
+  {
+    "title": "Benefits of DMARC for Email Deliverability",
+    "id": "benefits-of-dmarc-for-email-deliverability"
+  },
+  {
+    "title": "How to Configure DMARC for Email Deliverability",
+    "id": "how-to-configure-dmarc-for-email-deliverability"
+  },
+  {
+    "title": "Types of DMARC Policies",
+    "id": "types-of-dmarc-policies"
+  },
+  {
+    "title": "Breaking Down DMARC’s Key Components",
+    "id": "breaking-down-dmarc-s-key-components"
+  },
+  {
+    "title": "DMARC Policy (v, p, pct)",
+    "id": "dmarc-policy-v-p-pct"
+  },
+  {
+    "title": "Reporting (rua, ruf, ri, fo)",
+    "id": "reporting-rua-ruf-ri-fo"
+  },
+  {
+    "title": "Alignment (SPF and DKIM Modes)",
+    "id": "alignment-spf-and-dkim-modes"
+  }
+]

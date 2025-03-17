@@ -1,0 +1,30 @@
+[
+  {
+    "title": "DANE 101: The Basics of a Secure Email Journey",
+    "id": "dane-101-the-basics-of-a-secure-email-journey"
+  },
+  {
+    "title": "Benefits of DANE for Email Deliverability",
+    "id": "benefits-of-dane-for-email-deliverability"
+  },
+  {
+    "title": "Breaking Down DANE’s Key Components",
+    "id": "breaking-down-dane-s-key-components"
+  },
+  {
+    "title": "DANE Record Details",
+    "id": "dane-record-details"
+  },
+  {
+    "title": "DANE Record Anatomy",
+    "id": "dane-record-anatomy"
+  },
+  {
+    "title": "DANE Record Syntax",
+    "id": "dane-record-syntax"
+  },
+  {
+    "title": "How to Configure DANE for Email Deliverability",
+    "id": "how-to-configure-dane-for-email-deliverability"
+  }
+]

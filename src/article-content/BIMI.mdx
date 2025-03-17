@@ -1,0 +1,128 @@
+---
+title: "BIMI Guide: Boost Email Trust with Brand Logos"
+description: Learn how BIMI enhances email deliverability with verified logos. Explore benefits, components, and setup for trusted inbox placement.
+lastUpdatedAt: 2025-03-17
+---
+
+### BIMI: Your Email’s Verified Brand Badge
+
+**Definition:** BIMI, or Brand Indicators for Message Identification, is an email authentication standard that allows your verified brand logo to appear next to your emails in supporting inboxes. It acts like a verified badge, enhancing trust by visually confirming your email’s authenticity after passing rigorous authentication checks.
+
+## BIMI 101: The Basics of Visual Trust
+
+Imagine you’re at a crowded event, and you spot a friend wearing a name tag with their company logo—you instantly know it’s really them. BIMI is like that name tag for your emails—it displays your verified brand logo in the inbox, so recipients can trust the message is from you, not an impersonator, after it passes authentication checks like DMARC, SPF, and DKIM.
+
+## Benefits of BIMI for Email Deliverability
+
+BIMI enhances your email presence by adding a visual layer of trust, making your messages stand out while reinforcing security. Without BIMI, your emails might lack the visual credibility that builds recipient confidence, potentially impacting engagement and deliverability. Here’s why BIMI is a game-changer for email deliverability:
+
+- **Increases Recipient Trust:** BIMI displays your verified logo, reassuring recipients that your emails (daily communication, support, transactional, marketing, etc.) are legitimate, reducing hesitation to open them.
+- **Boosts Engagement Rates:** A recognizable logo encourages higher open and click-through rates, as recipients trust messages from daily B2B updates, B2C notifications, transactional emails, etc., signaling to email providers that your emails are wanted.
+- **Enhances Brand Recognition:** BIMI ensures your logo appears consistently in supporting inboxes (like Gmail, Yahoo, Apple Mail), reinforcing your brand identity with every email interaction.
+- **Reduces Spam Complaints:** When recipients trust your emails thanks to a verified logo, they’re less likely to mark them as spam, improving your sender reputation across all email types.
+- **Strengthens Email Authentication:** BIMI requires DMARC enforcement (with SPF and DKIM alignment), ensuring robust security that email providers favor, indirectly boosting inbox placement.
+- **Protects Against Spoofing and Phishing:** By requiring strict authentication, BIMI makes it harder for scammers to impersonate your brand, safeguarding your reputation and keeping your emails out of spam filters.
+- **Improves Sender Reputation:** BIMI signals to email providers that you prioritize security and authentication, enhancing your domain’s trustworthiness for all communications.
+- **Stands Out in the Inbox:** A logo makes your emails visually distinct, capturing attention amidst a sea of text-based sender names, especially for marketing and transactional messages.
+- **Supports Seasonal Branding:** BIMI allows you to update your logo for special occasions (e.g., holiday themes), keeping your emails fresh and engaging without compromising security.
+- **Aligns with Modern Email Standards:** BIMI is supported by major providers like Gmail, Yahoo, and Apple Mail, aligning your email program with the latest industry trends for seamless delivery.
+
+## Breaking Down BIMI’s Key Components
+
+BIMI builds on existing authentication protocols to add a visual trust layer. Here’s a breakdown of its elements:
+
+### BIMI Record Details
+
+<table>
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Domain</td>
+      <td>
+        The domain publishing the BIMI record, linked to your brand’s logo.
+      </td>
+    </tr>
+    <tr>
+      <td>Logo URL</td>
+      <td>
+        The secure URL (HTTPS) pointing to your logo in SVG Tiny PS format.
+      </td>
+    </tr>
+    <tr>
+      <td>VMC</td>
+      <td>
+        Verified Mark Certificate, proving logo ownership (required by some
+        providers like Gmail).
+      </td>
+    </tr>
+    <tr>
+      <td>Result</td>
+      <td>
+        Indicates if the email passes BIMI checks and displays the logo in the
+        inbox.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### BIMI Record Anatomy
+
+A BIMI record is a DNS TXT record containing your logo details. Here’s what it includes:
+
+<table>
+  <thead>
+    <tr>
+      <th>Tag</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>v=BIMI1</td>
+      <td>Specifies the BIMI version being used.</td>
+    </tr>
+    <tr>
+      <td>l=</td>
+      <td>
+        The URL to your logo in SVG format (e.g.,{" "}
+        <a href="https://example.com/logo.svg">https://example.com/logo.svg</a>
+        ).
+      </td>
+    </tr>
+    <tr>
+      <td>a=</td>
+      <td>
+        The URL to your Verified Mark Certificate (optional, e.g.,{" "}
+        <a href="https://example.com/vmc.pem">https://example.com/vmc.pem</a>).
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### BIMI Record Syntax
+
+A BIMI record typically looks like this: default.\_bimi.example.com. IN TXT "v=BIMI1; l=[https://example.com/logo.svg;](https://example.com/logo.svg; "https://example.com/logo.svg;") a=[https://certificateprovider.com/vmc.pem;"](https://certificateprovider.com/vmc.pem;%22 "https://certificateprovider.com/vmc.pem;%22").
+
+- default.\_bimi.example.com.: The subdomain where the BIMI record is published.
+- v=BIMI1: Specifies the BIMI version.
+- l=: The secure URL to your logo in SVG Tiny PS format.
+- a=: The URL to your VMC (optional but required for some providers like Gmail).
+
+In short, BIMI is your email’s verified badge—it visually proves your authenticity, builds trust, and makes your messages shine in the inbox!
+
+## How to Configure BIMI for Email Deliverability
+
+Setting up BIMI involves a few steps but adds significant value to your email program. Here’s the quick guide:
+
+1.  **Set Up DMARC, SPF, and DKIM:** Ensure your domain has DMARC enforcement (p=quarantine or p=reject) with aligned SPF and DKIM records.
+2.  **Create a BIMI-Compliant Logo:** Convert your logo to SVG Tiny PS format with a square aspect ratio and host it on a secure HTTPS server.
+3.  **Obtain a Verified Mark Certificate (VMC) (Optional):** For providers like Gmail, get a VMC from a certificate authority (e.g., DigiCert or Entrust) to prove logo ownership.
+4.  **Publish a BIMI Record:** Add a DNS TXT record at default.\_bimi.yourdomain.com with your logo URL and VMC URL (if applicable).
+5.  **Test and Monitor:** Use a BIMI lookup tool to verify your setup and ensure your logo displays in supporting inboxes.
+
+**Heads Up: BIMI Setup Can Be Technical!** BIMI requires precise DMARC alignment, a secure logo file, and sometimes a VMC, which can be tricky to manage. Errors in your DNS record or authentication setup can prevent your logo from displaying or even impact deliverability. If you’re unsure, tools like **InboxDoctor** can simplify the process. Their experts can configure your BIMI record, optimize it for maximum trust, and provide ongoing support to keep your brand shining. Focus on your emails—let the pros handle the tech!

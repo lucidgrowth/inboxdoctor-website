@@ -1,0 +1,30 @@
+[
+  {
+    "title": "STARTTLS 101: The Basics of Adding a Safety Lock",
+    "id": "starttls-101-the-basics-of-adding-a-safety-lock"
+  },
+  {
+    "title": "Benefits of STARTTLS for Email Deliverability",
+    "id": "benefits-of-starttls-for-email-deliverability"
+  },
+  {
+    "title": "Breaking Down STARTTLS’s Key Components",
+    "id": "breaking-down-starttls-s-key-components"
+  },
+  {
+    "title": "STARTTLS Record Details",
+    "id": "starttls-record-details"
+  },
+  {
+    "title": "STARTTLS Process Anatomy",
+    "id": "starttls-process-anatomy"
+  },
+  {
+    "title": "STARTTLS Example in SMTP",
+    "id": "starttls-example-in-smtp"
+  },
+  {
+    "title": "How to Configure STARTTLS for Email Deliverability",
+    "id": "how-to-configure-starttls-for-email-deliverability"
+  }
+]

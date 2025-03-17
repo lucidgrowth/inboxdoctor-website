@@ -1,0 +1,115 @@
+---
+title: DMARC Your Email’s Security Shield
+lastUpdatedAt: 2025-03-17
+description: DMARC, or Domain-based Message Authentication, Reporting, and Conformance, is a powerful email security tool that helps protect your domain from fakes and scams.
+---
+
+### DMARC: Your Email’s Security Shield
+
+DMARC, or Domain-based Message Authentication, Reporting, and Conformance, is a powerful email security tool that helps protect your domain from fakes and scams. It uses two other systems—SPF and DKIM—to verify emails and tells receiving servers what to do with suspicious ones, while also giving you reports to keep tabs on everything.
+
+### DMARC 101: The Freshman Take on Email Magic
+
+Imagine you’re throwing a huge party, but some randos keep sneaking in with fake invites. DMARC is like your bouncer—it checks everyone’s ID (aka your emails) to make sure they’re legit. It teams up with SPF and DKIM to spot the real deal, then decides if imposters get bounced to the spam bin or blocked completely. Plus, it sends you a report card on who’s trying to crash your vibe. DMARC stands for "Domain-based Message Authentication, Reporting, and Conformance," and it’s your email’s VIP security crew!
+
+### Benefits of DMARC for Email Deliverability
+
+DMARC isn’t just about security—it’s a win for getting your emails to the inbox too. Here’s why it’s awesome:
+
+- **Stops Fakes in Their Tracks**: DMARC catches scammers pretending to be you, keeping your reputation clean so legit emails don’t get flagged.
+- **Boosts Trust with Email Providers**: When your domain has a strong DMARC policy, providers like Gmail know you’re serious about security, which helps your emails land in the inbox.
+- **Gives You the Scoop**: DMARC sends reports on who’s sending emails as “you,” so you can spot issues and make sure only real emails get through.
+
+### How to Configure DMARC for Email Deliverability
+
+Setting up DMARC is like making a game plan for your party’s security team. Here’s the step-by-step:
+
+1.  **Set Up SPF and DKIM First**: DMARC needs these two to work, so make sure they’re already in place—they’re like the ID scanners for your emails.
+2.  **Create a DMARC Policy**: You’ll add a DNS record (a kind of digital instruction manual) for your domain. It looks like this: v=DMARC1; p=none;. Start with a monitoring mode to see what’s happening.
+3.  **Set Up Reporting**: Add tags to get reports on what’s passing or failing.  
+    **Need Backup? InboxDoctor to the Rescue**: Real talk—DMARC setup can feel like solving a puzzle. That’s where experts save the day. With InboxDoctor, you get a squad of email pros to handle it all, plus live support if you upgrade. Our plans come with a high-tech team that customizes your DMARC, monitors reports, and ensures your emails hit the inbox every time. Let us take the stress off your plate!
+4.  **Monitor and Adjust**: Check your DMARC reports to see what’s working. Gradually tighten your policy as you get the hang of it.
+
+### Types of DMARC Policies
+
+DMARC lets you decide how strict you want to be with emails that fail checks. You set this with the p tag in your policy, and here are the three options:
+
+- **None (p=none)**: This is like being in chill mode—DMARC watches and reports on emails that fail but doesn’t take any action. It’s perfect for testing to see what’s going on without risking your legit emails.
+- **Quarantine (p=quarantine)**: This steps things up—failing emails get sent to the spam folder. It’s a good middle ground to protect your domain while still being a bit lenient.
+- **Reject (p=reject)**: This is full lockdown mode—failing emails get blocked completely. In the screenshot, p=reject with pct=100 means 100% of failing emails are stopped, no exceptions.
+
+### Breaking Down DMARC’s Key Components
+
+DMARC has some important pieces that make it work, and the screenshot gives a perfect example. Here’s what they mean, broken down into tables:
+
+### DMARC Policy (v, p, pct)
+
+<table>
+  <thead>
+    <tr>
+      <th>Tag</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>v=DMARC1</td>
+      <td>Confirms you're using the DMARC system.</td>
+    </tr>
+    <tr>
+      <td>p</td>
+      <td>
+        Defines the action for failing emails: none (monitor), quarantine
+        (spam), or reject (block).
+      </td>
+    </tr>
+    <tr>
+      <td>pct=100</td>
+      <td>Applies the policy to 100% of emails—like a strict no-fakes rule.</td>
+    </tr>
+  </tbody>
+</table>
+
+### Reporting (rua, ruf, ri, fo)
+
+<table>
+  <thead>
+    <tr>
+      <th>Tag</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ri=86400</td>
+      <td>Sets reports to come daily (86,400 seconds = 1 day).</td>
+    </tr>
+    <tr>
+      <td>fo=1</td>
+      <td>Ensures all failures are reported.</td>
+    </tr>
+  </tbody>
+</table>
+
+### Alignment (SPF and DKIM Modes)
+
+<table>
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>SPF and DKIM Alignment</td>
+      <td>
+        The screenshot shows alignment as relaxed, meaning DMARC checks if
+        domains kinda match (not super strict), making it easier for legit
+        emails to pass while still catching fakes.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+In short, DMARC is your email’s ultimate bodyguard—it keeps the fakes out, gets your real messages in, and gives you the 411 on what’s going down with your domain!
