@@ -4,13 +4,14 @@ import Container from "@/components/container";
 import { Button } from "@/components/ui/button";
 import { bookingLink } from "@/lib/constants";
 import { Menu, X } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
 export default function NavBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <motion.nav
       initial={{ y: -20, opacity: 0 }}
@@ -33,31 +34,31 @@ export default function NavBar() {
 
         <div className="hidden md:flex items-center space-x-8">
           <Link
-            href="#benefits"
+            href="/#benefits"
             className="text-gray-300 hover:text-white transition-colors"
           >
             Benefits
           </Link>
           <Link
-            href="#features"
+            href="/#features"
             className="text-gray-300 hover:text-white transition-colors"
           >
             Features
           </Link>
           <Link
-            href="#testimonials"
+            href="/#testimonials"
             className="text-gray-300 hover:text-white transition-colors"
           >
             Testimonials
           </Link>
           <Link
-            href="#pricing"
+            href="/#pricing"
             className="text-gray-300 hover:text-white transition-colors"
           >
             Pricing
           </Link>
           <Link
-            href="#faq"
+            href="/#faq"
             className="text-gray-300 hover:text-white transition-colors"
           >
             FAQ

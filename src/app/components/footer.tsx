@@ -1,6 +1,5 @@
 "use client";
 
-import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
 
@@ -128,7 +127,7 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="#benefits"
+                  href={"/#benefits"}
                   className="text-gray-400 hover:text-blue-500 transition-colors"
                 >
                   Benefits
@@ -136,7 +135,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="#features"
+                  href={"/#features"}
                   className="text-gray-400 hover:text-blue-500 transition-colors"
                 >
                   Features
@@ -144,7 +143,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="#pricing"
+                  href={"/#pricing"}
                   className="text-gray-400 hover:text-blue-500 transition-colors"
                 >
                   Pricing
@@ -152,7 +151,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="#testimonials"
+                  href={"/#testimonials"}
                   className="text-gray-400 hover:text-blue-500 transition-colors"
                 >
                   Testimonials
@@ -160,7 +159,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="#faq"
+                  href={"/#faq"}
                   className="text-gray-400 hover:text-blue-500 transition-colors"
                 >
                   FAQ
