@@ -8,10 +8,10 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-      <div>
-        <NavBar />
-        {children}
-        <Footer />
-      </div>
+    <div className="dark bg-background">
+      <NavBar />
+      {children}
+      <Footer />
+    </div>
   );
 }

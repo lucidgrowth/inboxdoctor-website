@@ -1141,7 +1141,7 @@ const DomainReport = ({
 
                     {/* Warning for non-PEM logo */}
                     {logoUrl && !logoUrl.toLowerCase().endsWith(".pem") && (
-                      <div className="mt-3 p-2 bg-yellow-900/20 border border-yellow-600 rounded text-yellow-600">
+                      <div className="mt-3 p-2 dark:bg-yellow-900/20 bg-yellow-50 border rounded dark:border-yellow-600   dark:text-yellow-600 border-yellow-500 text-yellow-500">
                         <p>
                           Certificate is missing. Consider purchasing a VMC
                           certificate for stronger brand validation and
@@ -1412,7 +1412,9 @@ const DomainReport = ({
       <div id="shared-report-print" className="w-full">
         <div className="flex flex-col lg:flex-row items-center lg:justify-between gap-3 mb-4">
           <div>
-            <h1 className="page-heading">Email Domain Health Report</h1>
+            <h1 className="page-heading text-foreground">
+              Email Domain Health Report
+            </h1>
           </div>
           {recordsData && (
             <div className="flex items-center flex-col md:flex-row gap-3">
@@ -1449,7 +1451,7 @@ const DomainReport = ({
         </div>
 
         <div className="flex items-center gap-2 my-4">
-          <span className="font-medium">Domain Name</span>
+          <span className="font-medium text-foreground">Domain Name</span>
           <span className="text-muted-foreground">{recordsData?.domain}</span>
         </div>
 
@@ -1457,12 +1459,12 @@ const DomainReport = ({
           {/* Score Card */}
           <Card
             className={cn("bg-gradient-to-br", {
-              "from-red-900/20 to-transparent":
+              "dark:from-red-900/20 from-red-50 to-background":
                 (recordsData?.healthcheck?.score || 0) < 50,
-              "from-yellow-900/20 to-transparent":
+              "dark:from-yellow-900/20 from-yellow-50 to-background":
                 (recordsData?.healthcheck?.score || 0) >= 50 &&
                 (recordsData?.healthcheck?.score || 0) < 75,
-              "from-blue-900/20 to-transparent":
+              "dark:from-blue-900/20 from-blue-50 to-background":
                 (recordsData?.healthcheck?.score || 0) >= 75,
             })}
           >
@@ -1599,13 +1601,13 @@ const DomainReport = ({
           {/* Security Status Card */}
           <Card
             className={cn("bg-gradient-to-br", {
-              "bg-red-900/20":
+              "dark:bg-red-900/20 bg-red-50":
                 (recordsData?.healthcheck?.passedChecks || 0) <
                 (recordsData?.healthcheck?.totalChecks || 0) * 0.5,
-              "bg-yellow-900/20":
+              "dark:bg-yellow-900/20 bg-yellow-50":
                 (recordsData?.healthcheck?.passedChecks || 0) >=
                 (recordsData?.healthcheck?.totalChecks || 0) * 0.5,
-              "bg-green-900/20":
+              "dark:bg-green-900/20 bg-green-50":
                 (recordsData?.healthcheck?.passedChecks || 0) >=
                 (recordsData?.healthcheck?.totalChecks || 0) * 0.75,
             })}
@@ -1645,7 +1647,7 @@ const DomainReport = ({
                   <Shield className={cn("h-6 w-6")} />
                 </div>
                 <Progress
-                  className="h-5 bg-neutral-100"
+                  className="h-5 dark:bg-neutral-100"
                   indicatorClassName={cn({
                     "bg-green-500":
                       (recordsData?.healthcheck?.passedChecks || 0) >=
@@ -1668,7 +1670,7 @@ const DomainReport = ({
           </Card>
 
           {/* Status Summary Card */}
-          <Card className="bg-orange-900/20">
+          <Card className="dark:bg-orange-900/20 bg-orange-50">
             <CardContent className="p-6">
               <div className="flex items-center gap-2">
                 <h3 className="text-sm font-medium text-muted-foreground">
@@ -1856,7 +1858,9 @@ const DomainReport = ({
         </Card>
 
         <div className="mb-6">
-          <h2 className="text-lg font-semibold mb-4">Email Delivery Chain</h2>
+          <h2 className="text-lg font-semibold mb-4 text-foreground">
+            Email Delivery Chain
+          </h2>
           <div className="grid gap-4">
             <Collapsible defaultOpen>
               <Card>
@@ -1990,7 +1994,9 @@ const DomainReport = ({
         </div>
 
         <div className="mb-6 flex justify-between items-center">
-          <h2 className="text-lg font-semibold">Email Health Results</h2>
+          <h2 className="text-lg font-semibold text-foreground">
+            Email Health Results
+          </h2>
           <div className="flex gap-2 justify-end">
             <Button
               variant="outline"
@@ -2674,7 +2680,9 @@ const DomainReport = ({
 
         {/* Blacklists */}
         <div className="mb-6">
-          <h2 className="text-lg font-semibold mb-4">Blacklists</h2>
+          <h2 className="text-lg font-semibold mb-4 text-foreground">
+            Blacklists
+          </h2>
           <div className="grid gap-4">
             {/* Domain Blacklists Section */}
             <Collapsible defaultOpen>
@@ -3408,7 +3416,9 @@ const DomainReport = ({
 
         {/* Open relay check */}
         <div className="mb-6">
-          <h2 className="text-lg font-semibold mb-4">Open relay check</h2>
+          <h2 className="text-lg font-semibold mb-4 text-foreground">
+            Open relay check
+          </h2>
           <div className="grid gap-4">
             <Collapsible defaultOpen>
               <Card>

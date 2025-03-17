@@ -1,3 +1,4 @@
+import ThemeToggle from "@/app/components/theme-toggle";
 import Container from "@/components/container";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -17,10 +18,17 @@ const PublicNavbar = () => {
             src="/id-logo.png"
             alt="InboxDoctor Logo"
             fill
-            className="w-full h-full object-contain"
+            className="w-full h-full object-contain dark:block hidden"
+          />
+          <Image
+            src="/id-logo-full-black.png"
+            alt="InboxDoctor Logo"
+            fill
+            className="w-full h-full object-contain dark:hidden"
           />
         </Link>
         <div className="flex items-center gap-2">
+          <ThemeToggle />
           <Link
             href={`${BASE_APP_URL}/signin`}
             target="_blank"

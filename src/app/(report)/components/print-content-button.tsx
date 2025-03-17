@@ -1,5 +1,6 @@
 import { Download, Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTheme } from "@/providers/theme-provider";
 const wrapInBranding = (htmlContent: string, allStyles: string) => `
   <html>
     <head>
@@ -39,17 +40,16 @@ const wrapInBranding = (htmlContent: string, allStyles: string) => `
             class="flex items-center gap-2"
           >
             <img
-              src="https://app.inboxdoctor.ai/id-logo.png"
+              src="https://inboxdoctor.ai/id-logo.png"
               alt="InboxDoctor"
-              class="size-8 md:size-10 rounded-md"
+              class="h-[40px] w-[200px] object-contain dark:block hidden"
             />
-            <div class="flex flex-col whitespace-nowrap">
-              <img
-                src="https://app.inboxdoctor.ai/id-logo-text.png"
-                alt="InboxDoctor"
-                class="max-w-[90px] md:max-w-[120px]"
-              />
-            </div>
+            <img
+              src="https://inboxdoctor.ai/id-logo-full-black.png"
+              alt="InboxDoctor"
+              class="h-[40px] w-[200px] object-contain dark:hidden"
+            />
+            
           </a>
           <div>
             <a
@@ -62,7 +62,7 @@ const wrapInBranding = (htmlContent: string, allStyles: string) => `
           </div>
         </header>
       ${htmlContent}
-       <footer class="flex flex-col py-10 max-w-[1600px] w-full mx-auto shrink-0 items-center justify-between gap-2 border-t px-4">
+       <footer class="flex flex-col py-10 max-w-[1600px] w-full mx-auto shrink-0 items-center justify-between gap-2 border-t px-4 text-foreground">
           <p>
             &copy; ${new Date().getFullYear()} InboxDoctor. All rights reserved.
           </p>
@@ -96,6 +96,7 @@ const PrintContentButton = ({
   postRunCallback: () => void;
   beforePrintCallback?: (newTab: Window) => void;
 }) => {
+  const { theme } = useTheme();
   const handleDownload = () => {
     preRunCallback?.();
 
@@ -193,9 +194,6 @@ const PrintContentButton = ({
         .text-center { text-align: center; }
         .whitespace-nowrap { white-space: nowrap; }
 
-        :root{
-            --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;}
         
         /* Additional styles for PDF output */
         body {
@@ -239,7 +237,7 @@ const PrintContentButton = ({
       modalOverlay.style.zIndex = "9999";
 
       const modalContent = document.createElement("div");
-      modalContent.style.backgroundColor = "hsl(0, 0%, 3.9%)";
+      modalContent.style.backgroundColor = "hsl(0, 0%, 100%)";
       modalContent.style.padding = "20px";
       modalContent.style.borderRadius = "8px";
       modalContent.style.maxWidth = "500px";
@@ -251,7 +249,7 @@ const PrintContentButton = ({
         <p>When the print dialog appears, select <strong>"Save as PDF"</strong> and click <strong>"Save"</strong>.</p>
         <p>Recommended filename: <strong>${uniqueFilename}</strong></p>
         <p id="modal-status">Preparing document...</p>
-        <button id="modal-close-btn" style="background-color: hsl(0, 0%, 3.9%); color: hsl(0, 0%, 98%); border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-top: 15px; border: 1px solid hsl(0, 0%, 98%);">Close</button>
+        <button id="modal-close-btn" style="background-color: hsl(0, 0%, 100%); color: hsl(0 0% 3.9%); border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-top: 15px; border: 1px solid hsl(0, 0%, 98%);">Close</button>
       `;
 
       modalOverlay.appendChild(modalContent);
@@ -321,6 +319,9 @@ const PrintContentButton = ({
       if (frameDoc) {
         frameDoc.open();
         frameDoc.write(htmlContent);
+        if (theme === "dark") {
+          frameDoc.body.classList.add("dark");
+        }
         frameDoc.close();
 
         // Update status
