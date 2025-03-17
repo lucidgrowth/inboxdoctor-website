@@ -67,6 +67,7 @@ import {
 } from "@/components/ui/table";
 import PrintContentButton from "./print-content-button";
 import ReportSkeleton from "./report-skeleton";
+import MoreInfoButton from "./more-info-button";
 
 type MxRecord = { exchange: string; priority: number };
 type DnsRecordValue = string | string[] | MxRecord;
@@ -2070,6 +2071,7 @@ const DomainReport = ({
                               </div>
                             </div>
                             <div className="flex items-center gap-3">
+                              <MoreInfoButton slug={record.type} />
                               <span
                                 className={`${
                                   record?.result ||
@@ -3382,7 +3384,8 @@ const DomainReport = ({
                                           {blacklist.response || "No response"}
                                         </TableCell>
                                       </TableRow>
-                                    ))}
+                                    )
+                                  )}
                                 </TableBody>
                               </Table>
                             </div>
