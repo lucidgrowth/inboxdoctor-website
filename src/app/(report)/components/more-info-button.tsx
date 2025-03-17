@@ -11,7 +11,7 @@ const MoreInfoButton = ({ slug, className }: Props) => {
   return (
     <Link
       href={`/article/${slug}`}
-      className={cn("text-muted-foreground text-sm underline")}
+      className={cn("text-muted-foreground text-sm hover:underline")}
     >
       More Info
     </Link>

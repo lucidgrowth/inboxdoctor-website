@@ -1870,7 +1870,10 @@ const DomainReport = ({
                           <Info className="w-3 h-3 text-muted-foreground" />
                         </StyledTooltip>
                       </CardTitle>
-                      <ChevronDown className="w-4 h-4 text-muted-foreground transition-transform duration-200 [&[data-state=open]>svg]:rotate-180" />
+                      <div className="flex items-center gap-3">
+                        <MoreInfoButton slug="Email-Delivery-Chain" />
+                        <ChevronDown className="w-4 h-4 text-muted-foreground transition-transform duration-200 [&[data-state=open]>svg]:rotate-180" />
+                      </div>
                     </div>
                     <CardDescription className="self-start text-left">
                       Step-by-step routing and processing time of your email
@@ -2136,7 +2139,10 @@ const DomainReport = ({
                     })()}
                   </CardDescription>
                 </CardHeader>
-                <ChevronDown className="w-4 h-4 transition-transform duration-200" />
+                <div className="flex items-center gap-3">
+                  <MoreInfoButton slug="domain-age" />
+                  <ChevronDown className="w-4 h-4 transition-transform duration-200" />
+                </div>
               </CollapsibleTrigger>
               <CollapsibleContent>
                 <Separator />
@@ -3416,7 +3422,10 @@ const DomainReport = ({
                           <Info className="w-3 h-3 text-muted-foreground" />
                         </StyledTooltip>
                       </CardTitle>
-                      <ChevronDown className="w-4 h-4 text-muted-foreground transition-transform duration-200 [&[data-state=open]>svg]:rotate-180" />
+                      <div className="flex items-center gap-3">
+                        <MoreInfoButton slug="open-relay" />
+                        <ChevronDown className="w-4 h-4 text-muted-foreground transition-transform duration-200 [&[data-state=open]>svg]:rotate-180" />
+                      </div>
                     </div>
                     <CardDescription className="self-start">
                       Detailed SMTP communication logs
