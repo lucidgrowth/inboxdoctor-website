@@ -66,6 +66,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import PrintContentButton from "./print-content-button";
+import ReportSkeleton from "./report-skeleton";
 
 type MxRecord = { exchange: string; priority: number };
 type DnsRecordValue = string | string[] | MxRecord;
@@ -384,7 +385,9 @@ const DomainReport = ({
 
                   <div className="space-y-2">
                     <div className="flex items-start gap-2 text-sm">
-                      <span className="font-mono text-muted-foreground">Domain:</span>
+                      <span className="font-mono text-muted-foreground">
+                        Domain:
+                      </span>
                       <span className="font-mono text-muted-foreground">
                         {dkimRecord.signingDomain}
                       </span>
@@ -406,7 +409,9 @@ const DomainReport = ({
                       </span>
                     </div>
                     <div className="flex items-start gap-2 text-sm">
-                      <span className="font-mono text-muted-foreground">Result:</span>
+                      <span className="font-mono text-muted-foreground">
+                        Result:
+                      </span>
                       <span className="font-mono text-muted-foreground">
                         {dkimRecord.status?.result}
                       </span>
@@ -564,23 +569,10 @@ const DomainReport = ({
                       <div className="flex items-center gap-2 mb-2">
                         <div
                           className={`w-2 h-2 rounded-full ${
-                            record.record.DKIM ? "bg-green-500" : "bg-red-500"
-                          }`}
-                        />
-                        <span className="font-medium">DKIM</span>
-                      </div>
-                      <span className="text-xs text-muted-foreground">
-                        {record.record.DKIM ? "Valid" : "Invalid"}
-                      </span>
-                    </div>
-                    <div className="flex flex-col items-center p-3 bg-secondary rounded-lg">
-                      <div className="flex items-center gap-2 mb-2">
-                        <div
-                          className={`w-2 h-2 rounded-full ${
                             record.record.SPF ? "bg-green-500" : "bg-red-500"
                           }`}
                         />
-                        <span className="font-medium">SPF</span>
+                        <span className="font-medium">ARC SPF</span>
                       </div>
                       <span className="text-xs text-muted-foreground">
                         {record.record.SPF ? "Valid" : "Invalid"}
@@ -590,10 +582,24 @@ const DomainReport = ({
                       <div className="flex items-center gap-2 mb-2">
                         <div
                           className={`w-2 h-2 rounded-full ${
+                            record.record.DKIM ? "bg-green-500" : "bg-red-500"
+                          }`}
+                        />
+                        <span className="font-medium">ARC DKIM</span>
+                      </div>
+                      <span className="text-xs text-muted-foreground">
+                        {record.record.DKIM ? "Valid" : "Invalid"}
+                      </span>
+                    </div>
+
+                    <div className="flex flex-col items-center p-3 bg-secondary rounded-lg">
+                      <div className="flex items-center gap-2 mb-2">
+                        <div
+                          className={`w-2 h-2 rounded-full ${
                             record.record.DMARC ? "bg-green-500" : "bg-red-500"
                           }`}
                         />
-                        <span className="font-medium">DMARC</span>
+                        <span className="font-medium">ARC DMARC</span>
                       </div>
                       <span className="text-xs text-muted-foreground">
                         {record.record.DMARC ? "Valid" : "Invalid"}
@@ -819,7 +825,9 @@ const DomainReport = ({
                       </span>
                     </div>
                     <div className="flex items-start gap-2">
-                      <span className="font-medium text-muted-foreground">URL:</span>
+                      <span className="font-medium text-muted-foreground">
+                        URL:
+                      </span>
                       <span className="text-muted-foreground">
                         {getWhoisData(record)?.["Registrar URL"]}
                       </span>
@@ -1394,15 +1402,19 @@ const DomainReport = ({
 
   // Then use processedBlacklistData instead of recordsData?.domainBlacklist
 
+  if (isDnsCheckLoading) {
+    return <ReportSkeleton />;
+  }
+
   return (
     <>
       <div id="shared-report-print" className="w-full">
-        <div className="flex flex-col lg:flex-row items-center lg:justify-between mb-4">
+        <div className="flex flex-col lg:flex-row items-center lg:justify-between gap-3 mb-4">
           <div>
             <h1 className="page-heading">Email Domain Health Report</h1>
           </div>
           {recordsData && (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center flex-col md:flex-row gap-3">
               {recordsData.isPublic && (
                 <div className="flex items-center gap-2">
                   <span className="text-sm text-muted-foreground font-medium">
@@ -2697,6 +2709,16 @@ const DomainReport = ({
                                     (bl) => bl.listed
                                   ).length;
 
+                                // Sort blacklists to show listed entries first
+                                serverData.blacklists.sort((a, b) => {
+                                  // If a is listed and b is not, a comes first
+                                  if (a.listed && !b.listed) return -1;
+                                  // If b is listed and a is not, b comes first
+                                  if (!a.listed && b.listed) return 1;
+                                  // Otherwise maintain original order
+                                  return 0;
+                                });
+
                                 return (
                                   <Collapsible key={`ip-${serverData.server}`}>
                                     <CollapsibleTrigger className="w-full">
@@ -2821,6 +2843,16 @@ const DomainReport = ({
                                   serverData.blacklists.filter(
                                     (bl) => bl.listed
                                   ).length;
+
+                                // Sort blacklists to show listed entries first
+                                serverData.blacklists.sort((a, b) => {
+                                  // If a is listed and b is not, a comes first
+                                  if (a.listed && !b.listed) return -1;
+                                  // If b is listed and a is not, b comes first
+                                  if (!a.listed && b.listed) return 1;
+                                  // Otherwise maintain original order
+                                  return 0;
+                                });
 
                                 return (
                                   <Collapsible
@@ -2976,6 +3008,16 @@ const DomainReport = ({
                                     (bl) => bl.listed
                                   ).length;
 
+                                // Sort blacklists to show listed entries first
+                                serverData.blacklists.sort((a, b) => {
+                                  // If a is listed and b is not, a comes first
+                                  if (a.listed && !b.listed) return -1;
+                                  // If b is listed and a is not, b comes first
+                                  if (!a.listed && b.listed) return 1;
+                                  // Otherwise maintain original order
+                                  return 0;
+                                });
+
                                 return (
                                   <Collapsible
                                     key={`mx-ip-${serverData.server}`}
@@ -3101,6 +3143,16 @@ const DomainReport = ({
                                   serverData.blacklists.filter(
                                     (bl) => bl.listed
                                   ).length;
+
+                                // Sort blacklists to show listed entries first
+                                serverData.blacklists.sort((a, b) => {
+                                  // If a is listed and b is not, a comes first
+                                  if (a.listed && !b.listed) return -1;
+                                  // If b is listed and a is not, b comes first
+                                  if (!a.listed && b.listed) return 1;
+                                  // Otherwise maintain original order
+                                  return 0;
+                                });
 
                                 return (
                                   <Collapsible
@@ -3330,8 +3382,7 @@ const DomainReport = ({
                                           {blacklist.response || "No response"}
                                         </TableCell>
                                       </TableRow>
-                                    )
-                                  )}
+                                    ))}
                                 </TableBody>
                               </Table>
                             </div>
