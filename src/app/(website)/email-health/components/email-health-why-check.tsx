@@ -7,27 +7,27 @@ import { motion } from "motion/react";
 const steps = [
   {
     icon: Shield,
-    title: "Protects Your Domain Reputation",
+    title: "Protects Against Deliverability Issues",
     description:
-      "Scanning your domain helps prevent phishing or spamming attempts that can harm your reputation.",
+      "Regular checks identify issues with SPF, DKIM, and DMARC that could send your emails to spam, ensuring they land in the inbox.",
   },
   {
     icon: Mail,
-    title: "Ensures Email Deliverability",
+    title: "Enhances Email Security",
     description:
-      "Regular scans identify issues with DMARC, DKIM, SPF, and BIMI records that could disrupt email delivery.",
+      "Evaluate security settings like DANE and TLS to safeguard your domain from phishing or unauthorized email attempts.",
   },
   {
     icon: BarChart3,
-    title: "Improves Email Open Rates",
+    title: "Improves Inbox Placement Rates",
     description:
-      "Verifying BIMI records are properly configured boosts visibility and trust with your recipients.",
+      "Monitor domain age and blacklist status to boost your reputation, increasing the likelihood of higher open rates.",
   },
   {
     icon: CheckCircle,
-    title: "Meets Email Authentication Standards",
+    title: "Provides Actionable Insights",
     description:
-      "Domain checks ensure your domain complies with industry standards and best practices for email security.",
+      "Get a detailed report with scores, failed checks, and recommendations to optimize your email performance.",
   },
 ];
 
@@ -49,17 +49,15 @@ const EmailHealthWhyCheck = () => {
             transition={{ duration: 0.5 }}
             className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-5"
           >
-            <span className="text-sm text-primary">Why Check</span>
+            <span className="text-sm text-primary">Why Check?</span>
           </motion.div>
 
           <h2 className="text-3xl md:text-6xl font-semibold font-aspekta text-white mb-4">
-            Why Check <span className="text-primary">Domain Security?</span>
+            Why Run an Email Domain Health Test?
           </h2>
           <p className="text-gray-400 text-lg lg:text-xl">
-            Your domain&apos;s security is vital for safeguarding your brand,
-            ensuring email deliverability, and maintaining trust with your
-            audience. Regularly scanning your domain for DMARC, DKIM, SPF, and
-            BIMI records helps you stay proactive against potential threats.
+            Ensure your emails reach the inbox by evaluating critical domain
+            health factors like authentication, security, and reputation.
           </p>
         </motion.div>
 

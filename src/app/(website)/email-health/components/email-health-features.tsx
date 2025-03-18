@@ -88,15 +88,15 @@ const EmailHealthFeatures = () => {
             transition={{ duration: 0.5 }}
             className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-5"
           >
-            <span className="text-sm text-primary">Why Choose Us</span>
+            <span className="text-sm text-primary">Features</span>
           </motion.div>
 
           <h2 className="text-3xl md:text-6xl font-semibold font-aspekta text-white mb-4">
-            Why Choose InboxDoctor?
+            Preview Your Domain Health Insights
           </h2>
           <p className="text-gray-400 text-lg lg:text-xl">
-            We are a team of email experts who are dedicated to providing the
-            best email health check service to our customers.
+            Discover the detailed metrics you’ll get with our Email Domain
+            Health Test
           </p>
         </motion.div>
 

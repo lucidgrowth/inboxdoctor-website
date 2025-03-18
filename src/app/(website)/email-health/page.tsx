@@ -11,9 +11,9 @@ export default function EmailHealth() {
     <main>
       <EmailHealthHero />
       <EmailHealthHIW />
-      <EmailHealthWhyChoose />
-      <EmailHealthWhyCheck />
       <EmailHealthFeatures />
+      <EmailHealthWhyCheck />
+      <EmailHealthWhyChoose />
       <EmailHealthFAQ />
       <EmailHealthCTA />
     </main>

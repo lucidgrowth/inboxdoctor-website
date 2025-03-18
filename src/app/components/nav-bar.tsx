@@ -33,12 +33,12 @@ export default function NavBar() {
         </Link>
 
         <div className="hidden md:flex items-center space-x-8">
-          <Link
+          {/* <Link
             href="/#benefits"
             className="text-gray-300 hover:text-white transition-colors"
           >
             Benefits
-          </Link>
+          </Link> */}
           <Link
             href="/#features"
             className="text-gray-300 hover:text-white transition-colors"
@@ -63,12 +63,12 @@ export default function NavBar() {
           >
             Pricing
           </Link>
-          <Link
+          {/* <Link
             href="/#faq"
             className="text-gray-300 hover:text-white transition-colors"
           >
             FAQ
-          </Link>
+          </Link> */}
         </div>
 
         {/* Hamburger menu for small screens */}
