@@ -100,12 +100,19 @@ export default function NavBar() {
                 Features
               </Link>
               <Link
+                href="/email-health"
+                className="block px-4 py-2 text-gray-300 hover:text-white transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Email Health Test
+              </Link>
+              {/* <Link
                 href="#benefits"
                 className="block px-4 py-2 text-gray-300 hover:text-white transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Benefits
-              </Link>
+              </Link> */}
               <Link
                 href="#testimonials"
                 className="block px-4 py-2 text-gray-300 hover:text-white transition-colors"
@@ -120,13 +127,13 @@ export default function NavBar() {
               >
                 Pricing
               </Link>
-              <Link
+              {/* <Link
                 href="#faq"
                 className="block px-4 py-2 text-gray-300 hover:text-white transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 FAQ
-              </Link>
+              </Link> */}
               <div className="px-4 py-4">
                 <Link
                   href={bookingLink}
