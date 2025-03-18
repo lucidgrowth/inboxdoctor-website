@@ -1,5 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
+import { Loader, Loader2 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useState, useEffect } from "react";
 
@@ -64,14 +65,11 @@ const LoaderCore = ({
               {index > value && (
                 <CheckIcon className="text-black dark:text-white" />
               )}
-              {index <= value && (
-                <CheckFilled
-                  className={cn(
-                    "text-black dark:text-white",
-                    value === index &&
-                      "text-black dark:text-primary opacity-100"
-                  )}
-                />
+              {index < value && (
+                <CheckFilled className={cn("text-black dark:text-white")} />
+              )}
+              {index === value && (
+                <Loader2 className={cn("animate-spin duration-1000 text-foreground")} />
               )}
             </div>
             <span

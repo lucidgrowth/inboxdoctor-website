@@ -2,23 +2,27 @@
 
 import Container from "@/components/container";
 import { motion } from "motion/react";
+import Image from "next/image";
 import React from "react";
 
 const steps = [
   {
     step: 1,
+    image: "/email-health/hiw_01.png",
     title: "Initiate Your Test with a Unique Email",
     description:
       "Copy the provided test email address, compose an email from your domain, send it, check the confirmation box, and click 'View Results' to start the analysis.",
   },
   {
     step: 2,
+    image: "/email-health/hiw_02.png",
     title: "Unlock a Detailed Health Report",
     description:
       "Sit back as our system evaluates your domain's authentication, security, and deliverability, generating a comprehensive report tailored to your email setup.",
   },
   {
     step: 3,
+    image: "/email-health/hiw_03.png",
     title: "Explore and Download Your Results",
     description:
       "Access your personalized report on the results page, review key insights, and download it for further action or record-keeping.",
@@ -66,7 +70,14 @@ const EmailHealthHIW = () => {
               viewport={{ once: true }}
             >
               {/* image */}
-              <div className="aspect-square h-[300px] w-full relative"></div>
+              <div className="aspect-square h-[300px] w-full relative">
+                <Image
+                  src={step.image}
+                  alt={step.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
 
               <div className="flex flex-col gap-4 text-foreground">
                 <div className="rounded-full bg-primary/10 px-4 py-2 uppercase text-sm text-white/90 w-fit">

@@ -135,6 +135,14 @@ export default function Footer() {
               </li>
               <li>
                 <Link
+                  href={"/email-health"}
+                  className="text-gray-400 hover:text-blue-500 transition-colors"
+                >
+                  Email Health Test
+                </Link>
+              </li>
+              <li>
+                <Link
                   href={"/#features"}
                   className="text-gray-400 hover:text-blue-500 transition-colors"
                 >

@@ -97,7 +97,7 @@ const EmailHealthHero = () => {
           </motion.div>
 
           {!sendEmail ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 relative z-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 relative z-10 w-full">
               {/* <div className="absolute inset-0 pointer-events-none top-[20%]">
     <div className="relative rounded-[50%] blur-[150px] bg-primary aspect-square lg:aspect-[1194/378] z-0"></div>
   </div> */}
@@ -180,7 +180,7 @@ const EmailHealthHero = () => {
               </div>
             </div>
           ) : (
-            <div className="hiw-card relative flex flex-col gap-4 justify-center items-center z-10">
+            <div className="hiw-card relative flex flex-col gap-4 justify-center items-center z-10 w-full">
               <h3 className="text-2xl font-semibold text-white mb-6">
                 Please wait while we check your email domain
               </h3>
@@ -194,12 +194,20 @@ const EmailHealthHero = () => {
                 />
               </div>
 
-              <Button variant={"outline"}>
-                <ArrowLeft className="ml-2 h-5 w-5" />
-                <span>
-                  No results? Make sure you sent the email to the given address!
-                </span>
-              </Button>
+              <div className="flex flex-col justify-center items-center gap-4">
+                <p className="text-sm text-[#C0C6D0] text-left">
+                  Make sure you sent the email to the given address!
+                </p>
+
+                <Button
+                  variant={"outline"}
+                  className="w-fit bg-primary/10 border-none text-primary"
+                  onClick={() => setSendEmail(false)}
+                >
+                  <ArrowLeft className="mr-2 h-5 w-5" />
+                  <span>No results?</span>
+                </Button>
+              </div>
             </div>
           )}
         </div>
