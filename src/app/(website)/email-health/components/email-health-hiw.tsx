@@ -59,7 +59,7 @@ const EmailHealthHIW = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {steps.map((step) => (
             <motion.div
               className="hiw-card"
@@ -75,7 +75,7 @@ const EmailHealthHIW = () => {
                   src={step.image}
                   alt={step.title}
                   fill
-                  className="object-cover"
+                  className="object-cover object-top"
                 />
               </div>
 
