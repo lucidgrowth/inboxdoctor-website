@@ -1,6 +1,6 @@
 import ComparisonSection from "../components/comparison";
 import CTASection from "../components/cta-section";
-import FaqSection from "../components/faq";
+import FaqWrapper from "../components/faq-wrapper";
 import FeaturesSection from "../components/features-section";
 import HeroSection from "../components/hero-section";
 import PricingSection from "../components/pricing";
@@ -15,7 +15,7 @@ export default function Home() {
       <ComparisonSection />
       <PricingSection />
       <TestimonialsSection />
-      <FaqSection />
+      <FaqWrapper />
       <CTASection />
       {/* <InfiniteMovingCardsDemo /> */}
     </main>

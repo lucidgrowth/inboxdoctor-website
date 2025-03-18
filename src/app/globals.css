@@ -81,3 +81,51 @@ body {
     @apply text-lg lg:text-2xl font-semibold;
   }
 }
+
+.hiw-card {
+  grid-column-gap: 24px;
+  grid-row-gap: 24px;
+  -webkit-text-fill-color: inherit;
+  /* background-image: linear-gradient(#0d053a, #010019 24%),
+    linear-gradient(hsl(219, 88%, 60%), #1f185f 32%, #17174e); */
+  /* background-image: linear-gradient(#0d053a, #0a0a0a 24%),
+    linear-gradient(#3f7ef3, #1f185f 32%, #17174e); */
+  background-image: linear-gradient(#0d053a, #0a0a0a 24%),
+    linear-gradient(hsl(var(--primary)), hsl(var(--background)));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  border: 1px solid #0000;
+  border-radius: 16px;
+  flex-flow: column;
+  flex: 1;
+  padding: 32px;
+  display: flex;
+}
+/* 219 88% 60% */
+
+.cta-decoration {
+  background-image: linear-gradient(
+      90deg,
+      transparent,
+      hsl(var(--primary)) 50%,
+      hsl(var(--primary)) 79%,
+      transparent 103%
+    ),
+    linear-gradient(
+      180deg,
+      transparent,
+      transparent 0%,
+      hsl(var(--primary)) 50%,
+      transparent 102%
+    );
+  width: 350px;
+  height: 40%;
+  position: absolute;
+}
+
+.cta-decoration-one {
+  inset: 0% auto auto 0%;
+}
+.cta-decoration-two {
+  inset: auto 0% 0% auto;
+}

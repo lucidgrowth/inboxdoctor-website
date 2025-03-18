@@ -1,15 +1,5 @@
-"use client";
-
-import { InfiniteMovingCards } from "@/components/infinity-moving-cards";
-import { Card } from "@/components/ui/card";
-import { motion } from "motion/react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import Container from "@/components/container";
+import FaqSection from "@/components/faq-section";
+import React from "react";
 
 const faqs = [
   {
@@ -65,51 +55,14 @@ const faqs = [
   // },
 ];
 
-export default function FaqSection() {
+const FaqWrapper = () => {
   return (
-    <Container id="faq">
-      <div className="relative container mx-auto px-6">
-        <div className="text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 backdrop-blur-sm mb-8"
-          >
-            <span className="text-sm text-blue-400">FAQ</span>
-          </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            viewport={{ once: true }}
-            className="text-3xl md:text-6xl font-semibold font-aspekta text-white mb-4"
-          >
-            Frequently Asked Questions
-          </motion.h2>
-          <p className="text-gray-400 max-w-2xl mx-auto text-lg lg:text-xl">
-            Find answers to common questions about InboxDoctor.
-          </p>
-        </div>
-
-        <div className="space-y-2">
-          <Accordion type="single" collapsible className="w-full space-y-4">
-            {faqs.map((faq, index) => (
-              <AccordionItem
-                key={index}
-                value={`item-${index}`}
-                className="border border-white/10 bg-white/[0.02] rounded-2xl px-4"
-              >
-                <AccordionTrigger className="py-6 hover:no-underline text-lg [&>svg]:size-6 text-white">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="">{faq.answer}</AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
-      </div>
-    </Container>
+    <FaqSection
+      faqs={faqs}
+      title="Frequently Asked Questions"
+      description="FFind answers to common questions about InboxDoctor."
+    />
   );
-}
+};
+
+export default FaqWrapper;
