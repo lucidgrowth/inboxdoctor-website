@@ -46,6 +46,12 @@ export default function NavBar() {
             Features
           </Link>
           <Link
+            href="/email-health"
+            className="text-gray-300 hover:text-white transition-colors"
+          >
+            Email Health Test
+          </Link>
+          <Link
             href="/#testimonials"
             className="text-gray-300 hover:text-white transition-colors"
           >

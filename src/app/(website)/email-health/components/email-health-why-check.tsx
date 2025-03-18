@@ -1,15 +1,7 @@
 "use client";
 
 import Container from "@/components/container";
-import {
-  BarChart3,
-  CheckCircle,
-  ChartLine,
-  Headphones,
-  Lock,
-  Mail,
-  Shield,
-} from "lucide-react";
+import { BarChart3, CheckCircle, Mail, Shield } from "lucide-react";
 import { motion } from "motion/react";
 
 const steps = [
@@ -64,7 +56,7 @@ const EmailHealthWhyCheck = () => {
             Why Check <span className="text-primary">Domain Security?</span>
           </h2>
           <p className="text-gray-400 text-lg lg:text-xl">
-            Your domain's security is vital for safeguarding your brand,
+            Your domain&apos;s security is vital for safeguarding your brand,
             ensuring email deliverability, and maintaining trust with your
             audience. Regularly scanning your domain for DMARC, DKIM, SPF, and
             BIMI records helps you stay proactive against potential threats.

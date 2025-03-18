@@ -10,8 +10,6 @@ import { ArrowLeft, ArrowRight, Check, Copy } from "lucide-react";
 import Image from "next/image";
 import React, { useState } from "react";
 
-type Props = {};
-
 const loadingStates = [
   { text: "Receiving Your Test Email" },
   { text: "Verifying Email Authentication" },
@@ -21,7 +19,7 @@ const loadingStates = [
   { text: "Generating Your Health Report" },
 ];
 
-const EmailHealthHero = (props: Props) => {
+const EmailHealthHero = () => {
   const [isChecked, setIsChecked] = useState<CheckedState>(false);
   const [sendEmail, setSendEmail] = useState(false);
   return (
@@ -107,9 +105,9 @@ const EmailHealthHero = (props: Props) => {
                 </div>
 
                 <p className="text-sm text-[#C0C6D0]">
-                  We'll scan your domain's DNS records to verify proper email
-                  authentication setup. No emails will be sent or received
-                  during this process.
+                  We&apos;ll scan your domain&apos;s DNS records to verify
+                  proper email authentication setup. No emails will be sent or
+                  received during this process.
                 </p>
               </div>
 

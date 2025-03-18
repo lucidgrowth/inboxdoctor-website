@@ -4,8 +4,6 @@ import Container from "@/components/container";
 import { ChartLine, Headphones, Lock, Shield } from "lucide-react";
 import { motion } from "motion/react";
 
-type Props = {};
-
 const steps = [
   {
     key: 1,
@@ -37,7 +35,7 @@ const steps = [
   },
 ];
 
-const EmailHealthWhyChoose = (props: Props) => {
+const EmailHealthWhyChoose = () => {
   return (
     <Container id="why-choose-us">
       <div className="relative">

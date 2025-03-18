@@ -4,8 +4,6 @@ import Container from "@/components/container";
 import { motion } from "motion/react";
 import React from "react";
 
-type Props = {};
-
 const steps = [
   {
     step: 1,
@@ -27,7 +25,7 @@ const steps = [
   },
 ];
 
-const EmailHealthHIW = (props: Props) => {
+const EmailHealthHIW = () => {
   return (
     <Container id="how-it-works">
       <div className="relative">
