@@ -9,10 +9,15 @@ const ThemeContext = createContext({
 
 const storageKey = "report-theme";
 
+const getTheme = () => {
+  if (typeof window !== "undefined") {
+    return localStorage.getItem(storageKey) || "dark";
+  }
+  return "dark";
+};
+
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const [theme, setTheme] = useState(
-    localStorage.getItem(storageKey) || "dark"
-  ); // Default to dark mode
+  const [theme, setTheme] = useState(getTheme());
 
   useEffect(() => {
     const savedTheme = localStorage.getItem(storageKey);
