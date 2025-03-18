@@ -40,12 +40,12 @@ const wrapInBranding = (htmlContent: string, allStyles: string) => `
             class="flex items-center gap-2"
           >
             <img
-              src="https://inboxdoctor.ai/id-logo.png"
+              src="https://inboxdoctor.ai/id_full_logo_white.png"
               alt="InboxDoctor"
               class="h-[40px] w-[200px] object-contain dark:block hidden"
             />
             <img
-              src="https://inboxdoctor.ai/id-logo-full-black.png"
+              src="https://inboxdoctor.ai/id_full_logo_black.png"
               alt="InboxDoctor"
               class="h-[40px] w-[200px] object-contain dark:hidden"
             />
