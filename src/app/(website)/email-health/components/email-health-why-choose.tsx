@@ -1,37 +1,51 @@
 "use client";
 
 import Container from "@/components/container";
-import { ChartLine, Headphones, Lock, Shield } from "lucide-react";
+import { Brain, ChartLine, Headphones, Lock, Rocket, Shield } from "lucide-react";
 import { motion } from "motion/react";
 
 const steps = [
   {
     key: 1,
-    icon: Lock,
-    title: "95% Security Improvement",
+    icon: ChartLine,
+    title: "Inbox Placement Guarantee",
     description:
-      "Our customers see dramatic improvements in email security and deliverability",
+      "Stop guessing if your emails will reach the inbox. Our real-time email placement tests ensure maximum deliverability.",
   },
   {
     key: 2,
-    icon: ChartLine,
-    title: "Comprehensive Analysis",
+    icon: Shield,
+    title: "Complete Email Security & Compliance",
     description:
-      "Get detailed insights into your domain's email authentication setup",
+      "Shield your domain from phishing, spoofing, and unauthorized use with advanced SPF, DKIM, DMARC, and DANE validation.",
   },
   {
     key: 3,
-    icon: Shield,
-    title: "Phishing Protection",
+    icon: Lock,
+    title: "Advanced Mail Server Monitoring",
     description:
-      "Identify and fix vulnerabilities that could lead to domain spoofing",
+      "Keep your SMTP, MX, and DNS records optimized to prevent downtime, email rejections, or slow delivery.",
   },
   {
     key: 4,
-    icon: Headphones,
-    title: "Expert Support",
+    icon: Rocket,
+    title: "Deliverability & Reputation Booster",
     description:
-      "Our team of security experts is ready to help you implement fixes",
+      "Track blacklists, IP reputation, and bounce rates to keep your sending domains and mail servers trusted.",
+  },
+  {
+    key: 5,
+    icon: Brain,
+    title: "AI-Powered Email Analytics",
+    description:
+      "Get deep, data-driven insights on your email campaigns, sender reputation, and authentication setup.",
+  },
+  {
+    key: 6,
+    icon: Headphones,
+    title: "Enterprise-Grade Support & Consulting",
+    description:
+      "Our email experts provide 24/7 support, troubleshooting, and guidance to keep your emails performing at their best.",
   },
 ];
 
@@ -48,9 +62,9 @@ const EmailHealthWhyChoose = () => {
           className="text-center mb-16 max-w-[763px] w-full mx-auto"
         >
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
             className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-5"
           >
             <span className="text-sm text-primary">Why Choose Us</span>
@@ -60,8 +74,9 @@ const EmailHealthWhyChoose = () => {
             Why Choose InboxDoctor?
           </h2>
           <p className="text-gray-400 text-lg lg:text-xl">
-            We are a team of email experts who are dedicated to providing the
-            best email health check service to our customers.
+            InboxDoctor is more than just an email health check—it's the
+            ultimate platform for businesses to secure, optimize, and maximize
+            their email performance.
           </p>
         </motion.div>
 
@@ -78,9 +93,9 @@ const EmailHealthWhyChoose = () => {
               {/* image */}
 
               <div className="flex items-start">
-                <feature.icon className="mr-4 mt-1 text-primary size-8" />
+                <feature.icon className="mr-4 mt-1 text-primary size-8 shrink-0" />
                 <div className="flex flex-col gap-2 text-foreground">
-                  <h3 className="text-2xl font-semibold">{feature.title}</h3>
+                  <h3 className="text-xl font-medium">{feature.title}</h3>
                   <p className="text-base text-gray-400">
                     {feature.description}
                   </p>
