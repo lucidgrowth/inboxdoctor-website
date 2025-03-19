@@ -57,7 +57,9 @@ export default function FaqSection({ faqs, title, description }: Props) {
                 <AccordionTrigger className="py-6 hover:no-underline text-lg [&>svg]:size-6 text-white">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="">{faq.answer}</AccordionContent>
+                <AccordionContent className="text-foreground/80">
+                  {faq.answer}
+                </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>

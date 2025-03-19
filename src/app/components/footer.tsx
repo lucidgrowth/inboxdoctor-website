@@ -45,6 +45,37 @@ const legalPages = [
   },
 ];
 
+const quickLinks = [
+  {
+    title: "Benefits",
+    href: "/#benefits",
+  },
+  {
+    title: "Email Health Test",
+    href: "/email-health",
+  },
+  {
+    title: "Inbox Placement Test",
+    href: "/inbox-placement",
+  },
+  {
+    title: "Features",
+    href: "/#features",
+  },
+  {
+    title: "Pricing",
+    href: "/#pricing",
+  },
+  {
+    title: "Testimonials",
+    href: "/#testimonials",
+  },
+  {
+    title: "FAQ",
+    href: "/#faq",
+  },
+];
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
@@ -125,54 +156,16 @@ export default function Footer() {
           >
             <h3 className="text-white font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li>
-                <Link
-                  href={"/#benefits"}
-                  className="text-gray-400 hover:text-blue-500 transition-colors"
-                >
-                  Benefits
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={"/email-health"}
-                  className="text-gray-400 hover:text-blue-500 transition-colors"
-                >
-                  Email Health Test
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={"/#features"}
-                  className="text-gray-400 hover:text-blue-500 transition-colors"
-                >
-                  Features
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={"/#pricing"}
-                  className="text-gray-400 hover:text-blue-500 transition-colors"
-                >
-                  Pricing
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={"/#testimonials"}
-                  className="text-gray-400 hover:text-blue-500 transition-colors"
-                >
-                  Testimonials
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={"/#faq"}
-                  className="text-gray-400 hover:text-blue-500 transition-colors"
-                >
-                  FAQ
-                </Link>
-              </li>
+              {quickLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-gray-400 hover:text-blue-500 transition-colors"
+                  >
+                    {link.title}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </motion.div>
 

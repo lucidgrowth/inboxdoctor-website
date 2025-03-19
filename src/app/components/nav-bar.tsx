@@ -9,6 +9,33 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
+const navLinks = [
+  {
+    href: "/#features",
+    label: "Features",
+  },
+  {
+    href: "/email-health",
+    label: "Email Health Test",
+  },
+  {
+    href: "/inbox-placement",
+    label: "Inbox Placement Test",
+  },
+  {
+    href: "/#testimonials",
+    label: "Testimonials",
+  },
+  {
+    href: "/#pricing",
+    label: "Pricing",
+  },
+  // {
+  //   href: "/#faq",
+  //   label: "FAQ",
+  // },
+];
+
 export default function NavBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -39,36 +66,15 @@ export default function NavBar() {
           >
             Benefits
           </Link> */}
-          <Link
-            href="/#features"
-            className="text-gray-300 hover:text-white transition-colors"
-          >
-            Features
-          </Link>
-          <Link
-            href="/email-health"
-            className="text-gray-300 hover:text-white transition-colors"
-          >
-            Email Health Test
-          </Link>
-          <Link
-            href="/#testimonials"
-            className="text-gray-300 hover:text-white transition-colors"
-          >
-            Testimonials
-          </Link>
-          <Link
-            href="/#pricing"
-            className="text-gray-300 hover:text-white transition-colors"
-          >
-            Pricing
-          </Link>
-          {/* <Link
-            href="/#faq"
-            className="text-gray-300 hover:text-white transition-colors"
-          >
-            FAQ
-          </Link> */}
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-gray-300 hover:text-white transition-colors"
+            >
+              {link.label}
+            </Link>
+          ))}
         </div>
 
         {/* Hamburger menu for small screens */}
@@ -92,48 +98,16 @@ export default function NavBar() {
               transition={{ duration: 0.2 }}
               className="fixed top-[64px] px-2 left-0 right-0 bg-background/95 backdrop-blur-md border-t border-white/10 py-2 md:hidden z-50"
             >
-              <Link
-                href="#features"
-                className="block px-4 py-2 text-gray-300 hover:text-white transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Features
-              </Link>
-              <Link
-                href="/email-health"
-                className="block px-4 py-2 text-gray-300 hover:text-white transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Email Health Test
-              </Link>
-              {/* <Link
-                href="#benefits"
-                className="block px-4 py-2 text-gray-300 hover:text-white transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Benefits
-              </Link> */}
-              <Link
-                href="#testimonials"
-                className="block px-4 py-2 text-gray-300 hover:text-white transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Testimonials
-              </Link>
-              <Link
-                href="#pricing"
-                className="block px-4 py-2 text-gray-300 hover:text-white transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Pricing
-              </Link>
-              {/* <Link
-                href="#faq"
-                className="block px-4 py-2 text-gray-300 hover:text-white transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                FAQ
-              </Link> */}
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="block px-4 py-2 text-gray-300 hover:text-white transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
               <div className="px-4 py-4">
                 <Link
                   href={bookingLink}

@@ -2,14 +2,14 @@ import CTASection from "@/components/cta-section";
 import { bookingLink } from "@/lib/constants";
 
 const ctaData = {
-  title: "Get your email domain health checked today",
+  title: "Optimize Your Inbox Placement Now",
   description:
-    "Take the domain health test to ensure your email domain is properly secured.",
+    "Run the Inbox Placement Test to secure your email delivery and boost your open rates.",
   buttonText: "Book a Call",
   buttonLink: bookingLink,
 };
 
-const EmailHealthCTA = () => {
+const InboxPlacementCTA = () => {
   return (
     <CTASection
       title={ctaData.title}
@@ -20,4 +20,4 @@ const EmailHealthCTA = () => {
   );
 };
 
-export default EmailHealthCTA;
+export default InboxPlacementCTA;

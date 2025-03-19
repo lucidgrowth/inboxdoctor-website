@@ -61,8 +61,8 @@ const data = {
   ],
 };
 
-const EmailHealthWhyChoose = () => {
+const InboxPlacementWhyChoose = () => {
   return <WhyChooseSection data={data} />;
 };
 
-export default EmailHealthWhyChoose;
+export default InboxPlacementWhyChoose;

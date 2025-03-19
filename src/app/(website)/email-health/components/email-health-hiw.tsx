@@ -70,7 +70,7 @@ const EmailHealthHIW = () => {
               viewport={{ once: true }}
             >
               {/* image */}
-              <div className="aspect-square h-[300px] w-full relative">
+              <div className="aspect-square h-[300px] w-full relative border border-primary/20 rounded-xl">
                 <Image
                   src={step.image}
                   alt={step.title}
