@@ -3,6 +3,8 @@
 import Container from "@/components/container";
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
+import { b2b, b2c } from "./providers-list";
+import Image from "next/image";
 
 const data = {
   aspect: {
@@ -20,12 +22,13 @@ const data = {
       "Security Focus",
       "Authentication Importance",
       "Delivery Tracking",
+      "Providers",
     ],
   },
   b2b: {
     title: "B2B inbox placement",
     content: [
-      "Corporate email systems (Microsoft Exchange, Google Workspace)",
+      "Corporate email systems",
       "Strict corporate filtering policies, security gateways",
       "Domain-level blocklists used by businesses",
       "Stricter spam filters and content scanning systems",
@@ -37,12 +40,13 @@ const data = {
       "Avoiding security blocks and false-positive detection",
       "SPF, DKIM, DMARC pass rates",
       "Delivery speed and security scanning delays",
+      "Providers",
     ],
   },
   b2c: {
     title: "B2C inbox placement",
     content: [
-      "Consumer email providers (Gmail, Yahoo, Outlook.com)",
+      "Consumer email providers",
       "Algorithmic filtering based on user engagement",
       "Personal spam filter preferences",
       "Folder categorization (Promotions, Updates, etc.)",
@@ -54,6 +58,7 @@ const data = {
       "Engagement metrics impact on future deliverability",
       "Image loading and click tracking preservation",
       "Mobile app delivery confirmation",
+      "Providers",
     ],
   },
 };
@@ -79,7 +84,7 @@ const ProviderCompare = () => {
           </motion.div>
 
           <h2 className="text-3xl md:text-6xl font-semibold font-aspekta text-white mb-4">
-            Key Differences Between B2B & B2C Inbox Placement
+            Differences Between B2B & B2C Inbox Placement
           </h2>
           {/* <p className="text-gray-400 text-lg lg:text-xl">{data.description}</p> */}
         </motion.div>
@@ -120,15 +125,16 @@ const FeatureList = ({
     <div
       className={cn(
         "border rounded-xl grid grid-cols-1 grid-rows-[min-content_1fr]",
-        variant === "b2b" && "bg-blue-900/20 text-blue-800 border-blue-800",
-        variant === "b2c" && "bg-purple-900/20 text-purple-800 border-purple-800"
+        variant === "b2b" && "bg-blue-900/20 text-blue-800 border-blue-900",
+        variant === "b2c" &&
+          "bg-purple-900/20 text-purple-800 border-purple-900"
       )}
     >
       <div
         className={cn(
           "px-6 py-4 flex items-center border-b gap-2",
-          variant === "b2b" && "border-b-blue-800",
-          variant === "b2c" && "border-b-purple-800"
+          variant === "b2b" && "border-b-blue-900",
+          variant === "b2c" && "border-b-purple-900"
         )}
       >
         <h3 className="text-xl font-bold text-foreground capitalize">
@@ -138,8 +144,8 @@ const FeatureList = ({
       <ul
         className={cn(
           "divide-y grid auto-rows-[1fr] row-span-2",
-          variant === "b2b" && "divide-blue-800",
-          variant === "b2c" && "divide-purple-800"
+          variant === "b2b" && "divide-blue-900",
+          variant === "b2c" && "divide-purple-900"
         )}
       >
         {content.map((item, index) => (
@@ -153,7 +159,34 @@ const FeatureList = ({
             )}
           >
             {/* {variant !== "feature" && renderIcon(item, variant)} */}
-            {item}
+            {variant == "b2b" && item === "Providers" && (
+              <div className="flex items-center gap-3 flex-wrap">
+                {b2b.map((provider) => (
+                  <Image
+                    src={provider.image}
+                    alt={provider.title}
+                    width={20}
+                    height={20}
+                    key={provider.title}
+                  />
+                ))}
+              </div>
+            )}
+            {variant == "b2c" && item === "Providers" && (
+              <div className="flex items-center gap-3 flex-wrap">
+                {b2c.map((provider) => (
+                  <Image
+                    src={provider.image}
+                    alt={provider.title}
+                    width={20}
+                    height={20}
+                    key={provider.title}
+                  />
+                ))}
+              </div>
+            )}
+
+            {variant !== "feature" ? item !== "Providers" && item : item}
           </li>
         ))}
       </ul>

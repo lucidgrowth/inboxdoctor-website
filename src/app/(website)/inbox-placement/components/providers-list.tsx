@@ -10,7 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
-const b2c = [
+export const b2c = [
   {
     title: "Gmail",
     image: "/providers-logos/gmail.png",
@@ -41,7 +41,7 @@ const b2c = [
   },
 ];
 
-const b2b = [
+export const b2b = [
   {
     title: "Google Workspace",
     image: "/providers-logos/google-workspace.png",
@@ -94,12 +94,12 @@ export const ProviderSection = () => {
           />
         </div>
         <div className="flex items-center justify-center flex-col gap-4">
-          <h2 className="text-3xl font-medium text-foreground">
-            Major Providers Supported
+          <h2 className="text-3xl font-medium text-foreground text-center">
+            Providers We <br /> Support
           </h2>
 
           {/* CTA Button */}
-          <Link href="/#pricing" target="_blank" rel="noopener noreferrer">
+          <Link href="/#pricing">
             <Button
               size="lg"
               className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 text-lg rounded-full group relative"

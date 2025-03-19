@@ -10,16 +10,28 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Check, Copy } from "lucide-react";
+import { ArrowLeft, Check, Copy } from "lucide-react";
 import { useTheme } from "@/providers/theme-provider";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
+import { MultiStepLoader } from "@/components/multi-step-loader";
 
-type Props = {};
+const loadingStates = [
+  { text: "Receiving Your Test Email" },
+  { text: "Identifying Your Audience Type" },
+  { text: "Distributing to Email Providers" },
+  { text: "Analyzing Email Routing" },
+  { text: "Evaluating Placement Results" },
+  { text: "Checking Spam Triggers" },
+  { text: "Assessing Sender Reputation" },
+  { text: "Generating Your Placement Report" },
+];
 
-const B2BForm = (props: Props) => {
+const B2BForm = () => {
   const { theme } = useTheme();
   const [code] = useState("kjghdfkajsgdaiwe");
+  const [isSent, setIsSent] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
   const [emails, setEmails] = useState(
     "test-inbox1@company-m365.com, test-inbox2@company-workspace.com, test-inbox3@company-zoho.com, test-inbox4@company-exchange.com, test-inbox5@company-proton.com"
   );
@@ -50,6 +62,10 @@ const B2BForm = (props: Props) => {
     setEmails(emailList.join(value));
   };
 
+  if (isSent) {
+    return <Loader setSendEmail={setIsSent} />;
+  }
+
   return (
     <div className="p-8 space-y-4">
       <div className=" flex flex-col gap-4 items-center">
@@ -59,7 +75,7 @@ const B2BForm = (props: Props) => {
 
         <div className="relative w-full">
           <Input
-            className="bg-background/20 text-foreground/80 text-xl pr-10 h-auto py-2"
+            className="bg-background/20 text-foreground/80 md:text-xl pr-10 h-auto py-2"
             value={code}
             readOnly
           />
@@ -85,14 +101,14 @@ const B2BForm = (props: Props) => {
         </span>
 
         <Textarea
-          className="bg-background/20 text-foreground/80 text-xl"
+          className="bg-background/20 text-foreground/80 md:text-xl"
           rows={10}
           value={emails}
           readOnly
         />
       </div>
 
-      <div className="flex justify-between">
+      <div className="flex justify-between flex-col md:flex-row gap-4">
         <div className="flex gap-2 items-center">
           <Select defaultValue={","} onValueChange={handleSeparatorChange}>
             <SelectTrigger className="w-[180px] text-foreground">
@@ -119,15 +135,63 @@ const B2BForm = (props: Props) => {
             {isCopied ? "Copied" : "Copy Emails"}
           </Button>
         </div>
-        <div className="flex gap-4 items-center">
-          <div className="flex gap-2 items-center">
-            <Checkbox className="rounded-[4px] border-white/40" />
-            <span className="text-sm text-foreground">
+        <div className="flex gap-4 items-center flex-col md:flex-row">
+          <div className="flex gap-2 md:items-center">
+            <Checkbox
+              className="rounded-[4px] border-white/40"
+              checked={isChecked}
+              onCheckedChange={() => setIsChecked(!isChecked)}
+            />
+            <span className="text-sm text-foreground text-left">
               I have sent an email to the above addresses.
             </span>
           </div>
-          <Button className="text-white h-12 px-10 text-base">Send</Button>
+          <Button
+            className="text-white h-12 px-10 text-base w-full md:w-fit"
+            disabled={!isChecked}
+            onClick={() => setIsSent(true)}
+          >
+            View Result
+          </Button>
         </div>
+      </div>
+    </div>
+  );
+};
+
+const Loader = ({
+  setSendEmail,
+}: {
+  setSendEmail: (value: boolean) => void;
+}) => {
+  return (
+    <div className="p-8 space-y-4">
+      <h3 className="text-2xl font-semibold text-white mb-6">
+        Please wait while we analyze your email
+      </h3>
+
+      {/* animation */}
+      <div className="relative">
+        <MultiStepLoader
+          loadingStates={loadingStates}
+          loading={true}
+          duration={4000}
+        />
+      </div>
+
+      <div className="flex flex-col justify-center items-center gap-4">
+        <p className="text-sm text-[#C0C6D0] text-left">
+          Make sure you sent the email to the given address!
+        </p>
+
+        <Button
+          variant={"outline"}
+          className="w-fit bg-primary/10 border-none text-primary"
+          onClick={() => setSendEmail(false)}
+        >
+          <ArrowLeft className="mr-2 h-5 w-5" />
+          <span>No results?</span>
+        </Button>
       </div>
     </div>
   );

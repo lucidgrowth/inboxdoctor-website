@@ -91,10 +91,11 @@ const InboxPlacementDemo = () => {
             </motion.div>
 
             <h2 className="text-3xl md:text-6xl font-semibold font-aspekta text-white mb-4">
-              Inbox Placement Test Demo
+              Explore Your Email Placement Dashboard in Action
             </h2>
             <p className="text-gray-400 text-lg lg:text-xl">
-              See how InboxDoctor can help you improve your email placement.
+              Unlock the complete metrics of your Inbox Placement Test—book a
+              call to get started!
             </p>
           </motion.div>
 
@@ -133,7 +134,7 @@ const InboxPlacementDemo = () => {
                 className="rounded-xl absolute top-1/2 -translate-y-[40%] -right-[100px] bg-background rotate-6 max-w-[245px] w-[28%] h-[28%] lg:rounded-2xl shadow-2xl border-2 border-white/10 xl:block hidden  z-10 "
               /> */}
               <Image
-                src="/hero-image-mobile.png"
+                src="/inbox-placement/inbox-placement-main-mobile.png"
                 alt="InboxDoctor Interface"
                 width={767}
                 height={767}
