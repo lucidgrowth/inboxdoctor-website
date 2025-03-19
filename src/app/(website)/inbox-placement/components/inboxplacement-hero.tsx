@@ -6,7 +6,8 @@ import { Check, Mail } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
 import { useState } from "react";
-import B2CForm from "./forms/b2b-form";
+import B2CForm from "./forms/b2c-form";
+import B2BForm from "./forms/b2b-form";
 
 const loadingStates = [
   { text: "Receiving Your Test Email" },
@@ -136,7 +137,7 @@ const B2CContent = () => {
 const B2BContent = () => {
   return (
     <div className="border-2 border-white/20 rounded-xl bg-background">
-      <B2CForm />
+      <B2BForm />
     </div>
   );
 };

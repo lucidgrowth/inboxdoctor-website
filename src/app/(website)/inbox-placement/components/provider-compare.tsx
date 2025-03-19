@@ -1,82 +1,65 @@
 "use client";
 
 import Container from "@/components/container";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
 
-const data = [
-  {
-    aspect: "Target Environment",
-    b2b: "Corporate email systems (Microsoft Exchange, Google Workspace)",
-    b2c: "Consumer email providers (Gmail, Yahoo, Outlook.com)",
+const data = {
+  aspect: {
+    title: "Features",
+    content: [
+      "Target Environment",
+      "Filtering Mechanisms",
+      "Blocklist Concerns",
+      "Security Scrutiny",
+      "Testing Requirements",
+      "Testing Scope",
+      "Verification Process",
+      "Timing Considerations",
+      "Primary Success Metric",
+      "Security Focus",
+      "Authentication Importance",
+      "Delivery Tracking",
+    ],
   },
-  {
-    aspect: "Filtering Mechanisms",
-    b2b: "Strict corporate filtering policies, security gateways",
-    b2c: "Algorithmic filtering based on user engagement",
+  b2b: {
+    title: "B2B inbox placement",
+    content: [
+      "Corporate email systems (Microsoft Exchange, Google Workspace)",
+      "Strict corporate filtering policies, security gateways",
+      "Domain-level blocklists used by businesses",
+      "Stricter spam filters and content scanning systems",
+      "Seed accounts within actual corporate environments",
+      "Multiple company domain types and security configurations",
+      "Both external gateway and internal filtering results",
+      "Often requires testing during business hours",
+      "Deliverability to the primary inbox",
+      "Avoiding security blocks and false-positive detection",
+      "SPF, DKIM, DMARC pass rates",
+      "Delivery speed and security scanning delays",
+    ],
   },
-  {
-    aspect: "Blocklist Concerns",
-    b2b: "Domain-level blocklists used by businesses",
-    b2c: "Personal spam filter preferences",
+  b2c: {
+    title: "B2C inbox placement",
+    content: [
+      "Consumer email providers (Gmail, Yahoo, Outlook.com)",
+      "Algorithmic filtering based on user engagement",
+      "Personal spam filter preferences",
+      "Folder categorization (Promotions, Updates, etc.)",
+      "Consumer seed accounts across major providers",
+      "Personal account configurations and engagement levels",
+      "Folder placement rather than pure accept/reject outcomes",
+      "Can be performed reliably at any time of day",
+      "Inbox vs. promotions vs. spam folder placement rates",
+      "Engagement metrics impact on future deliverability",
+      "Image loading and click tracking preservation",
+      "Mobile app delivery confirmation",
+    ],
   },
-  {
-    aspect: "Security Scrutiny",
-    b2b: "Stricter spam filters and content scanning systems",
-    b2c: "Folder categorization (Promotions, Updates, etc.)",
-  },
-  {
-    aspect: "Testing Requirements",
-    b2b: "Seed accounts within actual corporate environments",
-    b2c: "Consumer seed accounts across major providers",
-  },
-  {
-    aspect: "Testing Scope",
-    b2b: "Multiple company domain types and security configurations",
-    b2c: "Personal account configurations and engagement levels",
-  },
-  {
-    aspect: "Verification Process",
-    b2b: "Both external gateway and internal filtering results",
-    b2c: "Folder placement rather than pure accept/reject outcomes",
-  },
-  {
-    aspect: "Timing Considerations",
-    b2b: "Often requires testing during business hours",
-    b2c: "Can be performed reliably at any time of day",
-  },
-  {
-    aspect: "Primary Success Metric",
-    b2b: "Deliverability to the primary inbox",
-    b2c: "Inbox vs. promotions vs. spam folder placement rates",
-  },
-  {
-    aspect: "Security Focus",
-    b2b: "Avoiding security blocks and false-positive detection",
-    b2c: "Engagement metrics impact on future deliverability",
-  },
-  {
-    aspect: "Authentication Importance",
-    b2b: "SPF, DKIM, DMARC pass rates",
-    b2c: "Image loading and click tracking preservation",
-  },
-  {
-    aspect: "Delivery Tracking",
-    b2b: "Delivery speed and security scanning delays",
-    b2c: "Mobile app delivery confirmation",
-  },
-];
-
+};
 const ProviderCompare = () => {
   return (
-    <Container id="provider-compare">
+    <Container>
       <div className="relative">
         {/* Header */}
         <motion.div
@@ -87,9 +70,9 @@ const ProviderCompare = () => {
           className="text-center mb-16 max-w-[763px] w-full mx-auto"
         >
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
             className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-5"
           >
             <span className="text-sm text-primary">Compare</span>
@@ -98,45 +81,83 @@ const ProviderCompare = () => {
           <h2 className="text-3xl md:text-6xl font-semibold font-aspekta text-white mb-4">
             Key Differences Between B2B & B2C Inbox Placement
           </h2>
-          {/* <p className="text-gray-400 text-lg lg:text-xl">
-            Key Differences Between B2B & B2C Inbox Placement.
-          </p> */}
+          {/* <p className="text-gray-400 text-lg lg:text-xl">{data.description}</p> */}
         </motion.div>
+      </div>
 
-        <div>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="py-4 px-5 text-lg text-gray-400">
-                  Aspect
-                </TableHead>
-                <TableHead className="py-4 px-5 text-lg text-gray-400">
-                  B2B Inbox Placement Testing
-                </TableHead>
-                <TableHead className="py-4 px-5 text-lg text-gray-400">
-                  B2C Inbox Placement Testing
-                </TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {data.map((item) => (
-                <TableRow key={item.aspect} className="text-foreground/80">
-                  <TableCell className="py-4 px-5 text-lg font-medium text-foreground">
-                    {item.aspect}
-                  </TableCell>
-                  <TableCell className="py-4 px-5 text-base">
-                    {item.b2b}
-                  </TableCell>
-                  <TableCell className="py-4 px-5 text-base">
-                    {item.b2c}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
+      {/* Features */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-15">
+        <FeatureList
+          title={data.aspect?.title}
+          content={data.aspect?.content}
+          variant="feature"
+        />
+        <FeatureList
+          title={data.b2b?.title}
+          content={data.b2b?.content}
+          variant="b2b"
+        />
+        <FeatureList
+          title={data.b2c?.title}
+          content={data.b2c?.content}
+          variant="b2c"
+        />
       </div>
     </Container>
+  );
+};
+
+const FeatureList = ({
+  title,
+  content,
+  variant = "feature",
+}: {
+  title: string;
+  content: string[];
+  variant: "b2b" | "b2c" | "feature";
+}) => {
+  return (
+    <div
+      className={cn(
+        "border rounded-xl grid grid-cols-1 grid-rows-[min-content_1fr]",
+        variant === "b2b" && "bg-blue-900/20 text-blue-800 border-blue-800",
+        variant === "b2c" && "bg-purple-900/20 text-purple-800 border-purple-800"
+      )}
+    >
+      <div
+        className={cn(
+          "px-6 py-4 flex items-center border-b gap-2",
+          variant === "b2b" && "border-b-blue-800",
+          variant === "b2c" && "border-b-purple-800"
+        )}
+      >
+        <h3 className="text-xl font-bold text-foreground capitalize">
+          {title}
+        </h3>
+      </div>
+      <ul
+        className={cn(
+          "divide-y grid auto-rows-[1fr] row-span-2",
+          variant === "b2b" && "divide-blue-800",
+          variant === "b2c" && "divide-purple-800"
+        )}
+      >
+        {content.map((item, index) => (
+          <li
+            key={index}
+            className={cn(
+              "flex items-center gap-4 p-5",
+              variant === "feature"
+                ? "text-base font-medium text-foreground"
+                : "text-sm text-foreground/80"
+            )}
+          >
+            {/* {variant !== "feature" && renderIcon(item, variant)} */}
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 

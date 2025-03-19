@@ -18,9 +18,10 @@ type FeaturesSectionProps = {
       image: string;
     }[];
   };
+  twoColIndexes?: number[];
 };
 
-const FeaturesSection = ({ data }: FeaturesSectionProps) => {
+const FeaturesSection = ({ data, twoColIndexes }: FeaturesSectionProps) => {
   return (
     <Container id={data.id}>
       <div className="relative">
@@ -62,7 +63,7 @@ const FeaturesSection = ({ data }: FeaturesSectionProps) => {
                   className="w-full h-full rounded-lg"
                 />
               }
-              className={index === 3 || index === 6 ? "md:col-span-2" : ""}
+              className={twoColIndexes?.includes(index) ? "md:col-span-2" : ""}
             />
           ))}
         </div>

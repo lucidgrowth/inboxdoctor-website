@@ -59,7 +59,7 @@ const data = {
 };
 
 const EmailHealthFeatures = () => {
-  return <FeaturesSection data={data} />;
+  return <FeaturesSection data={data} twoColIndexes={[3, 6]} />;
 };
 
 export default EmailHealthFeatures;

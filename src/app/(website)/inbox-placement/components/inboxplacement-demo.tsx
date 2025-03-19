@@ -122,7 +122,7 @@ const InboxPlacementDemo = () => {
 
             {/* images */}
             <div className="relative z-10">
-              <div
+              {/* <div
                 // src="/hero-image-mobile.png"
                 // alt="InboxDoctor Interface"
                 className="rounded-xl absolute top-1/2 -translate-y-[20%] -left-[100px] bg-background -rotate-6 max-w-[245px] w-[28%] h-[28%] lg:rounded-2xl shadow-2xl border-2 border-white/10 xl:block hidden  z-10 "
@@ -131,7 +131,7 @@ const InboxPlacementDemo = () => {
                 // src="/hero-image-mobile.png"
                 // alt="InboxDoctor Interface"
                 className="rounded-xl absolute top-1/2 -translate-y-[40%] -right-[100px] bg-background rotate-6 max-w-[245px] w-[28%] h-[28%] lg:rounded-2xl shadow-2xl border-2 border-white/10 xl:block hidden  z-10 "
-              />
+              /> */}
               <Image
                 src="/hero-image-mobile.png"
                 alt="InboxDoctor Interface"
@@ -140,7 +140,7 @@ const InboxPlacementDemo = () => {
                 className="rounded-xl lg:rounded-2xl shadow-2xl border-4 border-white/10 w-full z-10 lg:hidden"
               />
               <Image
-                src="/hero-image.png"
+                src="/inbox-placement/inbox-placement-main.png"
                 alt="InboxDoctor Interface"
                 width={1400}
                 height={600}
