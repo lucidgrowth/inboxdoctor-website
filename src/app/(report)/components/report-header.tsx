@@ -22,7 +22,7 @@ const BASE_APP_URL = "https://app.inboxdoctor.ai";
 
 const PublicNavbar = () => {
   return (
-    <header className="flex sticky top-0 bg-background h-16  z-40">
+    <header className="flex sticky top-0 bg-background h-16 border-b  z-40">
       <Container className="px-4 !py-0 md:px-6 lg:px-6 shrink-0 flex items-center justify-between gap-2">
         <Link
           href="/"

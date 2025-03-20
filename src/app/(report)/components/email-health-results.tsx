@@ -102,11 +102,11 @@ export const SanitizedHtmlViewer = ({ html }: { html: string }) => {
       {viewMode === "rendered" ? (
         <iframe
           ref={iframeRef}
-          className="w-full bg-white rounded-md"
+          className="w-full bg-muted/50 rounded-md"
           sandbox="allow-same-origin allow-popups"
         />
       ) : (
-        <pre className="bg-secondary p-4 rounded-md overflow-x-auto text-sm font-mono whitespace-pre-wrap">
+        <pre className="bg-muted/50 p-4 rounded-md overflow-x-auto text-sm font-mono whitespace-pre-wrap">
           {html}
         </pre>
       )}
@@ -118,29 +118,10 @@ export default function EmailHealthTestResults({
   testResults,
   isPrinting,
 }: EmailHealthTestResultsProps) {
-  const handleDownloadRawEmail = () => {
-    const blob = new Blob([testResults?.raw], { type: "text/plain" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "raw-email.eml";
-    a.click();
-    URL.revokeObjectURL(url);
-  };
-
-  const handleDownloadEmailContent = () => {
-    const blob = new Blob([testResults?.body?.html], { type: "text/html" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "email-content.html";
-    a.click();
-    URL.revokeObjectURL(url);
-  };
   return (
     <div className="max-w-full space-y-4 mt-6">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <Card>
+        <Card className="overflow-hidden">
           <CardHeader className="bg-muted/50 border-b">
             <CardTitle>Email Details</CardTitle>
             <CardDescription>
@@ -196,84 +177,124 @@ export default function EmailHealthTestResults({
             </div>
           </CardContent>
         </Card>
-        <Card>
-          <CardHeader className="bg-muted/50 border-b md:flex-row justify-between">
-            <div>
-              <CardTitle>Email Content</CardTitle>
-              <CardDescription>Message body content</CardDescription>
-            </div>
-            <div className="flex items-center gap-2 justify-between">
-              <div className="flex items-center md:mr-2 text-xs text-muted-foreground">
-                <StyledTooltip description="The total size of the email template">
-                  <div className="flex text-sm items-center gap-1 bg-muted/40 px-2 py-1 rounded-md">
-                    <Database className="w-3 h-3 text-foreground" />
-                    <span>
-                      {((testResults?.body?.html?.length || 0) / 1024).toFixed(
-                        1
-                      )}{" "}
-                      KB
-                    </span>
-                  </div>
-                </StyledTooltip>
-              </div>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleDownloadEmailContent}
-              >
-                <Download className="w-4 h-4" />
-                Download
-              </Button>
-              {/* <ChevronDown className="w-4 h-4 text-muted-foreground transition-transform duration-200 [&[data-state=open]>svg]:rotate-180" /> */}
-            </div>
-          </CardHeader>
-          <CardContent className="pt-6 text-sm">
-            <div className="space-y-4">
-              <div>
-                <h3 className="font-semibold mb-2">Plain Text</h3>
-                <div className="bg-secondary p-4 rounded-md whitespace-pre-wrap">
-                  {testResults?.body?.text}
-                </div>
-              </div>
-              <div>
-                <div className="rounded-md">
-                  <SanitizedHtmlViewer html={testResults?.body?.html} />
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+        <EmailContentCard
+          html={testResults?.body?.html}
+          text={testResults?.body?.text}
+        />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
-      <Card className="w-full">
-        <CardHeader className="bg-muted/50 border-b flex-row justify-between">
-          <CardTitle className="flex items-center gap-2">
-            <span>Raw Email</span>
-            <StyledTooltip description="The raw email content is the original email message that was tested. It includes the email headers and body content.">
-              <Info className="w-3 h-3 text-muted-foreground" />
-            </StyledTooltip>
-          </CardTitle>
-          <Button variant="outline" size="sm" onClick={handleDownloadRawEmail}>
-            <Download className="w-4 h-4" />
-            Download
-          </Button>
-        </CardHeader>
-        <CardContent className="py-6">
-          <pre
-            className={cn(
-              "rounded-md whitespace-pre-wrap text-sm font-mono   break-words w-full",
-              !isPrinting && "max-h-[400px] overflow-y-auto"
-            )}
-            style={{
-              wordBreak: "break-all",
-              whiteSpace: "pre-wrap",
-              overflowWrap: "break-word",
-            }}
-          >
-            {testResults?.raw}
-          </pre>
-        </CardContent>
-      </Card>
+      <RawEmailCard raw={testResults?.raw} isPrinting={isPrinting} />
     </div>
   );
 }
+
+export const RawEmailCard = ({
+  raw,
+  isPrinting = false,
+}: {
+  raw: string;
+  isPrinting?: boolean;
+}) => {
+  const handleDownloadRawEmail = () => {
+    const blob = new Blob([raw], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "raw-email.eml";
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+  return (
+    <Card className="w-full overflow-hidden">
+      <CardHeader className="bg-muted/50 border-b flex-row justify-between">
+        <CardTitle className="flex items-center gap-2">
+          <span>Raw Email</span>
+          <StyledTooltip description="The raw email content is the original email message that was tested. It includes the email headers and body content.">
+            <Info className="w-3 h-3 text-muted-foreground" />
+          </StyledTooltip>
+        </CardTitle>
+        <Button variant="outline" size="sm" onClick={handleDownloadRawEmail}>
+          <Download className="w-4 h-4" />
+          Download
+        </Button>
+      </CardHeader>
+      <CardContent className="py-6">
+        <pre
+          className={cn(
+            "rounded-md whitespace-pre-wrap text-sm font-mono   break-words w-full",
+            !isPrinting && "max-h-[400px] overflow-y-auto"
+          )}
+          style={{
+            wordBreak: "break-all",
+            whiteSpace: "pre-wrap",
+            overflowWrap: "break-word",
+          }}
+        >
+          {raw}
+        </pre>
+      </CardContent>
+    </Card>
+  );
+};
+
+export const EmailContentCard = ({
+  html,
+  text,
+}: {
+  html: string;
+  text: string;
+}) => {
+  const handleDownloadEmailContent = () => {
+    const blob = new Blob([html], { type: "text/html" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "email-content.html";
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+  return (
+    <Card className="overflow-hidden">
+      <CardHeader className="bg-muted/50 border-b md:flex-row justify-between">
+        <div>
+          <CardTitle>Email Content</CardTitle>
+          <CardDescription>Message body content</CardDescription>
+        </div>
+        <div className="flex items-center gap-2 justify-between">
+          <div className="flex items-center md:mr-2 text-xs text-muted-foreground">
+            <StyledTooltip description="The total size of the email template">
+              <div className="flex text-sm items-center gap-1 bg-muted/40 px-2 py-1 rounded-md">
+                <Database className="w-3 h-3 text-foreground" />
+                <span>{((html?.length || 0) / 1024).toFixed(1)} KB</span>
+              </div>
+            </StyledTooltip>
+          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleDownloadEmailContent}
+          >
+            <Download className="w-4 h-4" />
+            Download
+          </Button>
+          {/* <ChevronDown className="w-4 h-4 text-muted-foreground transition-transform duration-200 [&[data-state=open]>svg]:rotate-180" /> */}
+        </div>
+      </CardHeader>
+      <CardContent className="pt-6 text-sm">
+        <div className="space-y-4">
+          <div>
+            <h3 className="font-semibold mb-2">Plain Text</h3>
+            <div className="bg-muted/50 p-4 rounded-md whitespace-pre-wrap">
+              {text}
+            </div>
+          </div>
+          <div>
+            <div className="rounded-md">
+              <SanitizedHtmlViewer html={html} />
+            </div>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
