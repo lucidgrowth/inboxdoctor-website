@@ -613,11 +613,12 @@ const DomainReport = ({
           );
 
         case "DNSKEY":
+          const dnskeyData = record.record?.records || record.record?.record;
           return (
             <div className="mt-4 bg-secondary p-4 rounded-lg">
               <div className="text-sm text-muted-foreground space-y-3">
-                {(record.record?.record || record.record?.records)?.map(
-                  (dnskey: any, idx: number) => (
+                {dnskeyData?.length > 0 ? (
+                  dnskeyData?.map((dnskey: any, idx: number) => (
                     <div key={idx} className="border-b last:border-0">
                       <div className="font-medium mb-1">Record {idx + 1}</div>
                       <div className="space-y-1">
@@ -654,17 +655,22 @@ const DomainReport = ({
                         )}
                       </div>
                     </div>
-                  )
+                  ))
+                ) : (
+                  <div className="text-sm text-muted-foreground">
+                    No DNSKEY records found
+                  </div>
                 )}
               </div>
             </div>
           );
 
         case "RPKI":
+          const recordData = record.record?.records || record.record?.record;
           return (
             <div className="mt-4 bg-secondary p-4 rounded-lg">
-              {(record.record?.records || record.record?.record)?.map(
-                (rpki: any, idx: number) => (
+              {recordData?.length > 0 ? (
+                recordData?.map((rpki: any, idx: number) => (
                   <div key={idx} className="space-y-4">
                     <div className="flex items-center gap-2">
                       <div
@@ -707,12 +713,12 @@ const DomainReport = ({
                                   <span className="font-medium">Status:</span>{" "}
                                   <span
                                     className={`
-                                    ${
-                                      ip.validationState === "valid"
-                                        ? "text-green-600"
-                                        : "text-red-600"
-                                    }
-                                  `}
+                                      ${
+                                        ip.validationState === "valid"
+                                          ? "text-green-600"
+                                          : "text-red-600"
+                                      }
+                                    `}
                                   >
                                     {ip.validationState
                                       .replace(/_/g, " ")
@@ -739,7 +745,11 @@ const DomainReport = ({
                       </div>
                     )}
                   </div>
-                )
+                ))
+              ) : (
+                <div className="text-sm text-muted-foreground">
+                  No RPKI records found
+                </div>
               )}
             </div>
           );
@@ -1772,6 +1782,15 @@ const DomainReport = ({
                           (item) =>
                             item.status === "warning" || item.status === "fail"
                         )
+                        .sort((a, b) => {
+                          if (a.status === "fail") {
+                            return -1;
+                          }
+                          if (b.status === "fail") {
+                            return 1;
+                          }
+                          return 0;
+                        })
                         .map((error, index) => (
                           <TableRow
                             key={index}
@@ -3308,103 +3327,103 @@ const DomainReport = ({
                     <div className="space-y-2">
                       {recordsData?.smtpBlacklist?.map((serverData, index) => (
                         <Collapsible key={serverData.server} className="w-full">
-                          <CollapsibleTrigger className="w-full">
-                            <div className="flex items-center justify-between p-3 hover:bg-muted/50">
-                              <div className="flex items-center gap-2">
-                                <ChevronDown className="h-4 w-4 text-muted-foreground" />
-                                <span className="font-medium text-sm">
-                                  SMTP Server {index + 1}
-                                </span>
-                                <span className="text-sm text-muted-foreground">
-                                  {serverData.server}
-                                </span>
-                              </div>
-                              <Badge
-                                variant="outline"
-                                className={`${
+                            <CollapsibleTrigger className="w-full">
+                              <div className="flex items-center justify-between p-3 hover:bg-muted/50">
+                                <div className="flex items-center gap-2">
+                                  <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                                  <span className="font-medium text-sm">
+                                    SMTP Server {index + 1}
+                                  </span>
+                                  <span className="text-sm text-muted-foreground">
+                                    {serverData.server}
+                                  </span>
+                                </div>
+                                <Badge
+                                  variant="outline"
+                                  className={`${
                                   serverData.blacklists.every((b) => !b.listed)
-                                    ? "bg-green-500 text-white hover:bg-green-600"
-                                    : "bg-red-500 text-white hover:bg-red-600"
-                                }`}
-                              >
-                                {serverData.blacklists.every((b) => !b.listed)
-                                  ? "All Clear"
-                                  : "Issues Found"}
-                              </Badge>
-                            </div>
-                          </CollapsibleTrigger>
-                          <CollapsibleContent className="w-full">
-                            <div className="min-w-full">
-                              <Table className="w-full text-sm">
-                                <TableHeader>
-                                  <TableRow className="border-b bg-muted/50">
-                                    <TableHead className="py-2 px-4 text-left font-medium whitespace-nowrap hidden md:table-cell">
-                                      Blacklist
-                                    </TableHead>
-                                    <TableHead className="py-2 px-4 text-left font-medium whitespace-nowrap hidden md:table-cell">
-                                      Status
-                                    </TableHead>
-                                    <TableHead className="py-2 px-4 text-left font-medium whitespace-nowrap hidden md:table-cell">
-                                      Response
-                                    </TableHead>
-                                  </TableRow>
-                                </TableHeader>
-                                <TableBody className="divide-y">
-                                  {serverData.blacklists.map(
-                                    (blacklist, idx) => (
-                                      <TableRow key={idx}>
-                                        <TableCell className="py-2 px-4 whitespace-nowrap">
-                                          <div className="items-center gap-2 hidden md:flex">
-                                            {blacklist.listed ? (
-                                              <XCircle className="w-4 h-4 text-red-500 flex-shrink-0" />
-                                            ) : (
-                                              <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
-                                            )}
-                                            <span className="text-muted-foreground break-all">
-                                              {blacklist.rblName}
-                                            </span>
-                                          </div>
+                                      ? "bg-green-500 text-white hover:bg-green-600"
+                                      : "bg-red-500 text-white hover:bg-red-600"
+                                  }`}
+                                >
+                                  {serverData.blacklists.every((b) => !b.listed)
+                                    ? "All Clear"
+                                    : "Issues Found"}
+                                </Badge>
+                              </div>
+                            </CollapsibleTrigger>
+                            <CollapsibleContent className="w-full">
+                              <div className="min-w-full">
+                                <Table className="w-full text-sm">
+                                  <TableHeader>
+                                    <TableRow className="border-b bg-muted/50">
+                                      <TableHead className="py-2 px-4 text-left font-medium whitespace-nowrap hidden md:table-cell">
+                                        Blacklist
+                                      </TableHead>
+                                      <TableHead className="py-2 px-4 text-left font-medium whitespace-nowrap hidden md:table-cell">
+                                        Status
+                                      </TableHead>
+                                      <TableHead className="py-2 px-4 text-left font-medium whitespace-nowrap hidden md:table-cell">
+                                        Response
+                                      </TableHead>
+                                    </TableRow>
+                                  </TableHeader>
+                                  <TableBody className="divide-y">
+                                    {serverData.blacklists.map(
+                                      (blacklist, idx) => (
+                                        <TableRow key={idx}>
+                                          <TableCell className="py-2 px-4 whitespace-nowrap">
+                                            <div className="items-center gap-2 hidden md:flex">
+                                              {blacklist.listed ? (
+                                                <XCircle className="w-4 h-4 text-red-500 flex-shrink-0" />
+                                              ) : (
+                                                <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
+                                              )}
+                                              <span className="text-muted-foreground break-all">
+                                                {blacklist.rblName}
+                                              </span>
+                                            </div>
 
-                                          <div className="md:hidden">
+                                            <div className="md:hidden">
                                             <div className="flex items-center gap-2">
-                                              <span className=" text-muted-foreground">
-                                                Blacklist:
-                                              </span>
-                                              {blacklist.rblName}
-                                            </div>
+                                                <span className=" text-muted-foreground">
+                                                  Blacklist:
+                                                </span>
+                                                  {blacklist.rblName}
+                                              </div>
+                                              <div className="flex items-center gap-2">
+                                                <span className=" text-muted-foreground">
+                                                  Status:
+                                                </span>
+                                                {blacklist.listed
+                                                  ? "Listed"
+                                                  : "Clean"}
+                                              </div>
                                             <div className="flex items-center gap-2">
-                                              <span className=" text-muted-foreground">
-                                                Status:
-                                              </span>
-                                              {blacklist.listed
-                                                ? "Listed"
-                                                : "Clean"}
+                                                <span className=" text-muted-foreground">
+                                                  Response:
+                                                </span>
+                                                  {blacklist.response ||
+                                                    "No response"}
+                                              </div>
                                             </div>
-                                            <div className="flex items-center gap-2">
-                                              <span className=" text-muted-foreground">
-                                                Response:
-                                              </span>
-                                              {blacklist.response ||
-                                                "No response"}
-                                            </div>
-                                          </div>
-                                        </TableCell>
-                                        <TableCell className="py-2 px-4 text-muted-foreground whitespace-nowrap hidden md:table-cell">
-                                          {blacklist.listed
-                                            ? "Listed"
-                                            : "Clean"}
-                                        </TableCell>
+                                          </TableCell>
+                                          <TableCell className="py-2 px-4 text-muted-foreground whitespace-nowrap hidden md:table-cell">
+                                            {blacklist.listed
+                                              ? "Listed"
+                                              : "Clean"}
+                                          </TableCell>
                                         <TableCell className="py-2 px-4 text-muted-foreground whitespace-nowrap hidden md:table-cell">
                                           {blacklist.response || "No response"}
-                                        </TableCell>
-                                      </TableRow>
-                                    )
-                                  )}
-                                </TableBody>
-                              </Table>
-                            </div>
-                          </CollapsibleContent>
-                        </Collapsible>
+                                          </TableCell>
+                                        </TableRow>
+                                      )
+                                    )}
+                                  </TableBody>
+                                </Table>
+                              </div>
+                            </CollapsibleContent>
+                          </Collapsible>
                       ))}
                     </div>
                   </CardContent>
