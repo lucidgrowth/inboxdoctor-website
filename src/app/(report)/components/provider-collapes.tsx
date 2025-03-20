@@ -23,15 +23,14 @@ import {
 } from "lucide-react";
 import { useMemo, useState } from "react";
 
+import { mapToColorClasses } from "@/lib/colors";
 import {
   Envelope,
   Icon,
   Info as InfoIcon,
   Tag as TagIcon,
-  Tray,
   Users as UsersIcon,
 } from "@phosphor-icons/react";
-import { mapToColorClasses } from "@/lib/colors";
 import { EmailDetails } from "./email-details";
 import { getTooltip } from "./email-health-tooltips";
 // import { getTooltip } from "../email-health/email-health-tooltips";
@@ -64,6 +63,7 @@ const getPercentageColor = (status: string, value: number) => {
 
 export interface IProviderData {
   provider: string;
+  providerKey: string;
   stats: {
     inbox: number;
     spam: number;
@@ -71,6 +71,8 @@ export interface IProviderData {
   };
   category: string[];
   emails: { address: string; status: string; category?: string }[];
+  testId: string;
+  forceOpen: boolean;
 }
 export interface IProviderDataState {
   b2c: IProviderData[];
@@ -92,9 +94,12 @@ const iconMap: Record<string, Icon> = {
 
 const ProviderCollapes = ({
   provider,
+  providerKey,
   stats,
   emails,
   category,
+  testId,
+  forceOpen,
 }: IProviderData) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -173,8 +178,8 @@ const ProviderCollapes = ({
                   </StyledTooltip>
                 ))}
               </div>
-              <Separator orientation="vertical" className="h-4" />
-              <div className="flex items-center gap-2 ">
+              <Separator orientation="vertical" className="h-4 hidden md:block" />
+              <div className="items-center gap-2 hidden md:flex ">
                 <Badge
                   variant="outline"
                   className="bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-500 border-none"
@@ -271,11 +276,13 @@ const ProviderCollapes = ({
         </div>
       </div>
 
-      {isOpen && (
+      {(isOpen || forceOpen) && (
         <ProviderCollapesContent
           categoryBreakdown={categoryBreakdown}
           statuses={statuses}
           emails={emails}
+          providerKey={providerKey}
+          testId={testId}
         />
       )}
     </div>
@@ -286,6 +293,8 @@ const ProviderCollapesContent = ({
   categoryBreakdown,
   emails,
   statuses,
+  providerKey,
+  testId,
 }: {
   categoryBreakdown: {
     label: string;
@@ -298,6 +307,8 @@ const ProviderCollapesContent = ({
     value: number;
   }[];
   emails: { address: string; status: string; category?: string }[];
+  providerKey: string;
+  testId: string;
 }) => {
   return (
     <div className="border-t bg-muted/50">
@@ -405,10 +416,18 @@ const ProviderCollapesContent = ({
               </TableRow>
             </TableHeader>
             <TableBody>
-              {emails.map((email) => (
-                <TableRow key={email.address}>
+              {emails.map((email, index) => (
+                <TableRow key={`${email.address}-${index}`}>
                   <TableCell>
-                    <EmailDetails email={email.address} />
+                    {email.status === "Unreceived" ? (
+                      <span>{email.address}</span>
+                    ) : (
+                      <EmailDetails
+                        email={email.address}
+                        providerKey={providerKey}
+                        testId={testId}
+                      />
+                    )}
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center text-xs font-medium uppercase">

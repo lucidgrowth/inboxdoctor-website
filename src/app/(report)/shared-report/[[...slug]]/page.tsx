@@ -13,7 +13,6 @@ const ReportPage = async (props: Props) => {
 
   const [domain, companyId, reportId] = params.slug;
 
-  console.log({ domain, companyId, reportId });
   return (
     <Container className="py-10 md:px-6 lg:px-6">
       <DomainReport domain={domain} companyId={companyId} reportId={reportId} />

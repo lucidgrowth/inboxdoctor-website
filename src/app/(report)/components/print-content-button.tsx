@@ -88,10 +88,14 @@ const wrapInBranding = (htmlContent: string, allStyles: string) => `
 
 const PrintContentButton = ({
   id,
+  type,
+  filename,
   preRunCallback,
   postRunCallback,
 }: {
   id: string;
+  type: "email-health" | "inbox-placement";
+  filename: string;
   preRunCallback: () => void;
   postRunCallback: () => void;
   beforePrintCallback?: (newTab: Window) => void;
@@ -107,35 +111,18 @@ const PrintContentButton = ({
       return;
     }
 
-    // Try to extract domain name from the content
-    let domainName = "domain";
-    try {
-      // Look for domain name in the content - check for specific elements or text patterns
-      const domainElement = elementToExport.querySelector("[data-domain-name]");
-      if (domainElement) {
-        domainName = domainElement.textContent || "domain";
-      } else {
-        // Fallback: try to find domain in content
-        const contentText = elementToExport.textContent || "";
-        const domainMatch = contentText.match(
-          /Domain Name[:\s]+([a-zA-Z0-9.-]+)/i
-        );
-        if (domainMatch && domainMatch[1]) {
-          domainName = domainMatch[1];
-        }
-      }
-    } catch (error) {
-      console.error("Error extracting domain name:", error);
-    }
-
     // Generate date string for filename (YYYY-MM-DD format)
     const now = new Date();
     const dateStr = now.toISOString().split("T")[0];
 
     // Create unique filename: email-domain-health-report-{domain}-{date}.pdf
     // Replace invalid filename characters
-    const sanitizedDomain = domainName.replace(/[^a-zA-Z0-9.-]/g, "-");
-    const uniqueFilename = `email-domain-health-report-${sanitizedDomain}-${dateStr}`;
+    const sanitizedFilename = filename.replace(/[^a-zA-Z0-9.-]/g, "-");
+    const uniqueFilename = `${
+      type === "email-health"
+        ? "email-domain-health-report"
+        : "inbox-placement-report"
+    }-${sanitizedFilename}-${dateStr}`;
 
     // Collect all styles from the current page
     let allStyles = "";
@@ -245,7 +232,7 @@ const PrintContentButton = ({
       modalContent.style.textAlign = "center";
       modalContent.innerHTML = `
         <h3 style="margin-top: 0; font-size: 18px; font-weight: bold;">Downloading Email Domain Health Report</h3>
-        <p>Your report for <strong>${domainName}</strong> will begin downloading.</p>
+        <p>Your report will begin downloading.</p>
         <p>When the print dialog appears, select <strong>"Save as PDF"</strong> and click <strong>"Save"</strong>.</p>
         <p>Recommended filename: <strong>${uniqueFilename}</strong></p>
         <p id="modal-status">Preparing document...</p>
@@ -319,6 +306,15 @@ const PrintContentButton = ({
       if (frameDoc) {
         frameDoc.open();
         frameDoc.write(htmlContent);
+
+        // remove print-content-button
+        const printContentButton = frameDoc.getElementById(
+          "print-content-button"
+        );
+        if (printContentButton) {
+          printContentButton.remove();
+        }
+
         if (theme === "dark") {
           frameDoc.body.classList.add("dark");
         }

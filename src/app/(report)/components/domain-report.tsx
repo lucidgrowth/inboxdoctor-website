@@ -68,6 +68,7 @@ import {
 import PrintContentButton from "./print-content-button";
 import ReportSkeleton from "./report-skeleton";
 import MoreInfoButton from "./more-info-button";
+import BlackList, { BlackListTable } from "./blacklist";
 
 type MxRecord = { exchange: string; priority: number };
 type DnsRecordValue = string | string[] | MxRecord;
@@ -1424,7 +1425,7 @@ const DomainReport = ({
                     Published at
                   </span>
                   <span className="text-sm text-muted-foreground">
-                    {new Date(recordsData.publishedAt).toLocaleString("en-US", {
+                    {new Date(recordsData.publishedAt).toLocaleString("en-GB", {
                       year: "numeric",
                       month: "2-digit",
                       day: "2-digit",
@@ -1438,6 +1439,8 @@ const DomainReport = ({
 
               <PrintContentButton
                 id="shared-report-print"
+                type="email-health"
+                filename={domain}
                 preRunCallback={() => {
                   expandAll();
                   setIsPrinting(true);
@@ -1748,7 +1751,7 @@ const DomainReport = ({
             <CollapsibleContent>
               <Separator />
               <div className="">
-                <div className="rounded-lg overflow-hidden">
+                <div className="rounded-b-lg overflow-hidden">
                   <Table className="w-full text-sm">
                     <TableHeader>
                       <TableRow className="border-b bg-muted/50">
@@ -1793,9 +1796,9 @@ const DomainReport = ({
                                 </span>
                               </div>
 
-                              <div className="md:hidden">
+                              <div className="md:hidden space-y-1.5">
                                 <div className="flex items-center gap-2">
-                                  <span className=" text-gray-500">
+                                  <span className=" text-muted-foreground min-w-[80px]">
                                     Category:
                                   </span>
                                   <div className="flex items-center gap-1">
@@ -1810,18 +1813,18 @@ const DomainReport = ({
                                   </div>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                  <span className=" text-gray-500">Name:</span>
+                                  <span className=" text-muted-foreground min-w-[80px]">Name:</span>
                                   {error.name}
                                 </div>
 
                                 <div className="flex items-center gap-2">
-                                  <span className=" text-gray-500">
+                                  <span className=" text-muted-foreground min-w-[80px]">
                                     Status:
                                   </span>
                                   {error.status}
                                 </div>
                                 <div className="flex gap-2">
-                                  <span className=" text-gray-500">
+                                  <span className=" text-muted-foreground min-w-[80px]">
                                     Message:
                                   </span>
                                   {error.message || "--"}
@@ -1857,6 +1860,7 @@ const DomainReport = ({
           </Collapsible>
         </Card>
 
+        {/* Email Delivery Chain */}
         <div className="mb-6">
           <h2 className="text-lg font-semibold mb-4 text-foreground">
             Email Delivery Chain
@@ -1920,13 +1924,13 @@ const DomainReport = ({
                                 {/* Mobile */}
                                 <div className="md:hidden">
                                   <div className="flex items-center gap-2">
-                                    <span className=" text-gray-500">
+                                    <span className="text-muted-foreground">
                                       Step:
                                     </span>
                                     {index}
                                   </div>
                                   <div className="flex items-center gap-2">
-                                    <span className=" text-gray-500">
+                                    <span className="text-muted-foreground">
                                       Delay:
                                     </span>
                                     <span className="text-green-600">
@@ -1934,7 +1938,7 @@ const DomainReport = ({
                                     </span>
                                   </div>
                                   <div className="flex items-center gap-2">
-                                    <span className=" text-gray-500 ">
+                                    <span className="text-muted-foreground ">
                                       From:
                                     </span>
                                     <span className="font-mono">
@@ -1942,19 +1946,19 @@ const DomainReport = ({
                                     </span>
                                   </div>
                                   <div className="flex items-center gap-2">
-                                    <span className=" text-gray-500">To:</span>
+                                    <span className="text-muted-foreground">To:</span>
                                     <span className="font-mono">
                                       {hop?.to || ""}
                                     </span>
                                   </div>
                                   <div className="flex items-center gap-2">
-                                    <span className=" text-gray-500">
+                                    <span className="text-muted-foreground">
                                       Protocol:
                                     </span>
                                     {hop?.protocol || ""}
                                   </div>
                                   <div className="flex items-center gap-2">
-                                    <span className=" text-gray-500">
+                                    <span className="text-muted-foreground">
                                       Time received:
                                     </span>
                                     {hop?.timeReceived || ""}
@@ -2685,603 +2689,16 @@ const DomainReport = ({
           </h2>
           <div className="grid gap-4">
             {/* Domain Blacklists Section */}
-            <Collapsible defaultOpen>
-              <Card>
-                <CollapsibleTrigger className="w-full">
-                  <CardHeader className="p-4 hover:bg-muted/50 transition-colors">
-                    <div className="flex items-center justify-between">
-                      <CardTitle className="text-sm font-medium flex items-center gap-2">
-                        <Globe className="w-4 h-4 text-blue-500" />
-                        Domain Blacklists
-                        <StyledTooltip description="Domain blacklists check if your domain is listed on spam databases. Being blacklisted can severely impact email deliverability, causing your messages to be blocked or sent to spam folders.">
-                          <Info className="w-3 h-3 text-muted-foreground" />
-                        </StyledTooltip>
-                      </CardTitle>
-                      <ChevronDown className="w-4 h-4 text-muted-foreground transition-transform duration-200 [&[data-state=open]>svg]:rotate-180" />
-                    </div>
-                    <CardDescription className="self-start">
-                      Domain reputation and DNS-based blacklists
-                    </CardDescription>
-                  </CardHeader>
-                </CollapsibleTrigger>
-                <CollapsibleContent>
-                  <CardContent className="p-0">
-                    <div className="rounded-lg">
-                      {/* IP Addresses Section */}
-                      {recordsData?.domainBlacklist?.some((data) =>
-                        isIPAddress(data.server)
-                      ) && (
-                        <div className="mb-4">
-                          <div className="py-2 px-4 bg-muted font-medium text-sm">
-                            IP Addresses (A Records)
-                          </div>
-                          <div className="divide-y">
-                            {recordsData?.domainBlacklist
-                              ?.filter((data) => isIPAddress(data.server))
-                              .map((serverData, index) => {
-                                // Count listed blacklists for this IP
-                                const listedCount =
-                                  serverData.blacklists.filter(
-                                    (bl) => bl.listed
-                                  ).length;
-
-                                // Sort blacklists to show listed entries first
-                                serverData.blacklists.sort((a, b) => {
-                                  // If a is listed and b is not, a comes first
-                                  if (a.listed && !b.listed) return -1;
-                                  // If b is listed and a is not, b comes first
-                                  if (!a.listed && b.listed) return 1;
-                                  // Otherwise maintain original order
-                                  return 0;
-                                });
-
-                                return (
-                                  <Collapsible key={`ip-${serverData.server}`}>
-                                    <CollapsibleTrigger className="w-full">
-                                      <div className="flex items-center justify-between p-4 hover:bg-muted/50">
-                                        <div className="flex items-center gap-2">
-                                          {listedCount === 0 ? (
-                                            <CheckCircle2 className="w-4 h-4 text-green-500" />
-                                          ) : (
-                                            <XCircle className="w-4 h-4 text-red-500" />
-                                          )}
-                                          <span className="text-sm font-medium">
-                                            {serverData.server}
-                                          </span>
-                                        </div>
-                                        <Badge
-                                          variant={
-                                            listedCount === 0
-                                              ? "success"
-                                              : "destructive"
-                                          }
-                                        >
-                                          {listedCount === 0
-                                            ? "Clean"
-                                            : `${listedCount} Listed`}
-                                        </Badge>
-                                      </div>
-                                    </CollapsibleTrigger>
-                                    <CollapsibleContent>
-                                      <div className="border-t">
-                                        <Table className="w-full text-sm">
-                                          <TableHeader>
-                                            <TableRow className="border-b bg-muted/50">
-                                              <TableHead className="py-2 px-4 text-left font-medium hidden md:table-cell">
-                                                Blacklist
-                                              </TableHead>
-                                              <TableHead className="py-2 px-4 text-left font-medium hidden md:table-cell">
-                                                Status
-                                              </TableHead>
-                                              <TableHead className="py-2 px-4 text-left font-medium hidden md:table-cell">
-                                                Response
-                                              </TableHead>
-                                            </TableRow>
-                                          </TableHeader>
-                                          <TableBody className="divide-y">
-                                            {serverData.blacklists.map(
-                                              (blacklist, idx) => (
-                                                <TableRow key={idx}>
-                                                  <TableCell className="py-2 px-4">
-                                                    <div className="items-center gap-2 hidden md:flex">
-                                                      {blacklist.listed ? (
-                                                        <XCircle className="w-4 h-4 text-red-500" />
-                                                      ) : (
-                                                        <CheckCircle2 className="w-4 h-4 text-green-500" />
-                                                      )}
-                                                      <span className="text-muted-foreground">
-                                                        {blacklist.rblName}
-                                                      </span>
-                                                    </div>
-
-                                                    <div className="md:hidden">
-                                                      <div className="flex items-center gap-2">
-                                                        <span className=" text-muted-foreground">
-                                                          Blacklist:
-                                                        </span>
-                                                        {blacklist.rblName}
-                                                      </div>
-
-                                                      <div className="flex items-center gap-2">
-                                                        <span className=" text-muted-foreground">
-                                                          Status:
-                                                        </span>
-                                                        {blacklist.listed
-                                                          ? "Listed"
-                                                          : "Clean"}
-                                                      </div>
-                                                      <div className="flex items-center gap-2">
-                                                        <span className=" text-muted-foreground">
-                                                          Response:
-                                                        </span>
-                                                        {blacklist.response ||
-                                                          "No response"}
-                                                      </div>
-                                                    </div>
-                                                  </TableCell>
-                                                  <TableCell className="py-2 px-4 text-muted-foreground hidden md:table-cell">
-                                                    {blacklist.listed
-                                                      ? "Listed"
-                                                      : "Clean"}
-                                                  </TableCell>
-                                                  <TableCell className="py-2 px-4 text-muted-foreground hidden md:table-cell">
-                                                    {blacklist.response ||
-                                                      "No response"}
-                                                  </TableCell>
-                                                </TableRow>
-                                              )
-                                            )}
-                                          </TableBody>
-                                        </Table>
-                                      </div>
-                                    </CollapsibleContent>
-                                  </Collapsible>
-                                );
-                              })}
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Domain Names Section */}
-                      {recordsData?.domainBlacklist?.some(
-                        (data) => !isIPAddress(data.server)
-                      ) && (
-                        <div>
-                          <div className="py-2 px-4 bg-muted font-medium text-sm">
-                            Host Names
-                          </div>
-                          <div className="divide-y">
-                            {recordsData?.domainBlacklist
-                              ?.filter((data) => !isIPAddress(data.server))
-                              .map((serverData, index) => {
-                                // Count listed blacklists for this domain
-                                const listedCount =
-                                  serverData.blacklists.filter(
-                                    (bl) => bl.listed
-                                  ).length;
-
-                                // Sort blacklists to show listed entries first
-                                serverData.blacklists.sort((a, b) => {
-                                  // If a is listed and b is not, a comes first
-                                  if (a.listed && !b.listed) return -1;
-                                  // If b is listed and a is not, b comes first
-                                  if (!a.listed && b.listed) return 1;
-                                  // Otherwise maintain original order
-                                  return 0;
-                                });
-
-                                return (
-                                  <Collapsible
-                                    key={`domain-${serverData.server}`}
-                                  >
-                                    <CollapsibleTrigger className="w-full">
-                                      <div className="flex items-center justify-between p-4 hover:bg-muted/50">
-                                        <div className="flex items-center gap-2">
-                                          {listedCount === 0 ? (
-                                            <CheckCircle2 className="w-4 h-4 text-green-500" />
-                                          ) : (
-                                            <XCircle className="w-4 h-4 text-red-500" />
-                                          )}
-                                          <span className="text-sm font-medium">
-                                            {serverData.server}
-                                          </span>
-                                        </div>
-                                        <Badge
-                                          variant={
-                                            listedCount === 0
-                                              ? "success"
-                                              : "destructive"
-                                          }
-                                        >
-                                          {listedCount === 0
-                                            ? "Clean"
-                                            : `${listedCount} Listed`}
-                                        </Badge>
-                                      </div>
-                                    </CollapsibleTrigger>
-                                    <CollapsibleContent>
-                                      <div className="border-t">
-                                        <Table className="w-full text-sm">
-                                          <TableHeader>
-                                            <TableRow className="border-b bg-muted/50">
-                                              <TableHead className="py-2 px-4 text-left font-medium hidden md:table-cell">
-                                                Blacklist
-                                              </TableHead>
-                                              <TableHead className="py-2 px-4 text-left font-medium hidden md:table-cell">
-                                                Status
-                                              </TableHead>
-                                              <TableHead className="py-2 px-4 text-left font-medium hidden md:table-cell">
-                                                Response
-                                              </TableHead>
-                                            </TableRow>
-                                          </TableHeader>
-                                          <TableBody className="divide-y">
-                                            {serverData.blacklists.map(
-                                              (blacklist, idx) => (
-                                                <TableRow key={idx}>
-                                                  <TableCell className="py-2 px-4">
-                                                    <div className="items-center gap-2 hidden md:flex">
-                                                      {blacklist.listed ? (
-                                                        <XCircle className="w-4 h-4 text-red-500" />
-                                                      ) : (
-                                                        <CheckCircle2 className="w-4 h-4 text-green-500" />
-                                                      )}
-                                                      <span className="text-muted-foreground">
-                                                        {blacklist.rblName}
-                                                      </span>
-                                                    </div>
-
-                                                    <div className="md:hidden">
-                                                      <div className="flex items-center gap-2">
-                                                        <span className=" text-muted-foreground">
-                                                          Blacklist:
-                                                        </span>
-                                                        {blacklist.rblName}
-                                                      </div>
-                                                      <div className="flex items-center gap-2">
-                                                        <span className=" text-muted-foreground">
-                                                          Status:
-                                                        </span>
-                                                        {blacklist.listed
-                                                          ? "Listed"
-                                                          : "Clean"}
-                                                      </div>
-                                                      <div className="flex items-center gap-2">
-                                                        <span className=" text-muted-foreground">
-                                                          Response:
-                                                        </span>
-                                                        {blacklist.response ||
-                                                          "No response"}
-                                                      </div>
-                                                    </div>
-                                                  </TableCell>
-                                                  <TableCell className="py-2 px-4 text-muted-foreground hidden md:table-cell">
-                                                    {blacklist.listed
-                                                      ? "Listed"
-                                                      : "Clean"}
-                                                  </TableCell>
-                                                  <TableCell className="py-2 px-4 text-muted-foreground hidden md:table-cell">
-                                                    {blacklist.response ||
-                                                      "No response"}
-                                                  </TableCell>
-                                                </TableRow>
-                                              )
-                                            )}
-                                          </TableBody>
-                                        </Table>
-                                      </div>
-                                    </CollapsibleContent>
-                                  </Collapsible>
-                                );
-                              })}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </CardContent>
-                </CollapsibleContent>
-              </Card>
-            </Collapsible>
+            <BlackList
+              type="domainBlacklist"
+              data={recordsData?.domainBlacklist || []}
+            />
 
             {/* MX Server Blacklists */}
-            <Collapsible defaultOpen>
-              <Card>
-                <CollapsibleTrigger className="w-full">
-                  <CardHeader className="p-4 hover:bg-muted/50 transition-colors">
-                    <div className="flex items-center justify-between">
-                      <CardTitle className="text-sm font-medium flex items-center gap-2">
-                        <Globe className="w-4 h-4 text-blue-500" />
-                        MX Server Blacklists
-                        <StyledTooltip description="Mail server IP reputation checks verify if your mail servers are listed on spam databases. Being blacklisted can impact email deliverability.">
-                          <Info className="w-3 h-3 text-muted-foreground" />
-                        </StyledTooltip>
-                      </CardTitle>
-                      <ChevronDown className="w-4 h-4 text-muted-foreground transition-transform duration-200 [&[data-state=open]>svg]:rotate-180" />
-                    </div>
-                    <CardDescription className="self-start">
-                      Mail server IP reputation checks
-                    </CardDescription>
-                  </CardHeader>
-                </CollapsibleTrigger>
-                <CollapsibleContent>
-                  <CardContent className="p-0">
-                    <div className="rounded-lg">
-                      {/* IP Addresses Section */}
-                      {recordsData?.mxServerBlacklists?.some((data) =>
-                        isIPAddress(data.server)
-                      ) && (
-                        <div className="mb-4">
-                          <div className="py-2 px-4 bg-muted font-medium text-sm">
-                            IP Addresses (A Records)
-                          </div>
-                          <div className="divide-y">
-                            {recordsData?.mxServerBlacklists
-                              ?.filter((data) => isIPAddress(data.server))
-                              .map((serverData, index) => {
-                                // Count listed blacklists for this IP
-                                const listedCount =
-                                  serverData.blacklists.filter(
-                                    (bl) => bl.listed
-                                  ).length;
-
-                                // Sort blacklists to show listed entries first
-                                serverData.blacklists.sort((a, b) => {
-                                  // If a is listed and b is not, a comes first
-                                  if (a.listed && !b.listed) return -1;
-                                  // If b is listed and a is not, b comes first
-                                  if (!a.listed && b.listed) return 1;
-                                  // Otherwise maintain original order
-                                  return 0;
-                                });
-
-                                return (
-                                  <Collapsible
-                                    key={`mx-ip-${serverData.server}`}
-                                  >
-                                    <CollapsibleTrigger className="w-full">
-                                      <div className="flex items-center justify-between p-4 hover:bg-muted/50">
-                                        <div className="flex items-center gap-2">
-                                          {listedCount === 0 ? (
-                                            <CheckCircle2 className="w-4 h-4 text-green-500" />
-                                          ) : (
-                                            <XCircle className="w-4 h-4 text-red-500" />
-                                          )}
-                                          <span className="text-sm font-medium">
-                                            {serverData.server}
-                                          </span>
-                                        </div>
-                                        <Badge
-                                          variant={
-                                            listedCount === 0
-                                              ? "success"
-                                              : "destructive"
-                                          }
-                                        >
-                                          {listedCount === 0
-                                            ? "Clean"
-                                            : `${listedCount} Listed`}
-                                        </Badge>
-                                      </div>
-                                    </CollapsibleTrigger>
-                                    <CollapsibleContent>
-                                      <div className="border-t">
-                                        <Table className="w-full text-sm">
-                                          <TableHeader>
-                                            <TableRow className="border-b bg-muted/50">
-                                              <TableHead className="py-2 px-4 text-left font-medium hidden md:table-cell">
-                                                Blacklist
-                                              </TableHead>
-                                              <TableHead className="py-2 px-4 text-left font-medium hidden md:table-cell">
-                                                Status
-                                              </TableHead>
-                                              <TableHead className="py-2 px-4 text-left font-medium hidden md:table-cell">
-                                                Response
-                                              </TableHead>
-                                            </TableRow>
-                                          </TableHeader>
-                                          <TableBody className="divide-y">
-                                            {serverData.blacklists.map(
-                                              (blacklist, idx) => (
-                                                <TableRow key={idx}>
-                                                  <TableCell className="py-2 px-4">
-                                                    <div className="items-center gap-2 hidden md:flex">
-                                                      {blacklist.listed ? (
-                                                        <XCircle className="w-4 h-4 text-red-500" />
-                                                      ) : (
-                                                        <CheckCircle2 className="w-4 h-4 text-green-500" />
-                                                      )}
-                                                      <span className="text-muted-foreground break-all">
-                                                        {blacklist.rblName}
-                                                      </span>
-                                                    </div>
-
-                                                    <div className="md:hidden">
-                                                      <div className="flex items-center gap-2">
-                                                        <span className=" text-muted-foreground">
-                                                          Blacklist:
-                                                        </span>
-                                                        {blacklist.rblName}
-                                                      </div>
-                                                      <div className="flex items-center gap-2">
-                                                        <span className=" text-muted-foreground">
-                                                          Status:
-                                                        </span>
-                                                        {blacklist.listed
-                                                          ? "Listed"
-                                                          : "Clean"}
-                                                      </div>
-                                                      <div className="flex items-center gap-2">
-                                                        <span className=" text-muted-foreground">
-                                                          Response:
-                                                        </span>
-                                                        {blacklist.response ||
-                                                          "No response"}
-                                                      </div>
-                                                    </div>
-                                                  </TableCell>
-                                                  <TableCell className="py-2 px-4 text-muted-foreground hidden md:table-cell">
-                                                    {blacklist.listed
-                                                      ? "Listed"
-                                                      : "Clean"}
-                                                  </TableCell>
-                                                  <TableCell className="py-2 px-4 text-muted-foreground hidden md:table-cell">
-                                                    {blacklist.response ||
-                                                      "No response"}
-                                                  </TableCell>
-                                                </TableRow>
-                                              )
-                                            )}
-                                          </TableBody>
-                                        </Table>
-                                      </div>
-                                    </CollapsibleContent>
-                                  </Collapsible>
-                                );
-                              })}
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Domain Names Section */}
-                      {recordsData?.mxServerBlacklists?.some(
-                        (data) => !isIPAddress(data.server)
-                      ) && (
-                        <div>
-                          <div className="py-2 px-4 bg-muted font-medium text-sm">
-                            Host Names
-                          </div>
-                          <div className="divide-y">
-                            {recordsData?.mxServerBlacklists
-                              ?.filter((data) => !isIPAddress(data.server))
-                              .map((serverData, index) => {
-                                // Count listed blacklists for this domain
-                                const listedCount =
-                                  serverData.blacklists.filter(
-                                    (bl) => bl.listed
-                                  ).length;
-
-                                // Sort blacklists to show listed entries first
-                                serverData.blacklists.sort((a, b) => {
-                                  // If a is listed and b is not, a comes first
-                                  if (a.listed && !b.listed) return -1;
-                                  // If b is listed and a is not, b comes first
-                                  if (!a.listed && b.listed) return 1;
-                                  // Otherwise maintain original order
-                                  return 0;
-                                });
-
-                                return (
-                                  <Collapsible
-                                    key={`mx-domain-${serverData.server}`}
-                                  >
-                                    <CollapsibleTrigger className="w-full">
-                                      <div className="flex items-center justify-between p-4 hover:bg-muted/50">
-                                        <div className="flex items-center gap-2">
-                                          {listedCount === 0 ? (
-                                            <CheckCircle2 className="w-4 h-4 text-green-500" />
-                                          ) : (
-                                            <XCircle className="w-4 h-4 text-red-500" />
-                                          )}
-                                          <span className="text-sm font-medium">
-                                            {serverData.server}
-                                          </span>
-                                        </div>
-                                        <Badge
-                                          variant={
-                                            listedCount === 0
-                                              ? "success"
-                                              : "destructive"
-                                          }
-                                        >
-                                          {listedCount === 0
-                                            ? "Clean"
-                                            : `${listedCount} Listed`}
-                                        </Badge>
-                                      </div>
-                                    </CollapsibleTrigger>
-                                    <CollapsibleContent>
-                                      <div className="border-t">
-                                        <Table className="w-full text-sm">
-                                          <TableHeader>
-                                            <TableRow className="border-b bg-muted/50">
-                                              <TableHead className="py-2 px-4 text-left font-medium hidden md:table-cell">
-                                                Blacklist
-                                              </TableHead>
-                                              <TableHead className="py-2 px-4 text-left font-medium hidden md:table-cell">
-                                                Status
-                                              </TableHead>
-                                              <TableHead className="py-2 px-4 text-left font-medium hidden md:table-cell">
-                                                Response
-                                              </TableHead>
-                                            </TableRow>
-                                          </TableHeader>
-                                          <TableBody className="divide-y">
-                                            {serverData.blacklists.map(
-                                              (blacklist, idx) => (
-                                                <TableRow key={idx}>
-                                                  <TableCell className="py-2 px-4">
-                                                    <div className="items-center gap-2 hidden md:flex">
-                                                      {blacklist.listed ? (
-                                                        <XCircle className="w-4 h-4 text-red-500" />
-                                                      ) : (
-                                                        <CheckCircle2 className="w-4 h-4 text-green-500" />
-                                                      )}
-                                                      <span className="text-muted-foreground">
-                                                        {blacklist.rblName}
-                                                      </span>
-                                                    </div>
-
-                                                    <div className="md:hidden">
-                                                      <div className="flex items-center gap-2">
-                                                        <span className=" text-muted-foreground">
-                                                          Blacklist:
-                                                        </span>
-                                                        {blacklist.rblName}
-                                                      </div>
-                                                      <div className="flex items-center gap-2">
-                                                        <span className=" text-muted-foreground">
-                                                          Status:
-                                                        </span>
-                                                        {blacklist.listed
-                                                          ? "Listed"
-                                                          : "Clean"}
-                                                      </div>
-                                                      <div className="flex items-center gap-2">
-                                                        <span className=" text-muted-foreground">
-                                                          Response:
-                                                        </span>
-                                                        {blacklist.response ||
-                                                          "No response"}
-                                                      </div>
-                                                    </div>
-                                                  </TableCell>
-                                                  <TableCell className="py-2 px-4 text-muted-foreground hidden md:table-cell">
-                                                    {blacklist.listed
-                                                      ? "Listed"
-                                                      : "Clean"}
-                                                  </TableCell>
-                                                  <TableCell className="py-2 px-4 text-muted-foreground hidden md:table-cell">
-                                                    {blacklist.response ||
-                                                      "No response"}
-                                                  </TableCell>
-                                                </TableRow>
-                                              )
-                                            )}
-                                          </TableBody>
-                                        </Table>
-                                      </div>
-                                    </CollapsibleContent>
-                                  </Collapsible>
-                                );
-                              })}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </CardContent>
-                </CollapsibleContent>
-              </Card>
-            </Collapsible>
+            <BlackList
+              type="mxServerBlacklist"
+              data={recordsData?.mxServerBlacklists || []}
+            />
 
             {/* SMTP Server Blacklists - Already at the bottom */}
             <Collapsible defaultOpen>
@@ -3306,106 +2723,64 @@ const DomainReport = ({
                 <CollapsibleContent>
                   <CardContent className="p-0">
                     <div className="space-y-2">
-                      {recordsData?.smtpBlacklist?.map((serverData, index) => (
-                        <Collapsible key={serverData.server} className="w-full">
-                          <CollapsibleTrigger className="w-full">
-                            <div className="flex items-center justify-between p-3 hover:bg-muted/50">
-                              <div className="flex items-center gap-2">
-                                <ChevronDown className="h-4 w-4 text-muted-foreground" />
-                                <span className="font-medium text-sm">
-                                  SMTP Server {index + 1}
-                                </span>
-                                <span className="text-sm text-muted-foreground">
-                                  {serverData.server}
-                                </span>
-                              </div>
-                              <Badge
-                                variant="outline"
-                                className={`${
-                                  serverData.blacklists.every((b) => !b.listed)
-                                    ? "bg-green-500 text-white hover:bg-green-600"
-                                    : "bg-red-500 text-white hover:bg-red-600"
-                                }`}
-                              >
-                                {serverData.blacklists.every((b) => !b.listed)
-                                  ? "All Clear"
-                                  : "Issues Found"}
-                              </Badge>
-                            </div>
-                          </CollapsibleTrigger>
-                          <CollapsibleContent className="w-full">
-                            <div className="min-w-full">
-                              <Table className="w-full text-sm">
-                                <TableHeader>
-                                  <TableRow className="border-b bg-muted/50">
-                                    <TableHead className="py-2 px-4 text-left font-medium whitespace-nowrap hidden md:table-cell">
-                                      Blacklist
-                                    </TableHead>
-                                    <TableHead className="py-2 px-4 text-left font-medium whitespace-nowrap hidden md:table-cell">
-                                      Status
-                                    </TableHead>
-                                    <TableHead className="py-2 px-4 text-left font-medium whitespace-nowrap hidden md:table-cell">
-                                      Response
-                                    </TableHead>
-                                  </TableRow>
-                                </TableHeader>
-                                <TableBody className="divide-y">
-                                  {serverData.blacklists.map(
-                                    (blacklist, idx) => (
-                                      <TableRow key={idx}>
-                                        <TableCell className="py-2 px-4 whitespace-nowrap">
-                                          <div className="items-center gap-2 hidden md:flex">
-                                            {blacklist.listed ? (
-                                              <XCircle className="w-4 h-4 text-red-500 flex-shrink-0" />
-                                            ) : (
-                                              <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
-                                            )}
-                                            <span className="text-muted-foreground break-all">
-                                              {blacklist.rblName}
-                                            </span>
-                                          </div>
+                      {recordsData?.smtpBlacklist?.map((serverData, index) => {
+                        // Sort blacklists to show listed entries first
+                        serverData.blacklists.sort((a, b) => {
+                          // Listed entries come first
+                          if (a.listed && !b.listed) return -1;
+                          if (!a.listed && b.listed) return 1;
 
-                                          <div className="md:hidden">
-                                            <div className="flex items-center gap-2">
-                                              <span className=" text-muted-foreground">
-                                                Blacklist:
-                                              </span>
-                                              {blacklist.rblName}
-                                            </div>
-                                            <div className="flex items-center gap-2">
-                                              <span className=" text-muted-foreground">
-                                                Status:
-                                              </span>
-                                              {blacklist.listed
-                                                ? "Listed"
-                                                : "Clean"}
-                                            </div>
-                                            <div className="flex items-center gap-2">
-                                              <span className=" text-muted-foreground">
-                                                Response:
-                                              </span>
-                                              {blacklist.response ||
-                                                "No response"}
-                                            </div>
-                                          </div>
-                                        </TableCell>
-                                        <TableCell className="py-2 px-4 text-muted-foreground whitespace-nowrap hidden md:table-cell">
-                                          {blacklist.listed
-                                            ? "Listed"
-                                            : "Clean"}
-                                        </TableCell>
-                                        <TableCell className="py-2 px-4 text-muted-foreground whitespace-nowrap hidden md:table-cell">
-                                          {blacklist.response || "No response"}
-                                        </TableCell>
-                                      </TableRow>
+                          // Then entries with responses
+                          if (a.response && !b.response) return -1;
+                          if (!a.response && b.response) return 1;
+
+                          // Otherwise maintain original order
+                          return 0;
+                        });
+
+                        return (
+                          <Collapsible
+                            key={serverData.server}
+                            className="w-full"
+                          >
+                            <CollapsibleTrigger className="w-full">
+                              <div className="flex items-center justify-between p-3 hover:bg-muted/50">
+                                <div className="flex items-center gap-2">
+                                  <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                                  <div className="flex flex-col md:flex-row gap-1">
+
+                                  <span className="font-medium text-sm">
+                                    SMTP Server {index + 1}
+                                  </span>
+                                  <span className="text-sm text-muted-foreground">
+                                    {serverData.server}
+                                  </span>
+                                  </div>
+                                </div>
+                                <Badge
+                                  variant="outline"
+                                  className={`${
+                                    serverData.blacklists.every(
+                                      (b) => !b.listed
                                     )
-                                  )}
-                                </TableBody>
-                              </Table>
-                            </div>
-                          </CollapsibleContent>
-                        </Collapsible>
-                      ))}
+                                      ? "bg-green-500 text-white hover:bg-green-600"
+                                      : "bg-red-500 text-white hover:bg-red-600"
+                                  }`}
+                                >
+                                  {serverData.blacklists.every((b) => !b.listed)
+                                    ? "All Clear"
+                                    : "Issues Found"}
+                                </Badge>
+                              </div>
+                            </CollapsibleTrigger>
+                            <CollapsibleContent className="w-full">
+                              <BlackListTable
+                                blacklists={serverData.blacklists}
+                              />
+                            </CollapsibleContent>
+                          </Collapsible>
+                        );
+                      })}
                     </div>
                   </CardContent>
                 </CollapsibleContent>
