@@ -23,8 +23,8 @@ const navLinks = [
     label: "Inbox Placement Test",
   },
   {
-    href: "/#testimonials",
-    label: "Testimonials",
+    href: "/#contact",
+    label: "Contact",
   },
   {
     href: "/#pricing",
@@ -59,7 +59,7 @@ export default function NavBar() {
           />
         </Link>
 
-        <div className="hidden md:flex items-center space-x-8">
+        <div className="hidden lg:flex items-center space-x-8">
           {/* <Link
             href="/#benefits"
             className="text-gray-300 hover:text-white transition-colors"
@@ -79,7 +79,7 @@ export default function NavBar() {
 
         {/* Hamburger menu for small screens */}
         <button
-          className="md:hidden text-white"
+          className="lg:hidden text-white"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
           {mobileMenuOpen ? (

@@ -5,6 +5,13 @@ import Link from "next/link";
 
 import Container from "@/components/container";
 import Image from "next/image";
+import {
+  FacebookLogo,
+  InstagramLogo,
+  LinkedinLogo,
+  XLogo,
+  YoutubeLogo,
+} from "@phosphor-icons/react";
 
 const legalPages = [
   {
@@ -63,6 +70,10 @@ const quickLinks = [
     href: "/#features",
   },
   {
+    title: "Contact",
+    href: "/contact",
+  },
+  {
     title: "Pricing",
     href: "/#pricing",
   },
@@ -74,6 +85,30 @@ const quickLinks = [
     title: "FAQ",
     href: "/#faq",
   },
+];
+
+export const socialsLinks = [
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/share/1B3tM8eryg/?mibextid=wwXIfr",
+    icon: FacebookLogo,
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/inbox_doctor?igsh=cnlxYWk2b2ZvdDFk",
+    icon: InstagramLogo,
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/inboxdoctor/",
+    icon: LinkedinLogo,
+  },
+  {
+    label: "Youtube",
+    href: "https://www.youtube.com/channel/UCZFJb3dWSr-MSjdLJXHkjcQ",
+    icon: YoutubeLogo,
+  },
+  { label: "X", href: "https://x.com/Inbox_Doctor", icon: XLogo },
 ];
 
 export default function Footer() {
@@ -178,56 +213,18 @@ export default function Footer() {
           >
             <h3 className="text-white font-semibold mb-4">Socials</h3>
             <ul className="space-y-2">
-              <li>
-                <Link
-                  href="https://www.facebook.com/share/1B3tM8eryg/?mibextid=wwXIfr"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-blue-500 transition-colors"
-                >
-                  Facebook
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="https://www.instagram.com/inbox_doctor?igsh=cnlxYWk2b2ZvdDFk"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-blue-500 transition-colors"
-                >
-                  Instagram
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="https://www.linkedin.com/company/inboxdoctor/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-blue-500 transition-colors"
-                >
-                  LinkedIn
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="https://www.youtube.com/channel/UCZFJb3dWSr-MSjdLJXHkjcQ"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-blue-500 transition-colors"
-                >
-                  Youtube
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="https://x.com/Inbox_Doctor"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-blue-500 transition-colors"
-                >
-                  X
-                </Link>
-              </li>
+              {socialsLinks.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-blue-500 transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </motion.div>
 
