@@ -150,7 +150,7 @@ const InboxPlacementReport = ({
   return (
     <div className="space-y-6 w-full" id="inbox-placement-report">
       {/* Header */}
-      <div className="flex flex-col md:flex-row justify-between items-center md:items-start">
+      <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-4">
         <div className="space-y-2">
           <h1 className="text-2xl font-semibold text-foreground">
             Inbox Placement Report

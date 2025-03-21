@@ -1,23 +1,10 @@
 "use client";
 
 import Container from "@/components/container";
-import { cn } from "@/lib/utils";
 import { Check, Mail } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
-import { useState } from "react";
-import B2CForm from "./forms/b2c-form";
-import B2BForm from "./forms/b2b-form";
 import EmailWizard from "./forms/wizard-form";
-
-const loadingStates = [
-  { text: "Receiving Your Test Email" },
-  { text: "Verifying Email Authentication" },
-  { text: "Analyzing Delivery Chain" },
-  { text: "Scanning Security Settings" },
-  { text: "Checking Blacklist Status" },
-  { text: "Generating Your Health Report" },
-];
 
 const points = [
   "Checks delivery across major providers",
@@ -76,7 +63,7 @@ const InboxPlacementHero = () => {
               Take the <span className="text-primary">domain health test</span>
             </h2> */}
 
-            <div className="flex flex-wrap justify-center gap-8 mt-8">
+            <div className="flex flex-wrap justify-center gap-4 md:gap-8 mt-8">
               {points.map((point, index) => (
                 <div key={index} className="flex items-center">
                   <div className="mr-2 bg-primary/20 p-1 rounded-full">
@@ -90,9 +77,14 @@ const InboxPlacementHero = () => {
 
           {/* content */}
 
-          <div className="flex flex-col items-center justify-center w-full mt-7">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex flex-col items-center justify-center w-full mt-7"
+          >
             <EmailWizard />
-          </div>
+          </motion.div>
         </div>
       </Container>
     </section>

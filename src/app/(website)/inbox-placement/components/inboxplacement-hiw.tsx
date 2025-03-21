@@ -9,24 +9,24 @@ const data = {
   steps: [
     {
       step: 1,
-      image: "/email-health/hiw_01.png",
-      title: "Choose Your Audience and Send a Test Email",
+      image: "/inbox-placement/hiw_01.png",
+      title: "Enter Your Email and Choose Your Audience",
       description:
-        "Select B2B or B2C to target your audience, copy the provided test email address, and send an email from your domain to start the placement analysis.",
+        "Start by entering the email address you'll use to send the test email, ensuring we analyze the correct sender domain for accurate results. Then, select whether your audience is B2B or B2C, which helps us tailor the test to the email providers most relevant to your recipients, setting the stage for a targeted placement analysis.",
     },
     {
       step: 2,
-      image: "/email-health/hiw_02.png",
-      title: "Unlock a Detailed Placement Report",
+      image: "/inbox-placement/hiw_02.png",
+      title: "Copy the Test Emails and Dispatch Your Message",
       description:
-        "Sit back as our system evaluates your email's delivery across major providers, generating a comprehensive report tailored to your setup.",
+        "Next, copy the unique test email address we provide for this test, which ensures your email is routed to our system for analysis. Open your email client, compose a new message from the address you entered, paste the test email as the recipient, and dispatch the message to initiate the inbox placement evaluation.",
     },
     {
       step: 3,
-      image: "/email-health/hiw_03.png",
-      title: "Explore and Download Your Placement Results",
+      image: "/inbox-placement/hiw_03.png",
+      title: "Unlock and Explore Your Placement Report",
       description:
-        "Access your personalized report to see where your emails land—inbox, spam, or elsewhere—and download it for actionable insights.",
+        "Sit back as our system evaluates your email's delivery across major providers, generating a comprehensive report tailored to your setup, which you can access to see where your emails land—inbox, spam, or elsewhere—and download for actionable insights.",
     },
   ],
 };

@@ -190,7 +190,7 @@ export default function EmailWizard() {
                     className={`h-24 ${
                       selectedType === "b2c"
                         ? "bg-blue-950 border-primary hover:bg-blue-900"
-                        : "bg-transparent border-gray-700 hover:bg-gray-800"
+                        : "bg-transparent border hover:bg-gray-800"
                     }`}
                     onClick={() => setSelectedType("b2c")}
                   >
@@ -207,7 +207,7 @@ export default function EmailWizard() {
                     className={`h-24 ${
                       selectedType === "b2b"
                         ? "bg-blue-950 border-primary hover:bg-blue-900"
-                        : "bg-transparent border-gray-700 hover:bg-gray-800"
+                        : "bg-transparent border hover:bg-gray-800"
                     }`}
                     onClick={() => setSelectedType("b2b")}
                   >
@@ -225,12 +225,14 @@ export default function EmailWizard() {
             {/* Step 2: Send Email (with code for B2B) */}
             {currentStep === 2 && (
               <div className="space-y-4">
-                <h3 className="text-lg font-medium text-center">
-                  Step 2: Send an email to these addresses:
+                <div className="flex flex-col items-center">
+                  <h3 className="text-lg font-medium text-center">
+                    Step 2: Send an email to these addresses:
+                  </h3>
                   <span className="ml-2 text-sm font-normal text-blue-400">
                     ({selectedType?.toUpperCase()} Test)
                   </span>
-                </h3>
+                </div>
 
                 <div className="space-y-2">
                   <div className="relative">
@@ -256,20 +258,21 @@ export default function EmailWizard() {
                       </Button> */}
                   </div>
 
-                  <div className="pt-2 flex justify-between items-center gap-2">
-                    <div className="flex items-center space-x-2">
+                  <div className="pt-2 flex flex-col-reverse md:flex-row justify-between items-center gap-4">
+                    <div className="flex md:items-center space-x-2 w-full">
                       <Checkbox
                         id="emailSent"
+                        className="rounded-[4px] border-white/40 mt-1 md:mt-0"
                         checked={emailsSent}
                         onCheckedChange={(checked) =>
                           setEmailsSent(checked as boolean)
                         }
                       />
-                      <Label htmlFor="emailSent" className="text-sm">
+                      <Label htmlFor="emailSent" className="text-sm text-left">
                         I have sent an email to the above addresses
                       </Label>
                     </div>
-                    <div className="flex gap-2 items-center">
+                    <div className="flex gap-2 items-center w-full">
                       <Select
                         defaultValue={"comma"}
                         onValueChange={setEmailSeparator}
@@ -366,7 +369,7 @@ export default function EmailWizard() {
                 (currentStep === 2 && !emailsSent) ||
                 currentStep === 3
               }
-              className=""
+              // className="text-white"
             >
               {currentStep < 3 ? (
                 <>
