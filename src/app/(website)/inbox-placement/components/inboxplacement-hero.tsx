@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useState } from "react";
 import B2CForm from "./forms/b2c-form";
 import B2BForm from "./forms/b2b-form";
+import EmailWizard from "./forms/wizard-form";
 
 const loadingStates = [
   { text: "Receiving Your Test Email" },
@@ -25,7 +26,7 @@ const points = [
 ];
 
 const InboxPlacementHero = () => {
-  const [currentTab, setCurrentTab] = useState<"b2c" | "b2b">("b2c");
+  // const [currentTab, setCurrentTab] = useState<"b2c" | "b2b">("b2c");
   return (
     <section className="overflow-clip">
       <Container type="div" className="py-0 overflow-visible">
@@ -90,35 +91,7 @@ const InboxPlacementHero = () => {
           {/* content */}
 
           <div className="flex flex-col items-center justify-center w-full mt-7">
-            {/* tab list */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 w-full mb-4">
-              <div
-                onClick={() => setCurrentTab("b2c")}
-                className={cn(
-                  "flex  items-center justify-center py-4 rounded-lg border-[#292929] border bg-background text-white/50",
-                  currentTab === "b2c" &&
-                    "bg-[#0d053a] text-white border-primary"
-                )}
-              >
-                B2C
-              </div>
-              <div
-                onClick={() => setCurrentTab("b2b")}
-                className={cn(
-                  "flex  items-center justify-center py-4 rounded-lg border-[#292929] border bg-background text-white/50",
-                  currentTab === "b2b" &&
-                    "bg-[#0d053a] text-white border-primary"
-                )}
-              >
-                B2B
-              </div>
-            </div>
-
-            {/* tab content */}
-            <div className="w-full">
-              {currentTab === "b2c" && <B2CContent />}
-              {currentTab === "b2b" && <B2BContent />}
-            </div>
+            <EmailWizard />
           </div>
         </div>
       </Container>
@@ -126,20 +99,48 @@ const InboxPlacementHero = () => {
   );
 };
 
-const B2CContent = () => {
-  return (
-    <div className="border-2 border-white/20 rounded-xl bg-background">
-      <B2CForm />
-    </div>
-  );
-};
+// const B2CContent = () => {
+//   return (
+//     <div className="border-2 border-white/20 rounded-xl bg-background">
+//       <B2CForm />
+//     </div>
+//   );
+// };
 
-const B2BContent = () => {
-  return (
-    <div className="border-2 border-white/20 rounded-xl bg-background">
-      <B2BForm />
-    </div>
-  );
-};
+// const B2BContent = () => {
+//   return (
+//     <div className="border-2 border-white/20 rounded-xl bg-background">
+//       <B2BForm />
+//     </div>
+//   );
+// };
 
 export default InboxPlacementHero;
+
+//  <div className="grid grid-cols-1 md:grid-cols-2 gap-2 w-full mb-4">
+//  <div
+//    onClick={() => setCurrentTab("b2c")}
+//    className={cn(
+//      "flex  items-center justify-center py-4 rounded-lg border-[#292929] border bg-background text-white/50",
+//      currentTab === "b2c" &&
+//        "bg-[#0d053a] text-white border-primary"
+//    )}
+//  >
+//    B2C
+//  </div>
+//  <div
+//    onClick={() => setCurrentTab("b2b")}
+//    className={cn(
+//      "flex  items-center justify-center py-4 rounded-lg border-[#292929] border bg-background text-white/50",
+//      currentTab === "b2b" &&
+//        "bg-[#0d053a] text-white border-primary"
+//    )}
+//  >
+//    B2B
+//  </div>
+// </div>
+
+// <div className="w-full">
+//  {currentTab === "b2c" && <B2CContent />}
+//  {currentTab === "b2b" && <B2BContent />}
+// </div>

@@ -13,15 +13,15 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 
-const chartData = [
-  { month: "Gmail", Inbox: 100, Spam: 0, Unreceived: 0, Total: 5 },
-  { month: "Outlook", Inbox: 50, Spam: 50, Unreceived: 0, Total: 5 },
-  { month: "Yahoo", Inbox: 70, Spam: 20, Unreceived: 10, Total: 5 },
-  { month: "AOL", Inbox: 90, Spam: 10, Unreceived: 0, Total: 5 },
-  { month: "iCloud", Inbox: 50, Spam: 50, Unreceived: 0, Total: 5 },
-  { month: "GMX", Inbox: 100, Spam: 0, Unreceived: 0, Total: 5 },
-  { month: "ProtonMail", Inbox: 100, Spam: 0, Unreceived: 0, Total: 5 },
-];
+// const chartData = [
+//   { month: "Gmail", Inbox: 100, Spam: 0, Unreceived: 0, Total: 5 },
+//   { month: "Outlook", Inbox: 50, Spam: 50, Unreceived: 0, Total: 5 },
+//   { month: "Yahoo", Inbox: 70, Spam: 20, Unreceived: 10, Total: 5 },
+//   { month: "AOL", Inbox: 90, Spam: 10, Unreceived: 0, Total: 5 },
+//   { month: "iCloud", Inbox: 50, Spam: 50, Unreceived: 0, Total: 5 },
+//   { month: "GMX", Inbox: 100, Spam: 0, Unreceived: 0, Total: 5 },
+//   { month: "ProtonMail", Inbox: 100, Spam: 0, Unreceived: 0, Total: 5 },
+// ];
 
 const chartConfig = {
   Inbox: {

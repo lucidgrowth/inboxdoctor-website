@@ -31,6 +31,7 @@ import { EmailPlacementChart } from "./placement-chart";
 import ProviderCollapes from "./provider-collapes";
 import PrintContentButton from "./print-content-button";
 import Link from "next/link";
+import InboxPlacementSkeleton from "./inbox-placement-skeleton";
 
 const InboxPlacementReport = ({
   companyId,
@@ -40,7 +41,7 @@ const InboxPlacementReport = ({
   testId: string;
 }) => {
   const [isPrinting, setIsPrinting] = useState(false);
-  const [showHtml, setShowHtml] = useState(false);
+  const [showHtml, setShowHtml] = useState(true);
 
   const {
     data: inboxPlacementReport,
@@ -140,6 +141,11 @@ const InboxPlacementReport = ({
   }, [inboxPlacementReport?.providerResults]);
 
   const type = inboxPlacementReport?.test?.testType;
+
+  if (isLoadingInboxPlacementReport) {
+  // if (true) {
+    return <InboxPlacementSkeleton />;
+  }
 
   return (
     <div className="space-y-6 w-full" id="inbox-placement-report">
@@ -346,7 +352,7 @@ const InboxPlacementReport = ({
                   ) : (
                     <div
                       className={cn(
-                        "border rounded-md p-4 h-64 overflow-y-auto text-black",
+                        "border rounded-md p-4 h-64 overflow-y-auto dark:bg-neutral-100 dark:text-black",
                         isPrinting && "h-auto overflow-y-visible"
                       )}
                     >

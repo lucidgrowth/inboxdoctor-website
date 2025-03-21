@@ -46,9 +46,17 @@ const B2CForm = () => {
 
   const handleSeparatorChange = (value: string) => {
     setSeparator(value);
-    // Split by current separator and join with new separator
     const emailList = emails.split(separator);
-    setEmails(emailList.join(value));
+    if (value === "\n") {
+      // Use explicit line breaks and ensure proper formatting
+      const formattedEmails = emailList
+        .map((email) => email.trim())
+        .filter((email) => email) // Remove empty lines
+        .join("\r\n"); // Use \r\n for consistent line breaks
+      setEmails(formattedEmails);
+    } else {
+      setEmails(emailList.join(value));
+    }
   };
 
   if (isSent) {
@@ -63,7 +71,7 @@ const B2CForm = () => {
         </span>
 
         <Textarea
-          className="bg-background/20 text-foreground/80 md:text-xl"
+          className="bg-background/20 text-foreground/80 md:text-xl w-full"
           rows={10}
           value={emails}
           readOnly
