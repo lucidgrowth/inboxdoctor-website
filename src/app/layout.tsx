@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -98,6 +99,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable} ${aspekta.variable} antialiased`}>
         {children}
+        <Toaster />
       </body>
     </html>
   );
