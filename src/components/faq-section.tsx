@@ -49,18 +49,25 @@ export default function FaqSection({ faqs, title, description }: Props) {
         <div className="space-y-2">
           <Accordion type="single" collapsible className="w-full space-y-4">
             {faqs.map((faq, index) => (
-              <AccordionItem
+              <motion.div
                 key={index}
-                value={`item-${index}`}
-                className="border border-white/10 bg-white/[0.02] rounded-2xl px-4"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.2 }}
+                viewport={{ once: true }}
               >
-                <AccordionTrigger className="py-6 hover:no-underline text-lg [&>svg]:size-6 text-white">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-foreground/80">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
+                <AccordionItem
+                  value={`item-${index}`}
+                  className="border border-white/10 bg-white/[0.02] rounded-2xl px-4"
+                >
+                  <AccordionTrigger className="py-6 hover:no-underline text-lg [&>svg]:size-6 text-white">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-foreground/80">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              </motion.div>
             ))}
           </Accordion>
         </div>

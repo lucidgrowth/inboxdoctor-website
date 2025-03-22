@@ -21,7 +21,13 @@ const CTASection = ({
 }: CTASectionProps) => {
   return (
     <Container className="py-10">
-      <div className="p-[.063rem] rounded-2xl relative overflow-hidden">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="p-[.063rem] rounded-2xl relative overflow-hidden"
+      >
         {/* decoration */}
         <div>
           <motion.div
@@ -87,7 +93,7 @@ const CTASection = ({
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </Container>
   );
 };

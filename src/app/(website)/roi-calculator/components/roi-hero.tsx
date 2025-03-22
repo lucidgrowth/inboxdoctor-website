@@ -6,76 +6,76 @@ import { Check, Mail, Star } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
 import { useState } from "react";
-import CTAForm from "./cta-form";
+// import CTAForm from "./cta-form";
 
-export default function HeroSection() {
-  const reviews = [
-    {
-      stars: 5,
-      name: "Priya Sharma",
-      role: "Content Marketing Lead",
-      image: "/avatars/avatar_female_07.png",
-      quote:
-        "As someone who sends weekly newsletters, the spam trigger detection has been invaluable. Haven't hit the spam folder since using it.",
-    },
-    {
-      stars: 4,
-      name: "Rajesh Kumar",
-      role: "Email Marketing Specialist",
-      image: "/avatars/avatar_male_11.png",
-      quote:
-        "The deliverability insights are incredible. I can now troubleshoot issues before they affect our campaigns. Setup took some time though.",
-    },
-    {
-      stars: 5,
-      name: "Amit Desai",
-      quote:
-        "InboxDoctor transformed our email deliverability! Our open rates skyrocketed after using their warmup tool, making our campaigns more effective than ever.",
-      role: "Email Marketing Specialist",
-      image: "/avatars/avatar_male_12.png",
-    },
-    {
-      stars: 4,
-      name: "Karan Malhotra",
-      role: "Digital Campaign Specialist",
-      image: "/avatars/avatar_male_05.png",
-      quote:
-        "InboxDoctor's warmup built mailbox credibility fast. Now our newsletters hit inboxes—perfect for a Digital Campaign Specialist!",
-    },
-    {
-      stars: 4,
-      name: "Suresh Nair",
-      image: "/avatars/avatar_male_06.png",
-      quote:
-        "InboxDoctor warmed up our mailboxes, boosting engagement. Promotional emails now reach customers easily—great for e-commerce!",
-      role: "E-commerce Operations Manager",
-    },
-    {
-      stars: 5,
-      name: "Tenzing Lepcha",
-      quote:
-        "New domain, no delivery—weeks of chaos. InboxDoctor sorted it out. I handle Email Ops; it's smooth sailing from here!",
-      role: "Email Operations Specialist",
-      image: "/avatars/avatar_male_07.png",
-    },
-    {
-      stars: 5,
-      name: "Anjali Mehta",
-      role: "Content Strategy Director",
-      image: "/avatars/avatar_female_08.png",
-      quote:
-        "Managing multiple newsletter campaigns was a nightmare before InboxDoctor. Now I can ensure every email lands in the primary inbox.",
-    },
-    {
-      stars: 4,
-      name: "Manish Thakur",
-      quote:
-        "At our startup, emails vanished into spam during a big pitch. InboxDoctor warmed them up—now, as Growth Lead, we land in inboxes perfectly!",
-      role: "Growth Lead",
-      image: "/avatars/avatar_male_09.png",
-    },
-  ];
+const reviews = [
+  {
+    stars: 5,
+    name: "Priya Sharma",
+    role: "Content Marketing Lead",
+    image: "/avatars/avatar_female_07.png",
+    quote:
+      "As someone who sends weekly newsletters, the spam trigger detection has been invaluable. Haven't hit the spam folder since using it.",
+  },
+  {
+    stars: 4,
+    name: "Rajesh Kumar",
+    role: "Email Marketing Specialist",
+    image: "/avatars/avatar_male_11.png",
+    quote:
+      "The deliverability insights are incredible. I can now troubleshoot issues before they affect our campaigns. Setup took some time though.",
+  },
+  {
+    stars: 5,
+    name: "Amit Desai",
+    quote:
+      "InboxDoctor transformed our email deliverability! Our open rates skyrocketed after using their warmup tool, making our campaigns more effective than ever.",
+    role: "Email Marketing Specialist",
+    image: "/avatars/avatar_male_12.png",
+  },
+  {
+    stars: 4,
+    name: "Karan Malhotra",
+    role: "Digital Campaign Specialist",
+    image: "/avatars/avatar_male_05.png",
+    quote:
+      "InboxDoctor's warmup built mailbox credibility fast. Now our newsletters hit inboxes—perfect for a Digital Campaign Specialist!",
+  },
+  {
+    stars: 4,
+    name: "Suresh Nair",
+    image: "/avatars/avatar_male_06.png",
+    quote:
+      "InboxDoctor warmed up our mailboxes, boosting engagement. Promotional emails now reach customers easily—great for e-commerce!",
+    role: "E-commerce Operations Manager",
+  },
+  {
+    stars: 5,
+    name: "Tenzing Lepcha",
+    quote:
+      "New domain, no delivery—weeks of chaos. InboxDoctor sorted it out. I handle Email Ops; it's smooth sailing from here!",
+    role: "Email Operations Specialist",
+    image: "/avatars/avatar_male_07.png",
+  },
+  {
+    stars: 5,
+    name: "Anjali Mehta",
+    role: "Content Strategy Director",
+    image: "/avatars/avatar_female_08.png",
+    quote:
+      "Managing multiple newsletter campaigns was a nightmare before InboxDoctor. Now I can ensure every email lands in the primary inbox.",
+  },
+  {
+    stars: 4,
+    name: "Manish Thakur",
+    quote:
+      "At our startup, emails vanished into spam during a big pitch. InboxDoctor warmed them up—now, as Growth Lead, we land in inboxes perfectly!",
+    role: "Growth Lead",
+    image: "/avatars/avatar_male_09.png",
+  },
+];
 
+export default function ROIHeorSection() {
   const [selectedReview, setSelectedReview] = useState<string | null>(null);
 
   return (
@@ -166,13 +166,10 @@ export default function HeroSection() {
               className="text-4xl md:text-6xl font-bold font-aspekta tracking-tight"
             >
               <span className="text-white">
-                Boost Your Email Deliverability <br /> And Stay{" "}
+                Maximize Your Email ROI with InboxDoctor
               </span>
-              <span className="bg-primary bg-clip-text text-transparent">
-                Out of Spam
-              </span>
-
-              {/* <span className="text-white">with AI-Powered Intelligence</span> */}
+              <br />
+              <span className="text-primary">Calculate Your Returns Now!</span>
             </motion.h1>
 
             {/* Subheading */}
@@ -182,8 +179,7 @@ export default function HeroSection() {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto"
             >
-              Land in inboxes, not spam folders. Boost open rates and sender
-              reputation with ease.
+              For B2B and B2C • Actionable insights • Proven results
             </motion.p>
 
             {/* Social Proof */}
@@ -267,53 +263,6 @@ export default function HeroSection() {
               )}
             </motion.div>
 
-            {/* CTA Buttons */}
-            {/* <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="flex flex-col items-center gap-4 relative z-10"
-          >
-            <div className="flex items-center gap-4">
-              <motion.div
-                animate={{
-                  scale: [1, 1.05, 1],
-                  boxShadow: [
-                    "0 0 0 0 rgba(59, 130, 246, 0)",
-                    "0 0 0 10px rgba(59, 130, 246, 0.1)",
-                    "0 0 0 0 rgba(59, 130, 246, 0)",
-                  ],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Number.POSITIVE_INFINITY,
-                  repeatType: "reverse",
-                }}
-                className="rounded-full"
-              >
-                <Button className="bg-primary hover:bg-primary-light text-white font-medium text-base px-8 py-3 transition-colors duration-200 rounded-full">
-                  Book a Call
-                </Button>
-              </motion.div>
-              <Button className="bg-transparent border border-white/20 text-white hover:bg-white/10 font-medium text-base px-8 py-3 transition-colors duration-200 rounded-full">
-                7 Days Free Trial
-              </Button>
-            </div>
-
-            <div className="flex items-center justify-center gap-6 text-sm text-gray-400">
-              <div className="flex items-center gap-2">
-                <Check className="w-4 h-4 text-green-500" />
-                <span>No credit card required</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Check className="w-4 h-4 text-green-500" />
-                <span>7 Days Free Trial</span>
-              </div>
-            </div>
-          </motion.div> */}
-
-            <CTAForm />
-
             {/* App Screenshot */}
             <motion.div
               initial={{ opacity: 0, y: 40 }}
@@ -322,12 +271,7 @@ export default function HeroSection() {
               className="relative !mt-10"
             >
               {/* Background */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 1 }}
-                className="absolute inset-0 pointer-events-none"
-              >
+              <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-[15]" />
                 <div className="z-0 w-[62%] absolute -top-[12.5%] lg:-top-[23.5%] bottom-auto left-1/2 -translate-x-1/2">
                   <Image
@@ -339,7 +283,7 @@ export default function HeroSection() {
                   />
                 </div>
                 <div className="relative rounded-[50%] blur-[150px] bg-primary aspect-square lg:aspect-[1194/378] z-0"></div>
-              </motion.div>
+              </div>
               <div className="relative z-10">
                 <Image
                   src="/hero-image-mobile.png"
