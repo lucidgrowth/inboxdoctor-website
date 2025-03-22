@@ -22,7 +22,12 @@ import {
 import { useMemo, useState } from "react";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { PlacementType } from "@/types/inbox-placement.types";
+import {
+  b2bProviders,
+  b2cProviders,
+  EmailProvider,
+  PlacementType,
+} from "@/types/inbox-placement.types";
 import {
   useGetInboxPlacementProviderBreakdownReport,
   useGetSharedInboxPlacementReport,
@@ -36,21 +41,32 @@ import InboxPlacementSkeleton from "./inbox-placement-skeleton";
 const InboxPlacementReport = ({
   companyId,
   testId,
+  placementType,
 }: {
   companyId: string;
   testId: string;
+  placementType?: string;
 }) => {
   const [isPrinting, setIsPrinting] = useState(false);
   const [showHtml, setShowHtml] = useState(true);
+
+  const currentPlacementType =
+    placementType?.toUpperCase() === "B2C"
+      ? PlacementType.B2C
+      : PlacementType.B2B;
 
   const {
     data: inboxPlacementReport,
     isLoading: isLoadingInboxPlacementReport,
     isSuccess: isSuccessInboxPlacementReport,
-  } = useGetSharedInboxPlacementReport(companyId, testId);
+  } = useGetSharedInboxPlacementReport(companyId, testId, currentPlacementType);
 
   const { data: providerBreakdown, isLoading: isLoadingProviderBreakdown } =
-    useGetInboxPlacementProviderBreakdownReport(companyId, testId);
+    useGetInboxPlacementProviderBreakdownReport(
+      companyId,
+      testId,
+      currentPlacementType
+    );
 
   const statsCards = useMemo(() => {
     if (!inboxPlacementReport?.summary) {
@@ -140,10 +156,8 @@ const InboxPlacementReport = ({
     });
   }, [inboxPlacementReport?.providerResults]);
 
-  const type = inboxPlacementReport?.test?.testType;
-
   if (isLoadingInboxPlacementReport) {
-  // if (true) {
+    // if (true) {
     return <InboxPlacementSkeleton />;
   }
 
@@ -162,16 +176,16 @@ const InboxPlacementReport = ({
         <div className="flex flex-col items-center md:items-end gap-2">
           <div className="flex flex-col md:flex-row items-center gap-2">
             <div className="flex items-center gap-2">
-              {type && (
+              {currentPlacementType && (
                 <Badge
                   variant="outline"
                   className={cn(
                     "bg-blue-100 text-blue-800 border-blue-800 dark:bg-blue-900/30 dark:text-blue-500 dark:border-blue-500",
-                    type === PlacementType.B2C &&
+                    currentPlacementType === PlacementType.B2C &&
                       "bg-purple-100 text-purple-800 border-purple-800 dark:bg-purple-900/30 dark:text-purple-500 dark:border-purple-500"
                   )}
                 >
-                  {type === PlacementType.B2C ? "B2C" : "B2B"}
+                  {currentPlacementType === PlacementType.B2C ? "B2C" : "B2B"}
                 </Badge>
               )}
               {inboxPlacementReport?.test?.isCompleted && (
@@ -267,7 +281,7 @@ const InboxPlacementReport = ({
       </div>
 
       {/* Email Placement Chart */}
-      {type === PlacementType.B2C ? (
+      {currentPlacementType === PlacementType.B2C ? (
         <EmailPlacementChart chartData={b2cchartData} />
       ) : (
         <EmailPlacementChart chartData={b2bChartData} />
@@ -384,49 +398,61 @@ const InboxPlacementReport = ({
           <CardContent className="p-4 space-y-3">
             {providerBreakdown?.providers &&
               providerBreakdown.providers.length > 0 &&
-              providerBreakdown.providers.map((provider, index) => {
-                // Transform the provider data to match what ProviderCollapes expects
-                const transformedProvider = {
-                  provider: provider.displayName,
-                  providerKey: provider.provider,
-                  stats: {
-                    inbox: Math.round(provider.inboxPercentage),
-                    spam: Math.round(provider.spamPercentage),
-                    unreceived: Math.round(provider.unreceivedPercentage),
-                  },
-                  // Extract categories from categoryBreakdown if it exists
-                  category: provider.categoryBreakdown
-                    ? Object.keys(provider.categoryBreakdown || {}).filter(
-                        (key) =>
-                          key !== "other" &&
-                          (provider.categoryBreakdown?.[
-                            key as keyof typeof provider.categoryBreakdown
-                          ]?.count || 0) > 0
-                      )
-                    : [],
-                  // Transform emails to the format expected by ProviderCollapes
-                  emails: provider.emails.map((email) => ({
-                    address: email.email,
-                    status: mapDeliveryStatus(email.deliveredTo),
-                    category: email.category?.toLowerCase() || undefined,
-                    authStatus: email.authStatus,
-                    senderIp: email.senderIP,
-                  })),
-                };
+              providerBreakdown.providers
+                .filter((provider) => {
+                  if (currentPlacementType === PlacementType.B2C) {
+                    return b2cProviders.includes(
+                      provider.provider as EmailProvider
+                    );
+                  } else {
+                    return b2bProviders.includes(
+                      provider.provider as EmailProvider
+                    );
+                  }
+                })
+                .map((provider, index) => {
+                  // Transform the provider data to match what ProviderCollapes expects
+                  const transformedProvider = {
+                    provider: provider.displayName,
+                    providerKey: provider.provider,
+                    stats: {
+                      inbox: Math.round(provider.inboxPercentage),
+                      spam: Math.round(provider.spamPercentage),
+                      unreceived: Math.round(provider.unreceivedPercentage),
+                    },
+                    // Extract categories from categoryBreakdown if it exists
+                    category: provider.categoryBreakdown
+                      ? Object.keys(provider.categoryBreakdown || {}).filter(
+                          (key) =>
+                            key !== "other" &&
+                            (provider.categoryBreakdown?.[
+                              key as keyof typeof provider.categoryBreakdown
+                            ]?.count || 0) > 0
+                        )
+                      : [],
+                    // Transform emails to the format expected by ProviderCollapes
+                    emails: provider.emails.map((email) => ({
+                      address: email.email,
+                      status: mapDeliveryStatus(email.deliveredTo),
+                      category: email.category?.toLowerCase() || undefined,
+                      authStatus: email.authStatus,
+                      senderIp: email.senderIP,
+                    })),
+                  };
 
-                return (
-                  <ProviderCollapes
-                    key={index}
-                    provider={transformedProvider.provider}
-                    providerKey={transformedProvider.providerKey}
-                    stats={transformedProvider.stats}
-                    emails={transformedProvider.emails}
-                    category={transformedProvider.category}
-                    testId={testId}
-                    forceOpen={isPrinting}
-                  />
-                );
-              })}
+                  return (
+                    <ProviderCollapes
+                      key={index}
+                      provider={transformedProvider.provider}
+                      providerKey={transformedProvider.providerKey}
+                      stats={transformedProvider.stats}
+                      emails={transformedProvider.emails}
+                      category={transformedProvider.category}
+                      testId={testId}
+                      forceOpen={isPrinting}
+                    />
+                  );
+                })}
           </CardContent>
         </Card>
       </div>

@@ -130,7 +130,7 @@ export default function NavBar() {
           href={bookingLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden md:block"
+          className="hidden lg:block"
         >
           <Button
             // size=""

@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
+import QueryProviderWrapper from "@/providers/query-provider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -98,8 +99,10 @@ export default function RootLayout({
         <meta name="msvalidate.01" content="9993CBC4BC27866C85C4AB5FD1326CA3" />
       </head>
       <body className={`${inter.variable} ${aspekta.variable} antialiased`}>
-        {children}
-        <Toaster />
+        <QueryProviderWrapper>
+          {children}
+          <Toaster />
+        </QueryProviderWrapper>
       </body>
     </html>
   );

@@ -6,8 +6,15 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { ArrowLeft, Check, ChevronRight, Copy } from "lucide-react";
-import { useState } from "react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Check,
+  ChevronRight,
+  Copy,
+  Loader2,
+} from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 
 import { MultiStepLoader } from "@/components/multi-step-loader";
 import {
@@ -17,10 +24,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { freeCompanyId } from "@/lib/constants";
 import { useTheme } from "@/providers/theme-provider";
-import { z } from "zod";
+import { PlacementType } from "@/types/inbox-placement.types";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { z } from "zod";
+import {
+  useGetPlacementAccounts,
+  usePlacementReportStatus,
+  usePlacementSubmit,
+} from "../use-inboxplacement";
 
 const formSchema = z.object({
   emailFrom: z.string().email(),
@@ -52,38 +66,56 @@ const getFormattedEmails = (emails: string[], emailSeparator: string) => {
   return emails.join(", ");
 };
 
-const TEST_EMAILS = [
-  "test-inbox1@company-m365.com",
-  "test-inbox2@company-workspace.com",
-  "test-inbox3@company-zoho.com",
-  "test-inbox4@company-exchange.com",
-  "test-inbox5@company-proton.com",
-];
-
 export default function EmailWizard() {
   const [emailFrom, setEmailFrom] = useState("");
   const [currentStep, setCurrentStep] = useState(1);
   const [emailsSent, setEmailsSent] = useState(false);
-  const [selectedType, setSelectedType] = useState<"b2b" | "b2c" | null>(null);
+  const [selectedType, setSelectedType] = useState<PlacementType | null>(null);
+
+  const [isReportReady, setIsReportReady] = useState(false);
+
+  const router = useRouter();
+
+  const searchParams = useSearchParams();
+  const currentReportTestId = searchParams.get("testId");
+
+  const { mutateAsync: placementSubmit } = usePlacementSubmit();
+
+  const { data: placementReportStatus } = usePlacementReportStatus({
+    testId: currentReportTestId as string,
+    enabled: currentStep === 3 && !!currentReportTestId && !isReportReady,
+  });
+
+  const { data: placementAccounts, isLoading: isPlacementAccountsLoading } =
+    useGetPlacementAccounts({
+      type: selectedType as PlacementType,
+      enabled: currentStep === 2,
+    });
 
   const handleNavigation = (direction: "next" | "prev") => {
     if (direction === "next" && currentStep < 3) {
-      if (currentStep === 3) {
+      const attempts = localStorage.getItem("attempts");
+      if (Number(attempts) >= 10) {
+        toast.error("You have reached the maximum number of free tests");
+        return;
+      }
+
+      setCurrentStep(currentStep + 1);
+
+      if (currentStep === 2) {
         handleSubmit();
-      } else {
-        setCurrentStep(currentStep + 1);
       }
     } else if (direction === "prev" && currentStep > 1) {
       setCurrentStep(currentStep - 1);
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     try {
-      // validations
+      const reportType = selectedType?.toLowerCase();
       const validatedFields = formSchema.safeParse({
         emailFrom,
-        selectedType,
+        selectedType: reportType,
         emailsSent,
       });
 
@@ -93,7 +125,28 @@ export default function EmailWizard() {
         return;
       }
 
-      // api call
+      if (!placementAccounts) {
+        toast.error("No placement accounts found");
+        return;
+      }
+
+      const response = await placementSubmit({
+        senderEmail: emailFrom,
+        recipientType: reportType as string,
+        testEmails: placementAccounts?.map((account) => account.email) || [],
+      }); // api call
+
+      if (response.success) {
+        const url = new URL(window.location.href);
+        url.searchParams.set("testId", response.testId);
+
+        router.replace(url.toString(), { scroll: false });
+
+        const attempts = localStorage.getItem("attempts");
+        localStorage.setItem("attempts", (Number(attempts) + 1).toString());
+      } else {
+        toast.error(response.message);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -104,6 +157,19 @@ export default function EmailWizard() {
     if (currentStep === 2) return !emailsSent;
     return true;
   };
+
+  useEffect(() => {
+    if (placementReportStatus?.status) {
+      setIsReportReady(true);
+      // router.replace("/inbox-placement", { scroll: false });
+    }
+  }, [placementReportStatus?.status]);
+
+  useEffect(() => {
+    if (currentReportTestId) {
+      setCurrentStep(3);
+    }
+  }, [currentReportTestId]);
 
   return (
     <div className="flex flex-col items-center justify-center w-full ">
@@ -126,6 +192,8 @@ export default function EmailWizard() {
                 selectedType={selectedType}
                 emailsSent={emailsSent}
                 setEmailsSent={setEmailsSent}
+                isLoading={isPlacementAccountsLoading}
+                placementAccounts={placementAccounts}
               />
             )}
 
@@ -134,6 +202,27 @@ export default function EmailWizard() {
               <LoaderTabContent
                 selectedType={selectedType}
                 setCurrentStep={setCurrentStep}
+                isReportReady={isReportReady}
+                currentReportTestId={currentReportTestId}
+                handleTryAnotherTest={() => {
+                  router.replace("/inbox-placement", { scroll: false });
+                  setCurrentStep(1);
+                  setSelectedType(null);
+                  setEmailFrom("");
+                  setEmailsSent(false);
+                  setIsReportReady(false);
+                }}
+                handleViewReport={() => {
+                  router.replace(
+                    `/shared-inboxplacement-report/${freeCompanyId}/${currentReportTestId}?type=${selectedType}`
+                  );
+                  setCurrentStep(1);
+                  setCurrentStep(1);
+                  setSelectedType(null);
+                  setEmailFrom("");
+                  setEmailsSent(false);
+                  setIsReportReady(false);
+                }}
               />
             )}
           </div>
@@ -154,7 +243,7 @@ export default function EmailWizard() {
               onClick={() => handleNavigation("next")}
               disabled={isNextDisabled()}
             >
-              Next
+              {currentStep === 2 ? "Submit" : "Next"}
               <ChevronRight className="ml-1 h-4 w-4" />
             </Button>
           </CardFooter>
@@ -168,15 +257,27 @@ const EmailsListContent = ({
   selectedType,
   emailsSent,
   setEmailsSent,
+  isLoading,
+  placementAccounts,
 }: {
-  selectedType: "b2c" | "b2b" | null;
+  selectedType: PlacementType | null;
   emailsSent: boolean;
   setEmailsSent: (emailsSent: boolean) => void;
+  isLoading: boolean;
+  placementAccounts: { email: string; provider: string }[] | undefined;
 }) => {
   const [emailSeparator, setEmailSeparator] = useState("comma");
   const { theme } = useTheme();
 
-  const formattedEmails = getFormattedEmails(TEST_EMAILS, emailSeparator);
+  const formattedEmails = useMemo(() => {
+    if (!placementAccounts) return "";
+
+    return getFormattedEmails(
+      placementAccounts?.map((account) => account.email) || [],
+      emailSeparator
+    );
+  }, [placementAccounts, emailSeparator]);
+
   return (
     <div className="space-y-4">
       <div className="flex flex-col items-center">
@@ -188,45 +289,54 @@ const EmailsListContent = ({
         </span>
       </div>
 
-      <div className="space-y-2">
-        <Textarea
-          className="bg-background/20 text-foreground/80 md:text-base max-h-[150px] w-full"
-          value={formattedEmails}
-          rows={6}
-          readOnly
-        />
+      {isLoading ? (
+        <div className="flex justify-center items-center h-full">
+          <Loader2 className="w-10 h-10 animate-spin" />
+          <span className="text-sm text-gray-400">
+            Fetching email accounts...
+          </span>
+        </div>
+      ) : (
+        <div className="space-y-2">
+          <Textarea
+            className="bg-background/20 text-foreground/80 md:text-base max-h-[150px] w-full"
+            value={formattedEmails}
+            rows={6}
+            readOnly
+          />
 
-        <div className="pt-2 flex flex-col-reverse md:flex-row justify-between items-center gap-4">
-          <div className="flex md:items-center space-x-2 w-full">
-            <Checkbox
-              id="emailSent"
-              className="rounded-[4px] border-white/40 mt-1 md:mt-0"
-              checked={emailsSent}
-              onCheckedChange={(checked) => setEmailsSent(checked as boolean)}
-            />
-            <Label htmlFor="emailSent" className="text-sm text-left">
-              I have sent an email to the above addresses
-            </Label>
-          </div>
-          <div className="flex gap-2 items-center md:w-fit w-full">
-            <Select defaultValue={"comma"} onValueChange={setEmailSeparator}>
-              <SelectTrigger className="w-[180px] text-foreground">
-                <SelectValue placeholder="Select separator" />
-              </SelectTrigger>
-              <SelectContent className={theme === "dark" ? "dark" : ""}>
-                <SelectItem value="comma">Comma</SelectItem>
-                <SelectItem value="semicolon">Semicolon</SelectItem>
-                <SelectItem value="newline">Newline</SelectItem>
-                <SelectItem value="comma-newline">Comma + Newline</SelectItem>
-                <SelectItem value="semicolon-newline">
-                  Semicolon + Newline
-                </SelectItem>
-              </SelectContent>
-            </Select>
-            <CopyButton text={formattedEmails} />
+          <div className="pt-2 flex flex-col-reverse md:flex-row justify-between items-center gap-4">
+            <div className="flex md:items-center space-x-2 w-full">
+              <Checkbox
+                id="emailSent"
+                className="rounded-[4px] border-white/40 mt-1 md:mt-0"
+                checked={emailsSent}
+                onCheckedChange={(checked) => setEmailsSent(checked as boolean)}
+              />
+              <Label htmlFor="emailSent" className="text-sm text-left">
+                I have sent an email to the above addresses
+              </Label>
+            </div>
+            <div className="flex gap-2 items-center md:w-fit w-full">
+              <Select defaultValue={"comma"} onValueChange={setEmailSeparator}>
+                <SelectTrigger className="w-[180px] text-foreground">
+                  <SelectValue placeholder="Select separator" />
+                </SelectTrigger>
+                <SelectContent className={theme === "dark" ? "dark" : ""}>
+                  <SelectItem value="comma">Comma</SelectItem>
+                  <SelectItem value="semicolon">Semicolon</SelectItem>
+                  <SelectItem value="newline">Newline</SelectItem>
+                  <SelectItem value="comma-newline">Comma + Newline</SelectItem>
+                  <SelectItem value="semicolon-newline">
+                    Semicolon + Newline
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+              <CopyButton text={formattedEmails} />
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
@@ -234,10 +344,51 @@ const EmailsListContent = ({
 const LoaderTabContent = ({
   selectedType,
   setCurrentStep,
+  currentReportTestId,
+  isReportReady,
+  handleTryAnotherTest,
+  handleViewReport,
 }: {
-  selectedType: "b2c" | "b2b" | null;
+  selectedType: PlacementType | null;
   setCurrentStep: (step: number) => void;
+  currentReportTestId: string | null;
+  isReportReady: boolean;
+  handleTryAnotherTest: () => void;
+  handleViewReport: () => void;
 }) => {
+  if (isReportReady) {
+    return (
+      <div className="space-y-6">
+        <h3 className="text-2xl font-bold text-white">
+          Your report is ready! 🚀
+        </h3>
+
+        <div className="flex flex-col justify-center items-center gap-5">
+          <p className="text-sm text-[#C0C6D0] text-center">
+            Your latest report has been generated. Click below to review the
+            insights and take action!
+          </p>
+
+          <Button
+            className="flex items-center gap-2 w-fit h-auto py-4 px-6 text-base"
+            onClick={handleViewReport}
+          >
+            <span>View Report</span>
+            <ArrowRight className="h-5 w-5" />
+          </Button>
+          <Button
+            variant={"outline"}
+            className="w-fit h-auto py-4 px-6 text-base bg-primary/10 border-none text-primary"
+            onClick={handleTryAnotherTest}
+          >
+            <span>Try another test</span>
+            <ArrowRight className="h-5 w-5" />
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-4">
       <h3 className="text-2xl font-semibold text-white mb-6">
@@ -246,7 +397,7 @@ const LoaderTabContent = ({
           ({selectedType?.toUpperCase()} Test)
         </span>
       </h3>
-      <div className="space-y-4 text-center">
+      <div className="space-y-4 md:space-y-6 text-center">
         {/* animation */}
         <div className="relative">
           <MultiStepLoader
@@ -263,10 +414,11 @@ const LoaderTabContent = ({
 
           <Button
             variant={"outline"}
+            size={"lg"}
             className="w-fit bg-primary/10 border-none text-primary"
             onClick={() => setCurrentStep(1)}
           >
-            <ArrowLeft className="mr-2 h-5 w-5" />
+            <ArrowLeft className="h-5 w-5" />
             <span>No results?</span>
           </Button>
         </div>
@@ -283,8 +435,8 @@ const SelectionTabContent = ({
 }: {
   emailFrom: string;
   setEmailFrom: (emailFrom: string) => void;
-  selectedType: "b2c" | "b2b" | null;
-  setSelectedType: (selectedType: "b2c" | "b2b" | null) => void;
+  selectedType: PlacementType | null;
+  setSelectedType: (selectedType: PlacementType | null) => void;
 }) => {
   return (
     <div className="space-y-4">
@@ -311,11 +463,11 @@ const SelectionTabContent = ({
       <div className="grid grid-cols-2 gap-4 pt-4">
         {[
           {
-            type: "b2c",
+            type: PlacementType.B2C,
             description: "Business to Consumer",
           },
           {
-            type: "b2b",
+            type: PlacementType.B2B,
             description: "Business to Business",
           },
         ].map((item) => (
@@ -327,7 +479,7 @@ const SelectionTabContent = ({
                 ? "bg-blue-950 border-primary hover:bg-blue-900"
                 : "bg-transparent border hover:bg-gray-800"
             }`}
-            onClick={() => setSelectedType(item.type as "b2c" | "b2b")}
+            onClick={() => setSelectedType(item.type as PlacementType)}
           >
             <div className="flex flex-col items-center">
               <span className="text-xl font-bold">

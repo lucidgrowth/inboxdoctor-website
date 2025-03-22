@@ -1,5 +1,39 @@
 import { BlacklistCheck } from "./report";
 
+export enum EmailProvider {
+  GMAIL = "gmail",
+  OUTLOOK = "outlook",
+  YAHOO = "yahoo",
+  AOL = "aol",
+  ICLOUD = "icloud",
+  GMX = "gmx",
+  PROTONMAIL = "protonmail",
+  MICROSOFT365 = "microsoft365",
+  GOOGLEWORKSPACE = "googleworkspace",
+  ZOHO = "zoho",
+  AMAZONSES = "amazon ses",
+  WORKMAIL = "workmail",
+  OTHER = "other",
+}
+
+export const b2bProviders = [
+  EmailProvider.MICROSOFT365,
+  EmailProvider.GOOGLEWORKSPACE,
+  EmailProvider.ZOHO,
+  EmailProvider.AMAZONSES,
+];
+
+export const b2cProviders = [
+  EmailProvider.GMAIL,
+  EmailProvider.OUTLOOK,
+  EmailProvider.YAHOO,
+  EmailProvider.AOL,
+  EmailProvider.ICLOUD,
+  EmailProvider.GMX,
+  EmailProvider.PROTONMAIL,
+  EmailProvider.ZOHO,
+];
+
 export interface EmailDetailResponse {
   // Basic email information
   to: string;
@@ -117,7 +151,7 @@ export interface DetailedProviderBreakdownResponse {
 }
 
 export interface ProviderDetailedResult {
-  provider: string;
+  provider: EmailProvider;
   displayName: string;
   emailCount: number;
   inboxPercentage: number;

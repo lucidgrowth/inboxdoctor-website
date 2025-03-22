@@ -1,9 +1,8 @@
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { ThemeProvider } from "@/providers/theme-provider";
+import { Metadata } from "next";
 import React from "react";
 import PublicNavbar from "./components/report-header";
-import QueryProviderWrapper from "@/providers/query-provider";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { Metadata } from "next";
-import { ThemeProvider } from "@/providers/theme-provider";
 
 export const metadata: Metadata = {
   title: "InboxDoctor | Email Domain Report",
@@ -44,10 +43,8 @@ export default function MainLayout({
     <ThemeProvider>
       <div id="report-layout" className="bg-background">
         <TooltipProvider>
-          <QueryProviderWrapper>
-            <PublicNavbar />
-            {children}
-          </QueryProviderWrapper>
+          <PublicNavbar />
+          {children}
         </TooltipProvider>
       </div>
     </ThemeProvider>
