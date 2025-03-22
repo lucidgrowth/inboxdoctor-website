@@ -1,6 +1,5 @@
-import React from "react";
-import DomainReport from "../../components/domain-report";
 import Container from "@/components/container";
+import SharedDomainReportWrapper from "../../components/shared-domain-report-wrapper";
 
 type Props = {
   params: Promise<{
@@ -15,7 +14,11 @@ const ReportPage = async (props: Props) => {
 
   return (
     <Container className="py-10 md:px-6 lg:px-6">
-      <DomainReport domain={domain} companyId={companyId} reportId={reportId} />
+      <SharedDomainReportWrapper
+        domain={domain}
+        companyId={companyId}
+        reportId={reportId}
+      />
     </Container>
   );
 };

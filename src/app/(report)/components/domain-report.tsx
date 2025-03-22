@@ -54,7 +54,7 @@ import {
 import { useGetSharedReport } from "./hook/use-sharedreport";
 import { cn } from "@/lib/utils";
 import { getTooltip } from "./email-health-tooltips";
-import { EmailHealthResult } from "@/types/report";
+import { DnsRecordsResponse, EmailHealthResult } from "@/types/report";
 import { StructuredDnsRecords } from "@/types/report";
 import { useState } from "react";
 import {
@@ -81,18 +81,13 @@ interface DmarcRecord {
 }
 
 const DomainReport = ({
-  domain,
-  companyId,
-  reportId,
+  recordsData,
+  isReportLoading,
 }: {
-  domain: string;
-  companyId: string;
-  reportId: string;
+  recordsData: DnsRecordsResponse | undefined;
+  isReportLoading: boolean;
 }) => {
   const [isPrinting, setIsPrinting] = useState(false);
-
-  const { data: recordsData, isLoading: isDnsCheckLoading } =
-    useGetSharedReport(domain, companyId, reportId);
 
   const [isExpanded, setIsExpanded] = useState(true);
 
@@ -1414,7 +1409,7 @@ const DomainReport = ({
 
   // Then use processedBlacklistData instead of recordsData?.domainBlacklist
 
-  if (isDnsCheckLoading) {
+  if (isReportLoading) {
     return <ReportSkeleton />;
   }
 
@@ -1450,7 +1445,7 @@ const DomainReport = ({
               <PrintContentButton
                 id="shared-report-print"
                 type="email-health"
-                filename={domain}
+                filename={recordsData?.domain}
                 preRunCallback={() => {
                   expandAll();
                   setIsPrinting(true);
@@ -2054,7 +2049,7 @@ const DomainReport = ({
 
         <div className=" mb-6">
           <div className="space-y-3">
-            {isDnsCheckLoading ? (
+            {isReportLoading ? (
               <div className="flex items-center justify-center py-6">
                 <Loader2 className="h-4 w-4 animate-spin" />
               </div>

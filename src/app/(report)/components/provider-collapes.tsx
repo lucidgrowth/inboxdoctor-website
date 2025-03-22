@@ -70,7 +70,17 @@ export interface IProviderData {
     unreceived: number;
   };
   category: string[];
-  emails: { address: string; status: string; category?: string }[];
+  emails: {
+    address: string;
+    status: string;
+    category?: string;
+    authStatus: {
+      dkim: boolean;
+      spf: boolean;
+      dmarc: boolean;
+    };
+    senderIp?: string;
+  }[];
   testId: string;
   forceOpen: boolean;
 }
@@ -178,7 +188,10 @@ const ProviderCollapes = ({
                   </StyledTooltip>
                 ))}
               </div>
-              <Separator orientation="vertical" className="h-4 hidden md:block" />
+              <Separator
+                orientation="vertical"
+                className="h-4 hidden md:block"
+              />
               <div className="items-center gap-2 hidden md:flex ">
                 <Badge
                   variant="outline"
@@ -306,7 +319,17 @@ const ProviderCollapesContent = ({
     label: string;
     value: number;
   }[];
-  emails: { address: string; status: string; category?: string }[];
+  emails: {
+    address: string;
+    status: string;
+    category?: string;
+    authStatus: {
+      dkim: boolean;
+      spf: boolean;
+      dmarc: boolean;
+    };
+    senderIp?: string;
+  }[];
   providerKey: string;
   testId: string;
 }) => {
@@ -460,27 +483,27 @@ const ProviderCollapesContent = ({
                   </TableCell>
                   <TableCell className="text-muted-foreground">
                     {email.status.toLowerCase() === "unreceived" ? (
-                      <span></span>
+                      <span>{email.senderIp}</span>
                     ) : (
-                      <span>123.123.123.123</span>
+                      <span>{email.senderIp}</span>
                     )}
                   </TableCell>
                   <TableCell className="text-muted-foreground">
-                    {email.status.toLowerCase() === "unreceived" ? (
+                    {email.authStatus.dkim === false ? (
                       <CircleX className="text-red-500 size-5" />
                     ) : (
                       <CircleCheck className="text-green-500 size-5" />
                     )}
                   </TableCell>
                   <TableCell className="text-muted-foreground">
-                    {email.status.toLowerCase() === "unreceived" ? (
+                    {email.authStatus.spf === false ? (
                       <CircleX className="text-red-500 size-5" />
                     ) : (
                       <CircleCheck className="text-green-500 size-5" />
                     )}
                   </TableCell>
                   <TableCell className="text-muted-foreground">
-                    {email.status.toLowerCase() === "unreceived" ? (
+                    {email.authStatus.dmarc === false ? (
                       <CircleX className="text-red-500 size-5" />
                     ) : (
                       <CircleCheck className="text-green-500 size-5" />

@@ -35,6 +35,9 @@ import {
   usePlacementReportStatus,
   usePlacementSubmit,
 } from "../use-inboxplacement";
+import Image from "next/image";
+import { b2b, b2c } from "../providers-list";
+import { cn } from "@/lib/utils";
 
 const formSchema = z.object({
   emailFrom: z.string().email(),
@@ -427,6 +430,11 @@ const LoaderTabContent = ({
   );
 };
 
+const imagesMap = {
+  [PlacementType.B2C]: b2c,
+  [PlacementType.B2B]: b2b,
+};
+
 const SelectionTabContent = ({
   emailFrom,
   setEmailFrom,
@@ -460,7 +468,7 @@ const SelectionTabContent = ({
         Choose which type of verification test you want to run:
       </p>
 
-      <div className="grid grid-cols-2 gap-4 pt-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
         {[
           {
             type: PlacementType.B2C,
@@ -474,7 +482,7 @@ const SelectionTabContent = ({
           <Button
             key={item.type}
             variant="outline"
-            className={`h-24 ${
+            className={`h-auto py-4 ${
               selectedType === item.type
                 ? "bg-blue-950 border-primary hover:bg-blue-900"
                 : "bg-transparent border hover:bg-gray-800"
@@ -488,6 +496,23 @@ const SelectionTabContent = ({
               <span className="text-xs text-gray-400 mt-2">
                 {item.description}
               </span>
+
+              <div
+                className={cn(
+                  "flex items-center gap-3 flex-wrap pt-3 pb-2",
+                  selectedType !== item.type && "grayscale opacity-80"
+                )}
+              >
+                {imagesMap[item.type]?.map((provider) => (
+                  <Image
+                    src={provider.image}
+                    alt={provider.title}
+                    width={20}
+                    height={20}
+                    key={provider.title}
+                  />
+                ))}
+              </div>
             </div>
           </Button>
         ))}

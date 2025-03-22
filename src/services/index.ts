@@ -130,3 +130,28 @@ export const getPlacementReportStatus = async ({
     status: boolean;
   };
 };
+
+// ----------------------- email health report -----------------------
+
+export const getEmailHealthAlias = async (alias: string) => {
+  const response = await axiosInstance.post(`/public-result/alias`, {
+    alias,
+  });
+  return response.data as unknown as {
+    alias: string;
+  };
+};
+
+export const getFreeEmailHealthResults = async (alias: string) => {
+  const response = await axiosInstance.get(`/public-result/results/${alias}`);
+  return response.data as unknown as DnsRecordsResponse;
+};
+
+export const getFreeEmailHealthStatus = async (alias: string) => {
+  const response = await axiosInstance.get(
+    `/public-result/email-health/report-status/${alias}`
+  );
+  return response.data as unknown as {
+    status: boolean;
+  };
+};

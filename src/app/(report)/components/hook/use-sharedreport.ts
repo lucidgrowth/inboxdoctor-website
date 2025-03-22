@@ -1,4 +1,5 @@
 import {
+  getFreeEmailHealthResults,
   getInboxPlacementEmailDetails,
   getInboxPlacementProviderBreakdownReport,
   getSharedInboxPlacementReport,
@@ -17,6 +18,14 @@ export const useGetSharedReport = (
   return useQuery({
     queryKey: ["shared-report", { domain, companyId, id }],
     queryFn: () => getSharedReport(domain, companyId, id),
+    refetchOnWindowFocus: false,
+  });
+};
+
+export const useGetFreeReport = (alias: string) => {
+  return useQuery({
+    queryKey: ["free-report", { alias }],
+    queryFn: () => getFreeEmailHealthResults(alias),
     refetchOnWindowFocus: false,
   });
 };
